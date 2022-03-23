@@ -1,4 +1,4 @@
-package com.chipshop.model;
+package com.chipshop.models;
 
 public enum Status {
     PLACED,
