@@ -1,4 +1,4 @@
-package com.chipshop.model;
+package com.chipshop.models;
 
 public class Shop {
     private int id;

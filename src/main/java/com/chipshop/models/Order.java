@@ -1,4 +1,4 @@
-package com.chipshop.model;
+package com.chipshop.models;
 import java.time.LocalDate;
 
 public class Order {
