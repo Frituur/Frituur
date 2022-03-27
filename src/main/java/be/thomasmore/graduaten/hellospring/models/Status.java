@@ -1,4 +1,4 @@
-package com.chipshop.models;
+package be.thomasmore.graduaten.hellospring.models;
 
 public enum Status {
     PLACED,
