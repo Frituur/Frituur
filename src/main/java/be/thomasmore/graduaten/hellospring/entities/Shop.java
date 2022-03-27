@@ -1,4 +1,4 @@
-package be.thomasmore.graduaten.hellospring.models;
+package be.thomasmore.graduaten.hellospring.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -1,4 +1,4 @@
-package be.thomasmore.graduaten.hellospring.models;
+package be.thomasmore.graduaten.hellospring.entities;
 
 public enum Status {
     PLACED,
