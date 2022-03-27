@@ -1,6 +1,11 @@
-package com.chipshop.models;
+package be.thomasmore.graduaten.hellospring.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Menu {
+    @Id
     private int id;
     private int code;
     private int productcode;

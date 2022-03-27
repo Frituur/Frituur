@@ -1,6 +1,11 @@
-package com.chipshop.models;
+package be.thomasmore.graduaten.hellospring.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Customer {
+    @Id
     private int id;
     private String firstname;
     private String lastname;

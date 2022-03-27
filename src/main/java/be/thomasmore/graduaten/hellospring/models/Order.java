@@ -1,7 +1,11 @@
-package com.chipshop.models;
+package be.thomasmore.graduaten.hellospring.models;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
+@Entity
 public class Order {
+    @Id
     private int id;
     private int numberOfProducts;
     private double totalPrice;
