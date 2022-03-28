@@ -1,25 +1,38 @@
 package be.thomasmore.graduaten.hellospring.entities;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.bouncycastle.util.Times;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
+@Table(name = "Orders")
 public class Order {
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private int numberOfProducts;
     private double totalPrice;
-    private LocalDate timeOfOrder;
-    private LocalDate arrivalTime;
     private Status orderStatus;
     private String address;
 
+    @OneToOne
+    private Timeslot timeslot_id;
 
-    public int getId() {
+    @CollectionTable(name = "Product", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "Products")
+    @OneToMany( targetEntity=Product.class)
+    private List Products;
+
+
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -37,22 +50,6 @@ public class Order {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
-    }
-
-    public LocalDate getTimeOfOrder() {
-        return timeOfOrder;
-    }
-
-    public void setTimeOfOrder(LocalDate timeOfOrder) {
-        this.timeOfOrder = timeOfOrder;
-    }
-
-    public LocalDate getArrivalTime() {
-        return arrivalTime;
-    }
-
-    public void setArrivalTime(LocalDate arrivalTime) {
-        this.arrivalTime = arrivalTime;
     }
 
     public Status getOrderStatus() {

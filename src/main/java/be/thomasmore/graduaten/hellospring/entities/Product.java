@@ -1,27 +1,37 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "Products")
 public class Product {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String description;
     private boolean availability;
-    private String category;
-    private String subcategory;
+
+    @OneToOne
+    private Category category;
+
+    @ManyToOne
+    private Order order;
+
+    @ManyToMany
+    private List<Extra> extras;
 
     public Product() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -49,19 +59,6 @@ public class Product {
         this.availability = availability;
     }
 
-    public String getCategory() {
-        return category;
-    }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
-    public String getSubcategory() {
-        return subcategory;
-    }
-
-    public void setSubcategory(String subcategory) {
-        this.subcategory = subcategory;
-    }
 }

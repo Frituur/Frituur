@@ -1,3 +1,4 @@
+
 package be.thomasmore.graduaten.hellospring.entities;
 
 public enum Status {

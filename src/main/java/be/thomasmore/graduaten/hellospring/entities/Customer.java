@@ -1,17 +1,22 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "Customers")
 public class Customer {
+
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String firstname;
     private String lastname;
     private String adress;
     private String phone;
     private String email;
+
+    @OneToOne
+    private Order Order;
 
 
     public Customer() {
@@ -57,7 +62,7 @@ public class Customer {
         this.email = email;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 }
