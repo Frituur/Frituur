@@ -1,12 +1,14 @@
+/*
 package be.thomasmore.graduaten.hellospring.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "Owner")
 public class Owner {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String username;
@@ -44,3 +46,4 @@ public class Owner {
         this.password = password;
     }
 }
+*/

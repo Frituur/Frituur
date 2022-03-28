@@ -1,13 +1,16 @@
+/*
 package be.thomasmore.graduaten.hellospring.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 @Entity
+@Table(name = "Products")
 public class Product {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String description;
     private boolean availability;
@@ -17,11 +20,11 @@ public class Product {
     public Product() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -65,3 +68,4 @@ public class Product {
         this.subcategory = subcategory;
     }
 }
+*/
