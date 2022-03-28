@@ -1,5 +1,6 @@
-/*
 package be.thomasmore.graduaten.hellospring.entities;
+import org.bouncycastle.util.Times;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -13,14 +14,18 @@ public class Order {
     private Long id;
     private int numberOfProducts;
     private double totalPrice;
-    private Timestamp timeOfOrder;
-    private Timestamp arrivalTime;
     private Status orderStatus;
     private String address;
 
+    @OneToOne
+    private Timeslot timeslot_id;
+
     @CollectionTable(name = "Product", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "Products")
-    private List<Product> Products;
+    @OneToMany( targetEntity=Product.class)
+    private List Products;
+
+
 
 
     public Long getId() {
@@ -47,22 +52,6 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public LocalDate getTimeOfOrder() {
-        return timeOfOrder;
-    }
-
-    public void setTimeOfOrder(LocalDate timeOfOrder) {
-        this.timeOfOrder = timeOfOrder;
-    }
-
-    public LocalDate getArrivalTime() {
-        return arrivalTime;
-    }
-
-    public void setArrivalTime(LocalDate arrivalTime) {
-        this.arrivalTime = arrivalTime;
-    }
-
     public Status getOrderStatus() {
         return orderStatus;
     }
@@ -79,4 +68,3 @@ public class Order {
         this.address = address;
     }
 }
-*/

@@ -1,4 +1,3 @@
-/*
 package be.thomasmore.graduaten.hellospring.entities;
 
 import javax.persistence.*;
@@ -13,6 +12,9 @@ public class Shop {
     private String name;
     private String address;
     private String phone;
+
+    @OneToOne
+    private Owner owner;
 
     public Long getId() {
         return id;
@@ -46,4 +48,3 @@ public class Shop {
         this.phone = phone;
     }
 }
-*/

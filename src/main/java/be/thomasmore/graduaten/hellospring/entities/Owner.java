@@ -1,4 +1,3 @@
-/*
 package be.thomasmore.graduaten.hellospring.entities;
 
 import javax.persistence.*;
@@ -9,16 +8,19 @@ public class Owner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
     private String username;
     private String password;
 
-    public int getId() {
+    @OneToOne
+    private Shop shop;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,4 +48,3 @@ public class Owner {
         this.password = password;
     }
 }
-*/

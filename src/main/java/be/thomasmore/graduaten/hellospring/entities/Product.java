@@ -1,8 +1,8 @@
-/*
 package be.thomasmore.graduaten.hellospring.entities;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Products")
@@ -14,8 +14,15 @@ public class Product {
     private String name;
     private String description;
     private boolean availability;
-    private String category;
-    private String subcategory;
+
+    @OneToOne
+    private Category category;
+
+    @ManyToOne
+    private Order order;
+
+    @ManyToMany
+    private List<Extra> extras;
 
     public Product() {
     }
@@ -52,20 +59,6 @@ public class Product {
         this.availability = availability;
     }
 
-    public String getCategory() {
-        return category;
-    }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
-    public String getSubcategory() {
-        return subcategory;
-    }
-
-    public void setSubcategory(String subcategory) {
-        this.subcategory = subcategory;
-    }
 }
-*/

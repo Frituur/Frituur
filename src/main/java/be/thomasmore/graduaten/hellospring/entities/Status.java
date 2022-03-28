@@ -1,4 +1,4 @@
-/*
+
 package be.thomasmore.graduaten.hellospring.entities;
 
 public enum Status {
@@ -6,4 +6,3 @@ public enum Status {
     PREPARING,
     READY
 }
-*/

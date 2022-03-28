@@ -15,6 +15,9 @@ public class Customer {
     private String phone;
     private String email;
 
+    @OneToOne
+    private Order Order;
+
 
     public Customer() {
     }
