@@ -17,6 +17,8 @@ public class Order {
     private Status orderStatus;
     private String address;
 
+    private OrderType orderType;
+
 
     @OneToOne
     @JoinColumn(name = "customer_id")
