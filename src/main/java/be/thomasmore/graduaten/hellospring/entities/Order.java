@@ -17,6 +17,13 @@ public class Order {
     private Status orderStatus;
     private String address;
 
+    private OrderType orderType;
+
+
+    @OneToOne
+    @JoinColumn(name = "customer_id")
+    private Customer Customer;
+
     @OneToOne
     private Timeslot timeslot_id;
 
@@ -25,7 +32,23 @@ public class Order {
     @OneToMany( targetEntity=Product.class)
     private List Products;
 
+    public Order(Long id, int numberOfProducts, double totalPrice, Status orderStatus, String address, be.thomasmore.graduaten.hellospring.entities.Customer customer, Timeslot timeslot_id, List products) {
+        this.id = id;
+        this.numberOfProducts = numberOfProducts;
+        this.totalPrice = totalPrice;
+        this.orderStatus = orderStatus;
+        Customer = customer;
+        this.timeslot_id = timeslot_id;
+        Products = products;
+    }
 
+    public Order() {
+
+    }
+
+    public be.thomasmore.graduaten.hellospring.entities.Customer getCustomer() {
+        return Customer;
+    }
 
 
     public Long getId() {
@@ -66,5 +89,25 @@ public class Order {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void setCustomer(be.thomasmore.graduaten.hellospring.entities.Customer customer) {
+        Customer = customer;
+    }
+
+    public Timeslot getTimeslot_id() {
+        return timeslot_id;
+    }
+
+    public void setTimeslot_id(Timeslot timeslot_id) {
+        this.timeslot_id = timeslot_id;
+    }
+
+    public List getProducts() {
+        return Products;
+    }
+
+    public void setProducts(List products) {
+        Products = products;
     }
 }

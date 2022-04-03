@@ -27,6 +27,16 @@ public class Product {
     public Product() {
     }
 
+    public Product(Long id, String name, String description, boolean availability, Category category, Order order, List<Extra> extras) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.availability = availability;
+        this.category = category;
+        this.order = order;
+        this.extras = extras;
+    }
+
     public Long getId() {
         return id;
     }
@@ -60,5 +70,27 @@ public class Product {
     }
 
 
+    public Category getCategory() {
+        return category;
+    }
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public List<Extra> getExtras() {
+        return extras;
+    }
+
+    public void setExtras(List<Extra> extras) {
+        this.extras = extras;
+    }
 }

@@ -1,6 +1,7 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Owner")
@@ -15,6 +16,12 @@ public class Owner {
 
     @OneToOne
     private Shop shop;
+
+
+    @CollectionTable(name = "Orders", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "Orders")
+    @OneToMany( targetEntity=Order.class)
+    private List Orders;
 
     public Long getId() {
         return id;

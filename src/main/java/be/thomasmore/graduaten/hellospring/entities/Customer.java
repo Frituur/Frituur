@@ -19,7 +19,18 @@ public class Customer {
     private Order Order;
 
 
+    public Customer(String Firstname, String Lastname, String Address, String Phone, String Email) {
+        firstname = Firstname;
+        lastname = Lastname;
+        adress = Address;
+        phone = Phone;
+        email = Email;
+
+
+    }
+
     public Customer() {
+
     }
 
     public String getFirstname() {
