@@ -13,6 +13,7 @@ public class Product {
     private Long id;
     private String name;
     private String description;
+    private int quantity;
     private boolean availability;
 
     @OneToOne
@@ -27,13 +28,14 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String name, String description, boolean availability, Category category, Order order, List<Extra> extras) {
+    public Product(Long id, String name, String description, boolean availability, Category category, Order order, List<Extra> extras, int quantity) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.availability = availability;
         this.category = category;
         this.order = order;
+        this.quantity = quantity;
         this.extras = extras;
     }
 
@@ -69,6 +71,9 @@ public class Product {
         this.availability = availability;
     }
 
+    public void SetQuantity(int quantity) { this.quantity = quantity;}
+
+    public int GetQuantity() {return this.quantity;}
 
     public Category getCategory() {
         return category;
