@@ -21,6 +21,26 @@
     <button type="submit"><i class="fa fa-search"></i></button>
 </div>
 <div class="productgrid">
+    <h2>Frieten</h2>
+    <li>
+        <ul><image src=""/></ul>
+        <ul>Naam Product</ul>
+        <ul>Prijs Product</ul>
+    </li>
+    <li>
+        <ul><image src=""/></ul>
+        <ul>Naam Product</ul>
+        <ul>Prijs Product</ul>
+    </li>
+    <li>
+        <ul><image src=""/></ul>
+        <ul>Naam Product</ul>
+        <ul>Prijs Product</ul>
+    </li>
+    <h2>Sauzen</h2>
+    <h2>Snacks</h2>
+    <h2>Dranken</h2>
+    <h2>Desserts</h2>
 
 </div>
 </body>
