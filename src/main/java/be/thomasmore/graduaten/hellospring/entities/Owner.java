@@ -20,7 +20,7 @@ public class Owner {
 
     @CollectionTable(name = "Orders", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "Orders")
-    @OneToMany( targetEntity=Order.class)
+    @OneToMany( targetEntity= be.thomasmore.graduaten.hellospring.entities.Orders.class)
     private List Orders;
 
     public Long getId() {

@@ -13,7 +13,7 @@ public class Timeslot {
     private Timestamp timeArrival;
 
     @OneToOne
-    private Product product;
+    private Products product;
 
     public Timeslot() {
 

@@ -1,14 +1,11 @@
 package be.thomasmore.graduaten.hellospring.entities;
-import org.bouncycastle.util.Times;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "Orders")
-public class Order {
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,10 +26,10 @@ public class Order {
 
     @CollectionTable(name = "Product", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "Products")
-    @OneToMany( targetEntity=Product.class)
+    @OneToMany( targetEntity= be.thomasmore.graduaten.hellospring.entities.Products.class)
     private List Products;
 
-    public Order(Long id, int numberOfProducts, double totalPrice, Status orderStatus, String address, be.thomasmore.graduaten.hellospring.entities.Customer customer, Timeslot timeslot_id, List products) {
+    public Orders(Long id, int numberOfProducts, double totalPrice, Status orderStatus, String address, be.thomasmore.graduaten.hellospring.entities.Customer customer, Timeslot timeslot_id, List products) {
         this.id = id;
         this.numberOfProducts = numberOfProducts;
         this.totalPrice = totalPrice;
@@ -42,7 +39,7 @@ public class Order {
         Products = products;
     }
 
-    public Order() {
+    public Orders() {
 
     }
 
