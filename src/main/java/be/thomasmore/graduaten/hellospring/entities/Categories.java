@@ -3,27 +3,28 @@ package be.thomasmore.graduaten.hellospring.entities;
 import javax.persistence.*;
 
 @Entity
-public class Category {
+@Table(name = "Categories")
+public class Categories {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "categoryid")
     private Long id;
 
+    @Column(name = "categoryname")
     private String name;
 
-    private String description;
 
-    @OneToOne
-    private Product product;
+    @OneToOne(mappedBy="categoryid", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Products product;
 
-    public Category(Long id, String name, String description, Product product) {
+    public Categories(Long id, String name, Products product) {
         this.id = id;
         this.name = name;
-        this.description = description;
         this.product = product;
     }
 
-    public Category() {
+    public Categories() {
 
     }
 
@@ -44,19 +45,12 @@ public class Category {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Product getProduct() {
+    public Products getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(Products product) {
         this.product = product;
     }
 

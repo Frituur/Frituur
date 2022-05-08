@@ -16,7 +16,7 @@ public class Customer {
     private String email;
 
     @OneToOne
-    private Order Order;
+    private Orders Order;
 
 
     public Customer(String Firstname, String Lastname, String Address, String Phone, String Email) {

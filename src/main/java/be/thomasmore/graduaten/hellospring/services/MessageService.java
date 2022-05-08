@@ -1,9 +1,11 @@
 package be.thomasmore.graduaten.hellospring.services;
 
 import be.thomasmore.graduaten.hellospring.entities.Customer;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
+@Component
 public class MessageService {
     // Send messages to users with Twillio API
     // Send a message to the customer when the order is done

@@ -1,18 +1,20 @@
 package be.thomasmore.graduaten.hellospring.services;
 
 import be.thomasmore.graduaten.hellospring.entities.Customer;
-import be.thomasmore.graduaten.hellospring.entities.Order;
+import be.thomasmore.graduaten.hellospring.entities.Orders;
 import be.thomasmore.graduaten.hellospring.entities.OrderType;
-import be.thomasmore.graduaten.hellospring.entities.Product;
+import be.thomasmore.graduaten.hellospring.entities.Products;
 import be.thomasmore.graduaten.hellospring.repositories.CustomerRepository;
 import be.thomasmore.graduaten.hellospring.repositories.OrderRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Component
 public class OrderService {
     // Customers should be able to make orders
     // Need dependency injection for repositories and services
@@ -26,8 +28,8 @@ public class OrderService {
 
     // A customer chosen products
     // We need to make that order based on the products linked to
-    public void MakeOrder(List<Product> CustomerProducts, Customer customer) {
-        Order order = new Order();
+    public void MakeOrder(List<Products> CustomerProducts, Customer customer) {
+        Orders order = new Orders();
         // Set the status of the order to preparing
         // Based on Order type send an automatic message or message the customer itself
         // timeslot of the order
@@ -36,7 +38,7 @@ public class OrderService {
 
     }
 
-    private double CalculateTotalPrice(List<Product> CustomerProducts){
+    private double CalculateTotalPrice(List<Products> CustomerProducts){
         // Go through the list of  products
         // Get the price for of each product  times the how many
         // add every price up
@@ -46,7 +48,7 @@ public class OrderService {
     }
 
     //
-    public OrderType DetermineOrderType(List<Product> Products) {
+    public OrderType DetermineOrderType(List<Products> Products) {
         int numberOfProducts = 0;
         for(int i = 0; i < Products.stream().count(); i++) {
             numberOfProducts += 1;

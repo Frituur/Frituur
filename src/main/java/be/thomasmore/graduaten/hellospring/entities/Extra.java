@@ -17,9 +17,9 @@ public class Extra {
     private String Description;
 
     @ManyToMany
-    private List<Product> Product;
+    private List<Products> Product;
 
-    public Extra(Long id, String name, Float price, String description, List<be.thomasmore.graduaten.hellospring.entities.Product> product) {
+    public Extra(Long id, String name, Float price, String description, List<Products> product) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -63,11 +63,11 @@ public class Extra {
         Description = description;
     }
 
-    public List<be.thomasmore.graduaten.hellospring.entities.Product> getProduct() {
+    public List<Products> getProduct() {
         return Product;
     }
 
-    public void setProduct(List<be.thomasmore.graduaten.hellospring.entities.Product> product) {
+    public void setProduct(List<Products> product) {
         Product = product;
     }
 }
