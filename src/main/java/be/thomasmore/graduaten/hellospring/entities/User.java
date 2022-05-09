@@ -1,6 +1,6 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
-import be.thomasmore.graduaten.hellospring.security.ApplicationUserRole;
+import be.thomasmore.graduaten.hellospring.security.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,14 +18,14 @@ public class User  implements UserDetails {
     private String username;
     private String email;
     private String password;
-    private ApplicationUserRole Role;
+    private UserRole Role;
     private boolean locked;
     private boolean enabled;
 
     @OneToOne
     private Shop shop;
 
-    public User(String name, String username, String password, String email, boolean locked, boolean enabled, ApplicationUserRole Role) {
+    public User(String name, String username, String password, String email, boolean locked, boolean enabled, UserRole Role) {
         this.name = name;
         this.username = username;
         this.password = password;
@@ -101,9 +101,6 @@ public class User  implements UserDetails {
 
     public void setEmail(String email) {this.email = email;}
 
-    public ApplicationUserRole getRole() {return Role;}
-
-    public void SetRole(ApplicationUserRole Role) {this.Role = Role;}
 
 
 
