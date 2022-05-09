@@ -11,10 +11,8 @@ public class Orders {
     private Long id;
     private int numberOfProducts;
     private double totalPrice;
-    private Status orderStatus;
     private String address;
 
-    private OrderType orderType;
 
 
     @OneToOne
@@ -29,11 +27,10 @@ public class Orders {
     @OneToMany( targetEntity= be.thomasmore.graduaten.hellospring.entities.Products.class)
     private List Products;
 
-    public Orders(Long id, int numberOfProducts, double totalPrice, Status orderStatus, String address, be.thomasmore.graduaten.hellospring.entities.Customer customer, Timeslot timeslot_id, List products) {
+    public Orders(Long id, int numberOfProducts, double totalPrice, String address, be.thomasmore.graduaten.hellospring.entities.Customer customer, Timeslot timeslot_id, List products) {
         this.id = id;
         this.numberOfProducts = numberOfProducts;
         this.totalPrice = totalPrice;
-        this.orderStatus = orderStatus;
         Customer = customer;
         this.timeslot_id = timeslot_id;
         Products = products;
@@ -72,13 +69,6 @@ public class Orders {
         this.totalPrice = totalPrice;
     }
 
-    public Status getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(Status orderStatus) {
-        this.orderStatus = orderStatus;
-    }
 
     public String getAddress() {
         return address;
