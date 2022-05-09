@@ -14,7 +14,7 @@ public class Shop {
     private String phone;
 
     @OneToOne
-    private Owner owner;
+    private User owner;
 
     public Long getId() {
         return id;
