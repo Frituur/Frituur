@@ -22,21 +22,21 @@
 </div>
 <div class="productgrid">
     <h2>Frieten</h2>
-    <li>
-        <ul><image src=""/></ul>
-        <ul>Naam Product</ul>
-        <ul>Prijs Product</ul>
-    </li>
-    <li>
-        <ul><image src=""/></ul>
-        <ul>Naam Product</ul>
-        <ul>Prijs Product</ul>
-    </li>
-    <li>
-        <ul><image src=""/></ul>
-        <ul>Naam Product</ul>
-        <ul>Prijs Product</ul>
-    </li>
+    <ul>
+        <li><image src=""/></li>
+        <li>Naam Product</li>
+        <li>Prijs Product </li>
+    </ul>
+    <ul>
+        <li><image src=""/></li>
+        <li>Naam Product</li>
+        <li>Prijs Product</li>
+    </ul>
+    <ul>
+        <li><image src=""/></li>
+        <li>Naam Product</li>
+        <li>Prijs Product</li>
+    </ul>
     <h2>Sauzen</h2>
     <h2>Snacks</h2>
     <h2>Dranken</h2>
