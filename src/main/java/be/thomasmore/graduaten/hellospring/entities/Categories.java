@@ -15,7 +15,7 @@ public class Categories {
     private String name;
 
 
-    @OneToOne(mappedBy="categoryid", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy="categoryid", orphanRemoval = true ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Products product;
 
     public Categories(Long id, String name, Products product) {

@@ -1,6 +1,7 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Customers")
@@ -8,21 +9,24 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customerid")
     private Long id;
-    private String firstname;
-    private String lastname;
-    private String adress;
+    @NotBlank(message = "Name is mandatory")
+    private String name;
+
+    @NotBlank(message = "Address  is mandatory")
+    private String address;
     private String phone;
     private String email;
 
-    @OneToOne
+    @OneToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "orderid", referencedColumnName = "orderid")
     private Orders Order;
 
 
-    public Customer(String Firstname, String Lastname, String Address, String Phone, String Email) {
-        firstname = Firstname;
-        lastname = Lastname;
-        adress = Address;
+    public Customer(String Name, String Address, String Phone, String Email) {
+        name = Name;
+        address = Address;
         phone = Phone;
         email = Email;
 
@@ -33,28 +37,16 @@ public class Customer {
 
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getName() {return name;}
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getAddress() {
+        return address;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAdress(String address) {
+        this.address = address;
     }
 
     public String getPhone() {

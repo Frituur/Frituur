@@ -30,25 +30,35 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Create the admin for the application
         auth.authenticationProvider(daoAuthenticationProvider());
 
+
     }
 
     @Override
     protected  void configure(HttpSecurity httpSecurity) throws Exception{
         //Specify which urls can be accessed for the owner and which are free for all
         httpSecurity.authorizeRequests()
-                .antMatchers("/", "index", "/css/*")
+                .antMatchers("/",
+                        "index",
+                        "/css/*",
+                        "/prod**",
+                        "/cust**",
+                        "/ord**",
+                        "/api**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic();
+                .formLogin();
+        httpSecurity.httpBasic();
     }
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
+        // Add default user admin
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
         daoAuthenticationProvider.setUserDetailsService(UserDetailsService);
+
 
         return daoAuthenticationProvider;
     }
