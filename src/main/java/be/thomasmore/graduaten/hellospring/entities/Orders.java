@@ -1,46 +1,53 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Orders")
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "orderid")
     private Long id;
+
+    @Column(name = "numberofproducts")
     private int numberOfProducts;
+
+    @Column(name="totalprice")
     private double totalPrice;
-    private String address;
 
 
 
-    @OneToOne
-    @JoinColumn(name = "customer_id")
+    @OneToOne(mappedBy="Order", orphanRemoval = true ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Customer Customer;
 
     @OneToOne
-    private Timeslot timeslot_id;
+    @JoinColumn(name = "tijdslotid")
+    private Timeslot timeslot;
 
-    @CollectionTable(name = "Product", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "Products")
-    @OneToMany( targetEntity= be.thomasmore.graduaten.hellospring.entities.Products.class)
-    private List Products;
+    @OneToMany(mappedBy= "orderid",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<Products> Products;
 
-    public Orders(Long id, int numberOfProducts, double totalPrice, String address, be.thomasmore.graduaten.hellospring.entities.Customer customer, Timeslot timeslot_id, List products) {
+    public Orders(Long id, int numberOfProducts, double totalPrice, String address, Customer customer,  Set<Products> products, Timeslot timeslot) {
         this.id = id;
         this.numberOfProducts = numberOfProducts;
         this.totalPrice = totalPrice;
         Customer = customer;
-        this.timeslot_id = timeslot_id;
         Products = products;
+        timeslot = timeslot;
     }
 
     public Orders() {
 
     }
 
-    public be.thomasmore.graduaten.hellospring.entities.Customer getCustomer() {
+    public Customer getCustomer() {
         return Customer;
     }
 
@@ -70,31 +77,24 @@ public class Orders {
     }
 
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setCustomer(be.thomasmore.graduaten.hellospring.entities.Customer customer) {
+    public void setCustomer(Customer customer) {
         Customer = customer;
     }
 
-    public Timeslot getTimeslot_id() {
-        return timeslot_id;
-    }
 
-    public void setTimeslot_id(Timeslot timeslot_id) {
-        this.timeslot_id = timeslot_id;
-    }
-
-    public List getProducts() {
+    public Set<Products> getProducts() {
         return Products;
     }
 
-    public void setProducts(List products) {
+    public void setProducts(Set<Products> products) {
         Products = products;
+    }
+
+    public Timeslot getTimeslot() {
+        return timeslot;
+    }
+
+    public void setTimeslot(Timeslot timeslot) {
+        this.timeslot = timeslot;
     }
 }

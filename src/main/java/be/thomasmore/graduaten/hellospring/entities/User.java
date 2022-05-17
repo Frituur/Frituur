@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "Owner")
+@Table(name = "User")
 public class User  implements UserDetails {
 
     @Id
@@ -22,8 +22,6 @@ public class User  implements UserDetails {
     private boolean locked;
     private boolean enabled;
 
-    @OneToOne
-    private Shop shop;
 
     public User(String name, String username, String password, String email, boolean locked, boolean enabled, UserRole Role) {
         this.name = name;

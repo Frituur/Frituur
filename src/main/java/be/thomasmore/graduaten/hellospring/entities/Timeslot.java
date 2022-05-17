@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name ="Tijdslot")
 public class Timeslot {
 
     @Id
@@ -12,10 +13,19 @@ public class Timeslot {
 
     private Timestamp timeArrival;
 
-    @OneToOne
-    private Products product;
+    private Boolean isAvailable = true;
+
+    @OneToOne(mappedBy = "timeslot", fetch = FetchType.LAZY)
+    private Orders Order;
 
     public Timeslot() {
+
+    }
+
+    public Timeslot(Timestamp timestamp, Orders order, boolean isAvailable ) {
+        timeArrival = timestamp;
+        Order = order;
+        this.isAvailable = isAvailable;
 
     }
 
@@ -33,5 +43,13 @@ public class Timeslot {
 
     public Timestamp getTimeArrival() {
         return timeArrival;
+    }
+
+    public Boolean getAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(Boolean available) {
+        isAvailable = available;
     }
 }

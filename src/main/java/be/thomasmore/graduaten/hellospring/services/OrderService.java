@@ -6,12 +6,17 @@ import be.thomasmore.graduaten.hellospring.entities.OrderType;
 import be.thomasmore.graduaten.hellospring.entities.Products;
 import be.thomasmore.graduaten.hellospring.repositories.CustomerRepository;
 import be.thomasmore.graduaten.hellospring.repositories.OrderRespository;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Component
@@ -28,38 +33,49 @@ public class OrderService {
 
     // A customer chosen products
     // We need to make that order based on the products linked to
-    public void MakeOrder(List<Products> CustomerProducts, Customer customer) {
+    public void MakeTemporaryOrder(List<Products> CustomerProducts, Customer customer) {
         Orders order = new Orders();
-        // Set the status of the order to preparing
-        // Based on Order type send an automatic message or message the customer itself
-        // timeslot of the order
-        // Check if it's a big order or not
-        // Start a deamon once the order has been made
+
 
     }
 
-    private double CalculateTotalPrice(List<Products> CustomerProducts){
+    protected double CalculateTotalPrice(Orders Order){
         // Go through the list of  products
-        // Get the price for of each product  times the how many
-        // add every price up
-        // return the total price
+        Double totalPrice = 0.0;
+        Set<Products> productsCustomer = Order.getProducts();
+        int quantityOfProducts = Order.getNumberOfProducts();
+        // Laad the Order
+        for (Products product : productsCustomer) {
+            totalPrice += product.GetPrice() * quantityOfProducts;
 
-        return 0;
+        }
+        return totalPrice;
     }
 
-    //
-    public OrderType DetermineOrderType(List<Products> Products) {
-        int numberOfProducts = 0;
-        for(int i = 0; i < Products.stream().count(); i++) {
-            numberOfProducts += 1;
+    //Admin moet orders kunnen zien
+    protected  List<Orders> GetOrders(){
+        // Filter op basis van de order die er is
+        // Alle timestamp dat is later dan current time filter out
+        List<Orders> OrdersNotHandled = new ArrayList<>();
+        List<Orders> allOrders = OrderRespository.findAll();
+
+        LocalDateTime now = LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(now);
+        for (Orders order : allOrders)
+        {
+            if(order.getTimeslot().getTimeArrival().after(timestamp)){
+                OrdersNotHandled.add(order);
+
+            }
+
+
         }
 
-        if(numberOfProducts > 6) {
-            return OrderType.Big;
-        }
-        return OrderType.Small;
+        return OrdersNotHandled;
 
     }
+
+
 
     // Let the customer know when the order is ready
     // This is a chosen value or

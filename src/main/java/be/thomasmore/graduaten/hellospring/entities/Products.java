@@ -1,6 +1,7 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -19,7 +20,7 @@ public class Products {
 
 
     @Column(name = "price")
-    private int price;
+    private Double price;
 
     @Column(name = "availability")
     private boolean availability;
@@ -27,26 +28,37 @@ public class Products {
     @Column(name = "photo")
     private byte[] photo;
 
-
-    @OneToOne( cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoryid")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "categoryid", referencedColumnName = "categoryid")
     private Categories categoryid;
 
+
     @ManyToOne
-    @JoinColumn(name = "orderid")
-    private Orders order;
+    @JoinTable(name = "Orders",
+            joinColumns = {@JoinColumn(name="orderid")},
+            inverseJoinColumns = @JoinColumn(name = "productid"))
+    @JsonBackReference
+    private Orders orderid;
+
+    public Orders getOrders() {
+        return orderid;
+    }
+
+    public void setOrders(Orders orders) {
+        this.orderid = orders;
+    }
 
 
     public Products() {
     }
 
-    public Products(Long id, String name, boolean availability, byte[] photo, Categories categoryid, Orders order, int price) {
+    public Products(Long id, String name, boolean availability, byte[] photo, Categories categoryid, Orders order, Double price) {
         this.id = id;
         this.name = name;
         this.availability = availability;
         this.photo = photo;
         this.categoryid = categoryid;
-        this.order = order;
+        this.orderid = order;
         this.price = price;
 
     }
@@ -76,9 +88,9 @@ public class Products {
         this.availability = availability;
     }
 
-    public void SetPrice(int price) { this.price = price;}
+    public void SetPrice(Double price) { this.price = price;}
 
-    public int GetPrice() {return this.price;}
+    public Double GetPrice() {return this.price;}
 
     public Categories getCategory() {
         return categoryid;
@@ -89,11 +101,11 @@ public class Products {
     }
 
     public Orders getOrder() {
-        return order;
+        return orderid;
     }
 
     public void setOrder(Orders order) {
-        this.order = order;
+        this.orderid = order;
     }
 
 
