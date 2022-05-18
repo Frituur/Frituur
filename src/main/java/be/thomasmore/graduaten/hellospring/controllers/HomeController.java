@@ -13,6 +13,33 @@ public class HomeController {
     public String navigateToIndex() {
         return "Home";
     }
-   }
+
+
+    @RequestMapping("/Detail")
+    public String navigateToDetail() {
+        return "Detail";
+    }
+
+    @RequestMapping("/Login")
+    public String navigateToLogin() {
+        return "Login";
+    }
+
+
+    @RequestMapping("/Tijdsslots")
+    public String navigateToTijdsslots() {
+        return "Tijdsslots";
+    }
+
+    @RequestMapping("/BestelKlant")
+    public String navigateToBestel() {
+        return "BesteloverzichtKlant";
+    }
+
+    @RequestMapping("/BestelAdmin")
+    public String navigateToBestelAdmin() {
+        return "BesteloverzichtAdmin";
+    }
+}
 
 

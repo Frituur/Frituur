@@ -43,7 +43,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/prod**",
                         "/cust**",
                         "/ord**",
-                        "/api**")
+                        "/api**",
+                        "/Detail",
+                        "/Login",
+                        "/Tijdsslots",
+                        "/BestelKlant",
+                        "/BestelAdmin")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
