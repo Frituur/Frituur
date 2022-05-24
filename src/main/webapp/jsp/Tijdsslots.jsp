@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Tijdsslots</title>
-    <link rel="stylesheet" href="../frituur.css" />
+    <link rel="stylesheet" href="../css/main.css" />
     <script src="https://kit.fontawesome.com/187b41207f.js" crossorigin="anonymous"></script>
 </head>
 <style>
