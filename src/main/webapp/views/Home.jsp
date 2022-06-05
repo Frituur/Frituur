@@ -8,40 +8,135 @@
 
 <body>
 <header>
-    <h1><i class="fa-solid fa-drumstick-bite"></i>'T Half Kieke</h1>
+    <h1><i class="fa-solid fa-drumstick-bite fa-xl"></i>'T Half Kieke</h1>
 </header>
 <nav>
-    <a href="#">Frieten</a>
-    <a href="#">Sauzen</a>
-    <a href="#">Snacks</a>
-    <a href="#">Dranken</a>
-    <a href="#">Deserts</a>
+    <a href="#Frieten">Frieten</a>
+    <a href="#Sauzen">Sauzen</a>
+    <a href="#Snacks">Snacks</a>
+    <a href="#Dranken">Dranken</a>
+    <a href="#Desserts">Deserts</a>
 </nav>
 <div class="search">
     <input type="text" placeholder="Search.." name="search">
     <button type="submit"><i class="fa fa-search"></i></button>
 </div>
-<div class="productgrid">
-    <h2>Frieten</h2>
-    <ul>
-        <li><image src=""/></li>
-        <li>Naam Product</li>
-        <li>Prijs Product </li>
-    </ul>
-    <ul>
-        <li><image src=""/></li>
-        <li>Naam Product</li>
-        <li>Prijs Product</li>
-    </ul>
-    <ul>
-        <li><image src=""/></li>
-        <li>Naam Product</li>
-        <li>Prijs Product</li>
-    </ul>
-    <h2>Sauzen</h2>
-    <h2>Snacks</h2>
-    <h2>Dranken</h2>
-    <h2>Desserts</h2>
+<div class="producten">
+    <h2 id="Frieten">Frieten</h2>
+    <div class="productgrid">
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+    </div>
+    <h2 id="Sauzen">Sauzen</h2>
+    <div class="productgrid">
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+    </div>
+    <h2 id="Snacks">Snacks</h2>
+    <div class="productgrid">
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+    </div>
+    <h2 id="Dranken">Dranken</h2>
+    <div class="productgrid">
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+    </div>
+    <h2 id="Desserts">Desserts</h2>
+    <div class="productgrid">
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+        <div class="item">
+            <image src="img_1.jpg" width="150" height="100" />
+            <p>Naam Product <br> Prijs Product</p>
+        </div>
+    </div>
 
 </div>
 </body>
