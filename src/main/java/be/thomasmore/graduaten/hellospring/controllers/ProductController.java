@@ -1,17 +1,27 @@
 package be.thomasmore.graduaten.hellospring.controllers;
 
+import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
+@SessionAttributes({"Product"})
 public class ProductController {
 
-    /*
+    //TODO: Maken van een session voor opslaan van lijst producten voor de customer
+    //TODO: Need to search for a products when the user enters a category name
+    // TODO: Need to send products to screen based on categories
+    // TODO: When the user post that he wants that product  store in session
+    // TODO: Convert the Image to base64string to display on the screen
+    //TODO: Tonen van een bepaald product detail pagina door id
+
     @Autowired
     ProductService service;
 
@@ -21,8 +31,22 @@ public class ProductController {
         return "product";
     }
 
+    @RequestMapping(value = "storeproduct", method = RequestMethod.POST)
+    public String storeProductCustomerForOrder(@Valid Product product, BindingResult bindingResult
+                                               ){
+        return "Detail";
+    }
+
+    @RequestMapping(value = "/searchproducts", method = RequestMethod.GET)
+    public List<Product> GetProductsFromCategoryName(@RequestParam String category){
+        var products = service.GetProductsByCatorgory(category);
+        return products;
+    }
+
+
+
 
     //Add new product
 
-     */
+
 }

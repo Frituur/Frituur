@@ -1,13 +1,25 @@
 package be.thomasmore.graduaten.hellospring.controllers;
 
+import be.thomasmore.graduaten.hellospring.security.UserDetailsService;
 import com.fasterxml.jackson.databind.ser.std.SqlTimeSerializer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @RequestMapping("/")
     public String navigateToIndex() {
@@ -15,30 +27,35 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/Detail")
-    public String navigateToDetail() {
-        return "Detail";
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model, String error, String logout) {
+        if (error != null)
+            model.addAttribute("error", "Your username and password is invalid.");
+
+        if (logout != null)
+            model.addAttribute("message", "You have been logged out successfully.");
+
+        return "login";
     }
 
-    @RequestMapping("/Login")
-    public String navigateToLogin() {
-        return "Login";
-    }
+    @PostMapping("/check-login")
+    @ResponseBody
+    public RedirectView checkLogin(HttpServletRequest request, @RequestParam("username") String userName,
+                                   @RequestParam("password") String password, RedirectAttributes redirectAttributes) {
+        if (userDetailsService.checkLogin(userName, password)) {
+            if (SecurityContextHolder.getContext().getAuthentication() == null ||
+                    SecurityContextHolder.getContext()
+                            .getAuthentication().getClass().equals(AnonymousAuthenticationToken.class)) {
+                UsernamePasswordAuthenticationToken token =
+                        new UsernamePasswordAuthenticationToken(userName, password,new ArrayList<>());
+                SecurityContextHolder.getContext().setAuthentication(token);
+            }
+            redirectAttributes.addFlashAttribute("message", "Login Successful");
+            return new RedirectView("Home");
 
-
-    @RequestMapping("/Tijdsslots")
-    public String navigateToTijdsslots() {
-        return "Tijdsslots";
-    }
-
-    @RequestMapping("/BestelKlant")
-    public String navigateToBestel() {
-        return "BesteloverzichtKlant";
-    }
-
-    @RequestMapping("/BestelAdmin")
-    public String navigateToBestelAdmin() {
-        return "BesteloverzichtAdmin";
+        }
+        redirectAttributes.addFlashAttribute("message", "Invalid Username or Password");
+        return new RedirectView("login");
     }
 }
 

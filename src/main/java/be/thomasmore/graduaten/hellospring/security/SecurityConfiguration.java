@@ -3,6 +3,7 @@ package be.thomasmore.graduaten.hellospring.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,26 +37,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected  void configure(HttpSecurity httpSecurity) throws Exception{
         //Specify which urls can be accessed for the owner and which are free for all
-        httpSecurity.authorizeRequests()
-                .antMatchers("/",
-                        "index",
-                        "e**",
-                        "/css/*",
-                        "/prod**",
-                        "/cust**",
-                        "/ord**",
-                        "/api**",
-                        "/Detail",
-                        "/Login",
-                        "/Tijdsslots",
-                        "/BestelKlant",
-                        "/BestelAdmin")
+        httpSecurity
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/")
                 .permitAll()
-                .anyRequest()
-                .authenticated()
+                .and().formLogin().loginPage("/login").permitAll()
+                .and().logout().permitAll()
                 .and()
-                .formLogin();
-        httpSecurity.httpBasic();
+                .httpBasic();
+
+
     }
 
     @Bean

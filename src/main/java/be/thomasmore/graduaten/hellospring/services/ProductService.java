@@ -1,7 +1,7 @@
 package be.thomasmore.graduaten.hellospring.services;
 
-import be.thomasmore.graduaten.hellospring.entities.Categories;
-import be.thomasmore.graduaten.hellospring.entities.Products;
+import be.thomasmore.graduaten.hellospring.entities.Category;
+import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,39 +18,39 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    protected Products GetProductById(int id) {
+    public Product GetProductById(int id) {
         return null;
     }
 
-    protected List<Products> GetProductsByCatorgory(Categories categories) {
+    public List<Product> GetProductsByCatorgory(String category) {
         //return all the products based on catory
-        //return productRepository.getProductsByCategory(categories);
+        //var products  =  productRepository.GetProductsByCategory(category);
         return null;
     }
 
 
     //For when the user wants to search at a specific set of products
-    protected List<Products> GetProductsBySearchName(String productName){
+    public List<Product> GetProductsBySearchName(String productName){
 
         String productNameWithoutUpperCaseAndSpaces = productName.toLowerCase(Locale.ROOT).trim();
-        List<Products> AllProducts = productRepository.findAll();
-        List<Products> SearchedProducts = new ArrayList();
+        List<Product> allProducts = productRepository.findAll();
+        List<Product> searchedProducts = new ArrayList();
 
 
-        for (Products product : AllProducts) {
+        for (Product product : allProducts) {
             if(product.getName().contentEquals(productNameWithoutUpperCaseAndSpaces)){
-                SearchedProducts.add(product);
+                searchedProducts.add(product);
             }
         }
 
-        return SearchedProducts;
+        return searchedProducts;
 
 
 
 
     }
     
-    protected List<Products> GetAllProducts() {
+    protected List<Product> GetAllProducts() {
         return productRepository.findAll();
     }
 
