@@ -43,7 +43,7 @@ public class TimeslotService {
         List<Timeslot> allAvailableTimeslot = new ArrayList<>();
 
         for (Timeslot timeslot : timeslots) {
-            if(timeslot.getAvailable() == true){
+            if(timeslot.getIsAvailable() == true){
                 allAvailableTimeslot.add(timeslot);
             }
         }

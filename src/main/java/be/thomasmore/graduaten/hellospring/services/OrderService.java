@@ -2,11 +2,9 @@ package be.thomasmore.graduaten.hellospring.services;
 
 import be.thomasmore.graduaten.hellospring.entities.Customer;
 import be.thomasmore.graduaten.hellospring.entities.Orders;
-import be.thomasmore.graduaten.hellospring.entities.OrderType;
-import be.thomasmore.graduaten.hellospring.entities.Products;
+import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.repositories.CustomerRepository;
 import be.thomasmore.graduaten.hellospring.repositories.OrderRespository;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -33,7 +31,7 @@ public class OrderService {
 
     // A customer chosen products
     // We need to make that order based on the products linked to
-    public void MakeTemporaryOrder(List<Products> CustomerProducts, Customer customer) {
+    public void MakeTemporaryOrder(List<Product> customerProducts, Customer customer) {
         Orders order = new Orders();
 
 
@@ -42,11 +40,11 @@ public class OrderService {
     protected double CalculateTotalPrice(Orders Order){
         // Go through the list of  products
         Double totalPrice = 0.0;
-        Set<Products> productsCustomer = Order.getProducts();
+        List<Product> productCustomer = Order.getProduct();
         int quantityOfProducts = Order.getNumberOfProducts();
         // Laad the Order
-        for (Products product : productsCustomer) {
-            totalPrice += product.GetPrice() * quantityOfProducts;
+        for (Product product : productCustomer) {
+            totalPrice += product.getPrice() * quantityOfProducts;
 
         }
         return totalPrice;
@@ -75,7 +73,11 @@ public class OrderService {
 
     }
 
+    public boolean DeleteProductFromOrder(Orders orders, Product product) {
+        // TODO: THE USER CAN DELETE PRODUCT FROM ORDER BY
 
+        return true;
+    }
 
     // Let the customer know when the order is ready
     // This is a chosen value or

@@ -1,11 +1,10 @@
 package be.thomasmore.graduaten.hellospring.controllers;
 
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ErrorrHandlerController implements ErrorrHandlerController2 {
+public class ErrorrHandlerController implements ErrorrHandlerControllerInterface {
 
     @Override
     @GetMapping("/error")

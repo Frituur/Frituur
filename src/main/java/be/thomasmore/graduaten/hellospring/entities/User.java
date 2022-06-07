@@ -1,41 +1,36 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
-import be.thomasmore.graduaten.hellospring.security.UserRole;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
 
+
 @Entity
-@Table(name = "User")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "user")
 public class User  implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Column(nullable = false, unique = true)
     private String username;
     private String email;
     private String password;
-    private UserRole Role;
+    private String Role;
     private boolean locked;
     private boolean enabled;
 
 
-    public User(String name, String username, String password, String email, boolean locked, boolean enabled, UserRole Role) {
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.locked = locked;
-        this.enabled = enabled;
-        this.email = email;
-        this.Role = Role;
-    }
-
-    public User() {
-
-    }
 
 
     public Long getId() {

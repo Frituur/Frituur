@@ -1,55 +1,31 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name ="Tijdslot")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name ="tijdslot")
 public class Timeslot {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "timearrival")
     private Timestamp timeArrival;
 
+    @Column(name = "isavailable")
     private Boolean isAvailable = true;
 
-    @OneToOne(mappedBy = "timeslot", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "timeslot")
     private Orders Order;
 
-    public Timeslot() {
 
-    }
-
-    public Timeslot(Timestamp timestamp, Orders order, boolean isAvailable ) {
-        timeArrival = timestamp;
-        Order = order;
-        this.isAvailable = isAvailable;
-
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setTimeArrival(Timestamp timeArrival) {
-        this.timeArrival = timeArrival;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Timestamp getTimeArrival() {
-        return timeArrival;
-    }
-
-    public Boolean getAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(Boolean available) {
-        isAvailable = available;
-    }
 }

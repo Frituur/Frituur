@@ -1,8 +1,6 @@
 package be.thomasmore.graduaten.hellospring.controllers;
 
-import be.thomasmore.graduaten.hellospring.entities.Products;
 import be.thomasmore.graduaten.hellospring.entities.User;
-import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import be.thomasmore.graduaten.hellospring.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

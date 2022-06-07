@@ -1,13 +1,18 @@
 package be.thomasmore.graduaten.hellospring.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.List;
 import java.util.Set;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Orders")
 public class Orders {
     @Id
@@ -23,78 +28,19 @@ public class Orders {
 
 
 
-    @OneToOne(mappedBy="Order", orphanRemoval = true ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinTable(name = "Customers",
+            joinColumns = {@JoinColumn(name="orderid")},
+            inverseJoinColumns = @JoinColumn(name = "customerid"))
     private Customer Customer;
 
-    @OneToOne
-    @JoinColumn(name = "tijdslotid")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
     private Timeslot timeslot;
 
-    @OneToMany(mappedBy= "orderid",cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy= "orderid")
     @JsonManagedReference
-    private Set<Products> Products;
-
-    public Orders(Long id, int numberOfProducts, double totalPrice, String address, Customer customer,  Set<Products> products, Timeslot timeslot) {
-        this.id = id;
-        this.numberOfProducts = numberOfProducts;
-        this.totalPrice = totalPrice;
-        Customer = customer;
-        Products = products;
-        timeslot = timeslot;
-    }
-
-    public Orders() {
-
-    }
-
-    public Customer getCustomer() {
-        return Customer;
-    }
+    private List<Product> Product;
 
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getNumberOfProducts() {
-        return numberOfProducts;
-    }
-
-    public void setNumberOfProducts(int numberOfProducts) {
-        this.numberOfProducts = numberOfProducts;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-
-    public void setCustomer(Customer customer) {
-        Customer = customer;
-    }
-
-
-    public Set<Products> getProducts() {
-        return Products;
-    }
-
-    public void setProducts(Set<Products> products) {
-        Products = products;
-    }
-
-    public Timeslot getTimeslot() {
-        return timeslot;
-    }
-
-    public void setTimeslot(Timeslot timeslot) {
-        this.timeslot = timeslot;
-    }
 }

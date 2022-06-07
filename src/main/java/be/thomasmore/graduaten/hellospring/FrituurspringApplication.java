@@ -1,5 +1,6 @@
 package be.thomasmore.graduaten.hellospring;
 
+import be.thomasmore.graduaten.hellospring.security.PasswordConfig;
 import be.thomasmore.graduaten.hellospring.shared.DatabaseInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
