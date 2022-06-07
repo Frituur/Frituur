@@ -1,4 +1,4 @@
 # Frituur
-Bouwen van een frituur applicatie waar mensen hun favoriete friten online kunnen spelen en dit kunnen komen ophalen zonder dat ze in lijn moeten wachten. Gedaan met eindeloos wachten op je fritten.
-Mensen kunnen aan de hand van een simpel scherm stapgewijs hun favoriete eten bestellen en zullen een melding krijgen wanneer ze dit kunnen ophalen. 
-De bereidheid van de fritten en openinguren staaan ook allemaal online.
+Een frituur-applicatie waar mensen hun favoriete frieten online kunnen bestellen en deze kunnen komen ophalen zonder dat ze in lijn moeten wachten. Gedaan met eindeloos wachten op je frieten.
+Mensen kunnen aan de hand van een simpel scherm stapgewijs hun favoriete eten bestellen en een tijddslot kiezen waarin ze deze kunnen halen. 
+De eigenaar kan in deze applicatie de bestellingen bekijken en de tijddslots beheren.
