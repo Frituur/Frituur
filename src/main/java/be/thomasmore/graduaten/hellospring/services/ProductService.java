@@ -3,10 +3,12 @@ package be.thomasmore.graduaten.hellospring.services;
 import be.thomasmore.graduaten.hellospring.entities.Category;
 import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
+import be.thomasmore.graduaten.hellospring.shared.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -18,6 +20,11 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+
+    @Autowired
+    private Converter converter;
+
+
     public Product GetProductById(int id) {
         return null;
     }
@@ -27,6 +34,7 @@ public class ProductService {
         //var products  =  productRepository.GetProductsByCategory(category);
         return null;
     }
+
 
 
     //For when the user wants to search at a specific set of products
@@ -45,22 +53,23 @@ public class ProductService {
 
         return searchedProducts;
 
-
-
-
     }
-    
+
+    public String GetProductImage(String productName){
+        var products = productRepository.findAll();
+        String productNameWithoutUpperCaseAndSpaces = productName.toLowerCase(Locale.ROOT).trim();
+        for (Product product : products) {
+            if(product.getName().contentEquals(productNameWithoutUpperCaseAndSpaces)){
+                return converter.ConvertByteArrayToBase64(product.getPhoto());
+            }
+        }
+
+        return null;
+    }
+
+
     protected List<Product> GetAllProducts() {
         return productRepository.findAll();
     }
 
-    /*
-    protected List<Products> GetProductsByCategory(Categories Category) {
-
-        return productRepository.getProductsByCategory(Category);
-
-
-    }
-
-     */
 }

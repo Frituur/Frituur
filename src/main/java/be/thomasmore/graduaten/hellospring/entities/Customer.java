@@ -4,8 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+
 import java.util.List;
 
 @Entity
@@ -19,15 +20,15 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customerid")
     private Long id;
-    @NotBlank(message = "Firstname is mandatory")
+
     @Column(name = "firstname")
     private String firstname ;
 
-    @NotBlank(message = "Lastname is mandatory")
+
     @Column(name = "lastname")
     private String lastname ;
 
-    @NotBlank(message = "Address  is mandatory")
+
     private String address;
     private String phone;
     private String email;

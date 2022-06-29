@@ -17,11 +17,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("api/auth")
 public class AuthContoller {
+
 
     @Autowired
     private DaoAuthenticationProvider DaoAuthenticationProvider;
@@ -65,12 +68,12 @@ public class AuthContoller {
             var user = userDetailsService.loadUserByUsername(userDto.getUsername());
             System.out.println(user.getUsername());
             var isLoggedIn = userDetailsService.checkLogin(userDto.getUsername(), userDto.getPassword());
-            System.out.println(isLoggedIn);
-            System.out.println(user.getPassword());
-            System.out.println("Succesfull inlog");
+            if(isLoggedIn){
+                return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
+            }
+            return new ResponseEntity<>("You have entered the wrong password or username. Check database.", HttpStatus.EXPECTATION_FAILED);
 
 
-            return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
         }catch (Exception ex){
             System.out.println(ex.getCause());
             System.out.println(ex.getMessage());

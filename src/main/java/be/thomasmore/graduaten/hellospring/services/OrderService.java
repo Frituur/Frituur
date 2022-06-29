@@ -5,6 +5,7 @@ import be.thomasmore.graduaten.hellospring.entities.Orders;
 import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.repositories.CustomerRepository;
 import be.thomasmore.graduaten.hellospring.repositories.OrderRespository;
+import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,8 @@ import java.util.Set;
 public class OrderService {
     // Customers should be able to make orders
     // Need dependency injection for repositories and services
+    @Autowired
+    private ProductRepository productRepository;
 
     @Qualifier("OrderRepository")
     @Autowired
@@ -29,13 +32,9 @@ public class OrderService {
     @Autowired
     private CustomerRepository CustomerRepository;
 
-    // A customer chosen products
-    // We need to make that order based on the products linked to
-    public void MakeTemporaryOrder(List<Product> customerProducts, Customer customer) {
-        Orders order = new Orders();
+    //
 
 
-    }
 
     protected double CalculateTotalPrice(Orders Order){
         // Go through the list of  products
@@ -51,7 +50,7 @@ public class OrderService {
     }
 
     //Admin moet orders kunnen zien
-    protected  List<Orders> GetOrders(){
+    protected  List<Orders> GetOrdersNotDoneYet(){
         // Filter op basis van de order die er is
         // Alle timestamp dat is later dan current time filter out
         List<Orders> OrdersNotHandled = new ArrayList<>();
@@ -73,17 +72,35 @@ public class OrderService {
 
     }
 
-    public boolean DeleteProductFromOrder(Orders orders, Product product) {
+    public List<Product> DeleteProductFromOrder(Orders orderCustomer, Long id) {
         // TODO: THE USER CAN DELETE PRODUCT FROM ORDER BY
-
-        return true;
+        var productsCustomer = orderCustomer.getProduct();
+        for(Product product : productsCustomer){
+            if(product.getId() == id ){
+                productsCustomer.remove(product);
+            }
+        }
+        return productsCustomer;
     }
 
-    // Let the customer know when the order is ready
-    // This is a chosen value or
 
-    // Send on automatic response to the user once the order is done
-    // Check the time when the order was made
-    // Time slot  => Once  the datetime is reached message should be send
-    //
+    // TODO:Pak alle id's van producten dat de klant geselecteerd heeft voor de bestalling
+    public List<Product> GetAllProductsForOrder(List<Integer> allproductids){
+        //get all the products bij looking up de ids
+        var products = productRepository.findAll();
+        List<Product> productForOrder = new ArrayList<>();
+
+        for (Product product : products) {
+            if(allproductids.contains(product.getId())){
+                productForOrder.add(product);
+            }
+        }
+
+        return productForOrder;
+    }
+
+    protected  boolean saveOrder(Orders order) {
+        OrderRespository.save(order);
+        return true;
+    }
 }
