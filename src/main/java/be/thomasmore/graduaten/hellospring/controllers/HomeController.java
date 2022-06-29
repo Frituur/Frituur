@@ -21,11 +21,21 @@ public class HomeController {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @RequestMapping("/")
-    public String navigateToIndex() {
-        return "Home";
-    }
 
+    @RequestMapping("/Detail")
+    public String DetailPage() {return "Detail"; }
+
+    @RequestMapping("/Login")
+    public String LoginPage() {return "Login"; }
+
+    @RequestMapping("/Tijdsslots")
+    public String TijdsslotsPage() {return "Tijdsslots";}
+
+    @RequestMapping("/Bestel")
+    public String BestelPage() {return "BesteloverzichtKlant";}
+
+    @RequestMapping("/Besteloverzicht")
+    public String BestelOverzichtPage() {return "BesteloverzichtAdmin"; }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {

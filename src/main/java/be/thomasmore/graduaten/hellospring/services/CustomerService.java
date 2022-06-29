@@ -16,4 +16,16 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    public boolean aDDCustomer(Customer customer) {
+
+        try{
+            customerRepository.save(customer);
+            return true;
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+            return false;
+        }
+
+    }
+
 }

@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Detail</title>
-    <link rel=”stylesheet”  type=”text/css”  href="../css/main.css" />
+    <link rel=”stylesheet”   href="../css/main.css" />
     <script src="https://kit.fontawesome.com/187b41207f.js" crossorigin="anonymous"></script>
 </head>
 

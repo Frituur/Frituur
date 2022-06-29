@@ -1,5 +1,6 @@
 package be.thomasmore.graduaten.hellospring;
 
+import be.thomasmore.graduaten.hellospring.entities.User;
 import be.thomasmore.graduaten.hellospring.security.PasswordConfig;
 import be.thomasmore.graduaten.hellospring.shared.DatabaseInitializer;
 import org.slf4j.Logger;
@@ -15,10 +16,13 @@ import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Set;
 
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class FrituurspringApplication extends SpringBootServletInitializer {
+
+
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -30,6 +34,8 @@ public class FrituurspringApplication extends SpringBootServletInitializer {
 
 
 	public static void main(String[] args) throws SQLException, FileNotFoundException {
+
+
 		logger.info("The application is starting now");
 		DatabaseInitializer databaseInitializer = new DatabaseInitializer(logger);
 		Connection conn = databaseInitializer.GetConnection();

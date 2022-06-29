@@ -41,8 +41,8 @@ public class Product {
     )
     @JoinTable(
             name = "product_category",
-            joinColumns = @JoinColumn(name = "categoryid"),
-            inverseJoinColumns = @JoinColumn(name = "productid"))
+            joinColumns = @JoinColumn(name = "productid"),
+            inverseJoinColumns = @JoinColumn(name = "categoryid"))
     @JsonManagedReference
     @JsonIgnore
     private List<Category> category;
