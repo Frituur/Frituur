@@ -1,9 +1,0 @@
-CREATE DATABASE frituur; 
-USE frituur;
-CREATE TABLE Customer ( id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                        firstname varchar(250),
-                        lastname varchar(250),
-                        address varchar(200),
-                        phone varchar(50),
-                        email varchar(50)
-)

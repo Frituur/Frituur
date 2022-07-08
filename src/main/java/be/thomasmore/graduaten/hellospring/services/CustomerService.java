@@ -16,7 +16,7 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public boolean aDDCustomer(Customer customer) {
+    public boolean AddCustomer(Customer customer) {
 
         try{
             customerRepository.save(customer);
