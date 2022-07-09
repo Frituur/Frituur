@@ -1,7 +1,9 @@
 package be.thomasmore.graduaten.hellospring.controllers;
 
 import be.thomasmore.graduaten.hellospring.entities.Category;
+import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.repositories.CategoryRepository;
+import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import be.thomasmore.graduaten.hellospring.security.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -27,10 +29,15 @@ public class HomeController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @RequestMapping("/")
     public String getAllCategories(Model model) {
         List<Category> categories=categoryRepository.findAll();
+        List<Product> products=productRepository.findAll();
         model.addAttribute("categories",categories);
+        model.addAttribute("products",products);
         return "Home";
     }
 

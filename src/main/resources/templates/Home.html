@@ -24,123 +24,16 @@
     <input type="text" placeholder="Search.." name="search">
     <button type="submit"><i class="fa fa-search"></i></button>
 </div>
-<div class="producten">
-    <h2 id="Frieten">Frieten</h2>
+<div class="producten" th:each="categories: ${categories}">
+    <h2 th:text="${categories.name}"></h2>
     <div class="productgrid">
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
+        <div class="item" th:each="products:${categories.product}">
+            <image th:src="${products.photo}" width="150" height="100" />
+            <p th:text="${products.name}"></p><br>
+            <p th:text="${products.price}"></p>
         </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-    </div>
-    <h2 id="Sauzen">Sauzen</h2>
-    <div class="productgrid">
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-    </div>
-    <h2 id="Snacks">Snacks</h2>
-    <div class="productgrid">
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-    </div>
-    <h2 id="Dranken">Dranken</h2>
-    <div class="productgrid">
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-    </div>
-    <h2 id="Desserts">Desserts</h2>
-    <div class="productgrid">
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-        <div class="item">
-            <image src="img_1.jpg" width="150" height="100" />
-            <p>Naam Product <br> Prijs Product</p>
-        </div>
-    </div>
 
+    </div>
 </div>
 </body>
 </html>
