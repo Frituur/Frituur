@@ -16,11 +16,9 @@
     <h1><i class="fa-solid fa-drumstick-bite fa-xl"></i>'T Half Kieke</h1>
 </header>
 <nav>
-    <a href="#Frieten">Frieten</a>
-    <a href="#Sauzen">Sauzen</a>
-    <a href="#Snacks">Snacks</a>
-    <a href="#Dranken">Dranken</a>
-    <a href="#Desserts">Deserts</a>
+    <tr th:each="categories: ${categories}">
+        <td th:text="${categories.name}" /><br>
+    </tr>
 </nav>
 <div class="search">
     <input type="text" placeholder="Search.." name="search">
