@@ -55,7 +55,7 @@ public class OrController {
         List<Product>productsForOrder = new ArrayList<>();
         try{
 
-            customerService.aDDCustomer(customer);
+            customerService.AddCustomer(customer);
             productsForOrder = orderService.GetAllProductsForOrder(productsids);
             orders.setTimeslot(tijdslot);
             orders.setCustomer(customer);

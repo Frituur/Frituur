@@ -1,9 +1,7 @@
 package be.thomasmore.graduaten.hellospring.shared;
 
-import org.apache.tomcat.jni.Directory;
 import org.slf4j.Logger;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,7 +11,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Dictionary;
-import java.util.Enumeration;
 import java.util.Hashtable;
 
 public class DatabaseInitializer {
@@ -83,8 +80,8 @@ public class DatabaseInitializer {
 
     }
     private Dictionary<Integer, String> FillDict(Dictionary<Integer, String> dict){
-        dict.put(1, "snacks");
-        dict.put(2, "burgers");
+        dict.put(1, "images/snacks");
+        dict.put(2, "images/burgers");
         dict.put(3, "dranken");
         dict.put(4, "desert");
         return dict;

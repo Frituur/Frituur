@@ -73,7 +73,7 @@ button {
 
 .item {
     display: grid;
-    grid-template-columns: 100 px auto;
+    grid-template-columns: 100px auto;
     grid-template-rows: auto;
 }
 

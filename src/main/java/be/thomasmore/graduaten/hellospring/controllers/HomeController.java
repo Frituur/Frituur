@@ -1,7 +1,6 @@
 package be.thomasmore.graduaten.hellospring.controllers;
 
 import be.thomasmore.graduaten.hellospring.security.UserDetailsService;
-import com.fasterxml.jackson.databind.ser.std.SqlTimeSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,6 +20,8 @@ public class HomeController {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @GetMapping("/")
+    public String HomePage() {return "Home";}
 
     @RequestMapping("/Detail")
     public String DetailPage() {return "Detail"; }
@@ -28,14 +29,12 @@ public class HomeController {
     @RequestMapping("/Login")
     public String LoginPage() {return "Login"; }
 
-    @RequestMapping("/Tijdsslots")
-    public String TijdsslotsPage() {return "Tijdsslots";}
+    @RequestMapping("/BestelKlant")
+    public String TijdsslotsPage() {return "BestelKlant";}
 
-    @RequestMapping("/Bestel")
-    public String BestelPage() {return "BesteloverzichtKlant";}
+    @RequestMapping("/BestelAdmin")
+    public String BestelPage() {return "BestelAdmin";}
 
-    @RequestMapping("/Besteloverzicht")
-    public String BestelOverzichtPage() {return "BesteloverzichtAdmin"; }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
