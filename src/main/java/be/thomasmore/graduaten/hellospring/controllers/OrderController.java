@@ -1,43 +1,44 @@
 package be.thomasmore.graduaten.hellospring.controllers;
 
+import be.thomasmore.graduaten.hellospring.dto.CategoryDto;
+import be.thomasmore.graduaten.hellospring.dto.OrderDto;
+import be.thomasmore.graduaten.hellospring.dto.ProductDto;
+import be.thomasmore.graduaten.hellospring.entities.Orders;
+import be.thomasmore.graduaten.hellospring.entities.Product;
+import be.thomasmore.graduaten.hellospring.mapper.ModelMap;
 import be.thomasmore.graduaten.hellospring.repositories.OrderRespository;
 import be.thomasmore.graduaten.hellospring.services.OrderService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class OrderController {
 
-    //TODO: When the user wants to order the product give him summary of the chosen products
-    //TODO: Calculate the total order of the products for the order
-    //TODO: User should be able to Change products from owner
-    //TODO: Opslaan van Customer in Database for data contact
-    //TODO: Count the products in order
-
-
-    // TODO: aanmaken van een paar in memory objects voor producten en categorieen
-    // TOOD:  Dan kunnen kiezen van een product via
-
-
-
-    /*
-    product aanpassen:
-    Hij kan op dezelfde pagina producten verwijderen uit de lijst
-    Toevoegen aan lijst terug sturen naar hooftmenu waar hij zijn items kan bijvullen
-    Temporary in memory houden
-
-     */
     @Autowired
-    private final OrderService service;
+    private ModelMap modelMap;
 
-    public OrderController(OrderService orderService) {
-        service = orderService;
+    @Autowired
+    private OrderService orderService;
+
+    @GetMapping("/showorder")
+    public ModelAndView ShowOrder(@RequestParam("Order") Orders order){
+        ModelAndView mv = new ModelAndView("BestelKlant");
+        OrderDto orderDto = modelMap.modelMapper().map(order, OrderDto.class);
+        mv.addObject(order);
+        return mv;
 
     }
+
 
     public String FinalOrder(){
         // Eenmaal als tijdslot gekozen is, lijst van producten in orders, naam van klant en telefoon nummer
@@ -46,17 +47,39 @@ public class OrderController {
         return "/complete";
     }
 
-    @GetMapping("/temporaryorder")
-    public String MakeTemporaryOrder(){
+    @RequestMapping(value = "/makeOrder", method = RequestMethod.POST)
+    public ModelAndView MakeOrder(@ModelAttribute List<CategoryDto> categories) throws IOException {
+        // get all categories back
+        Orders order = new Orders();
+        order = ChosenProductsForOrder(categories, order);
 
-        return "temporaryorder";
+        double totalPrice = orderService.CalculateTotalPrice(order);
+        order.setTotalPrice(totalPrice);
+        ModelAndView mv = new ModelAndView("redirect:/showorder");
+        mv.addObject(order);
+
+        return mv;
     }
-
 
     //Orders ophalen van de customers in database
     @GetMapping("/getorders")
     public String GetOrdersFromCustomers() {
         // get the orders from the customers
         return "getorders";
+    }
+
+    private Orders ChosenProductsForOrder(List<CategoryDto> categoryDtos, Orders order)
+    {
+        for (CategoryDto categoryDto : categoryDtos) {
+            for (ProductDto productDto : categoryDto.getProduct()) {
+                if(productDto.isChosenProduct() == true){
+                    Product product = modelMap.modelMapper().map(productDto, Product.class);
+                    order.getProduct().add(product);
+                }
+
+            }
+        }
+
+        return order;
     }
 }

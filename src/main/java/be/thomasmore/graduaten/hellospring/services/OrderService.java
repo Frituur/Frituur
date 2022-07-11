@@ -36,7 +36,7 @@ public class OrderService {
 
 
 
-    protected double CalculateTotalPrice(Orders Order){
+    public double CalculateTotalPrice(Orders Order){
         // Go through the list of  products
         Double totalPrice = 0.0;
         List<Product> productCustomer = Order.getProduct();
@@ -50,7 +50,7 @@ public class OrderService {
     }
 
     //Admin moet orders kunnen zien
-    protected  List<Orders> GetOrdersNotDoneYet(){
+    public  List<Orders> GetOrdersNotDoneYet(){
         // Filter op basis van de order die er is
         // Alle timestamp dat is later dan current time filter out
         List<Orders> OrdersNotHandled = new ArrayList<>();
