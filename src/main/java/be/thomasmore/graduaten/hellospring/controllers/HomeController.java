@@ -10,10 +10,12 @@ import be.thomasmore.graduaten.hellospring.mapper.ModelMap;
 import be.thomasmore.graduaten.hellospring.repositories.CategoryRepository;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import be.thomasmore.graduaten.hellospring.security.UserDetailsService;
+import be.thomasmore.graduaten.hellospring.services.ProductService;
 import be.thomasmore.graduaten.hellospring.shared.Converter;
 import org.aspectj.weaver.ast.Or;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,7 +41,8 @@ public class HomeController {
 
     @Autowired
     private Converter converter;
-
+    @Autowired
+    private ProductService service;
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -50,11 +53,14 @@ public class HomeController {
     private ProductRepository productRepository;
 
     @RequestMapping("/")
-    public String GetCategoriesAndProductsForHomePage(Model model) {
+    public String GetCategoriesAndProductsForHomePage(Model model, @Param("keyword") String keyword) {
         List<Category> categories=categoryRepository.findAll();
         List<CategoryDto> categoryDtos = new ArrayList<>();
         TypeToken<List<CategoryDto>> typeToken = new TypeToken<>() {
         };
+        List<Product> listProducts = service.listAll(keyword);
+        model.addAttribute("listProducts", listProducts);
+        model.addAttribute("keyword", keyword);
         categoryDtos = modelMap.modelMapper().map(categories,typeToken.getType());
         System.out.println(categoryDtos.isEmpty());
         categoryDtos = ConvertPhotoBase64(categoryDtos);
