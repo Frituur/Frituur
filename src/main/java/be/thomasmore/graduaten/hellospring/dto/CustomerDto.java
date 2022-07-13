@@ -14,12 +14,8 @@ import java.util.List;
 @Data
 public class CustomerDto {
 
-    @NotNull( message = "Firstname can't be null")
-    @Column(name = "firstname")
     private String firstname ;
 
-    @NotNull( message = "Firstname can't be null")
-    @Column(name = "lastname")
     private String lastname ;
 
     private String fullname = firstname + lastname;

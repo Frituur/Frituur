@@ -3,11 +3,14 @@
 <head>
     <meta charset="ISO-8859-1">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/payment.css}"/>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
     <script type="text/javascript" th:src="@{../static/js/script.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/187b41207f.js" crossorigin="anonymous"></script>
 </head>
 
@@ -15,26 +18,28 @@
 <header>
     <h1><i class="fa-solid fa-drumstick-bite"></i>'T Half Kieke</h1>
 </header>
-<nav>
-    <a href="#">Frieten</a>
-    <a href="#">Sauzen</a>
-    <a href="#">Snacks</a>
-    <a href="#">Dranken</a>
-    <a href="#">Deserts</a>
-</nav>
-<div class="Bestelling">
-    <h2>Bestelling</h2>
-    <form>
-        <p>Kleine friet- 2 - 4 euro</p>
-        <p>Kleine friet- 2 - 4 euro</p>
-        <p>Kleine friet- 2 - 4 euro</p>
-        <input type="button" value="Aanpassen">
-        <p>Totaal:12 euro</p>
-        <input type="text" id="naam" name="naam" value="Naam">
-        <input type="text" id="nummer" name="nummer" value="Telefoonnummer">
-        <input type="button" value="Kies een afhaalmoment">
-        <input type="submit" value="Bestellen">
-    </form>
+<main class="page payment-page">
+    <section class="payment-form dark">
+        <div class="container">
+            <form>
+                <div class="products">
+                    <h3 class="title">Bestelling</h3>
+                    <div class="item" th:each="products:${order.Product}">
+                        <div class="row">
+                            <span class="price" th:text="${products.price}"></span>
+                            <p class="item-name" th:text="${products.name}"></p>
+                        </div>
+                    </div>
+                    <div class="total">Total<span class="price" th:text="${order.totalPrice}">$320</span></div>
+                </div>
+                <div class="row">
+                    <input class="item-name" th:text="">
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
 
 </div>
 </body>

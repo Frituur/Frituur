@@ -20,12 +20,12 @@
         <td th:text="${categories.name}" /><br>
     </tr>
 </nav>
+<div class="search">
+    <input type="text" placeholder="Search.." name="search">
+    <button type="submit"><i class="fa fa-search"></i></button>
+</div>
+<form action="makeorder" method='POST'  th:object="${categories}">
 
-<form action="makeOrder" method="post">
-    <div class="search">
-        <input type="text" placeholder="Search.." name="search">
-        <button type="submit"><i class="fa fa-search"></i></button>
-    </div>
     <div class="container" th:each="categories: ${categories}">
         <div class="row">
             <h2 th:text="${categories.name}"></h2>
@@ -51,7 +51,7 @@
 
     </div>
     <div class="order">
-        <input th:type="submit" th:value="Submit">
+        <input type="submit" name="btnOrder" >
     </div>
 </form>
 
