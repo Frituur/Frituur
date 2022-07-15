@@ -58,9 +58,6 @@ public class HomeController {
         List<CategoryDto> categoryDtos = new ArrayList<>();
         TypeToken<List<CategoryDto>> typeToken = new TypeToken<>() {
         };
-        List<Product> listProducts = service.listAll(keyword);
-        model.addAttribute("listProducts", listProducts);
-        model.addAttribute("keyword", keyword);
         categoryDtos = modelMap.modelMapper().map(categories,typeToken.getType());
         System.out.println(categoryDtos.isEmpty());
         categoryDtos = ConvertPhotoBase64(categoryDtos);
@@ -76,11 +73,7 @@ public class HomeController {
     @RequestMapping("/Login")
     public String LoginPage() {return "Login"; }
 
-    @RequestMapping("/BestelKlant")
-    public String TijdsslotsPage() {return "BestelKlant";}
 
-    @RequestMapping("/BestelAdmin")
-    public String BestelPage() {return "BestelAdmin";}
 
 
 

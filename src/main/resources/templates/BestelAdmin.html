@@ -17,18 +17,17 @@
     <h1><i class="fa-solid fa-drumstick-bite"></i>'T Half Kieke</h1>
 </header>
 <div class="Adminoverzicht">
-    <h2>Bestellingen</h2>
-    <div class="Bestellingcard">
-        <h3>17:00</h3>
-        <i class="fa-solid fa-circle-x"></i>
-        <h4>Demi de Haan</h4>
-        <h4>012 345 678 </h4>
-        <ul>
-            <li>2 Kleine friet</li>
-            <li> 2 Cola</li>
-            <li>1 Ketchup</li>
-        </ul>
-    </div>
+    <h2 th:each="orders: ${orders}">Bestellingen</h2>
+        <div class="Bestellingcard">
+           <h3></h3>
+            <i class="fa-solid fa-circle-x"></i>
+            <h4  th:text="${orders.Customer.firstname}+' '+${orders.Customer.lastname}"></h4>
+            <h4 th:text="${orders.Customer.phone}"></h4>
+            <ul th:each="products: ${orders.Product}">
+                <li>2 Kleine friet</li>
+            </ul>
+        </div>
+
 </div>
 </body>
 </html>

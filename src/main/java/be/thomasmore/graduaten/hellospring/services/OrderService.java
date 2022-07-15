@@ -1,10 +1,9 @@
 package be.thomasmore.graduaten.hellospring.services;
 
-import be.thomasmore.graduaten.hellospring.entities.Customer;
 import be.thomasmore.graduaten.hellospring.entities.Orders;
 import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.repositories.CustomerRepository;
-import be.thomasmore.graduaten.hellospring.repositories.OrderRespository;
+import be.thomasmore.graduaten.hellospring.repositories.OrderRepository;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +14,6 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @Component
@@ -27,7 +25,7 @@ public class OrderService {
 
     @Qualifier("OrderRepository")
     @Autowired
-    private OrderRespository OrderRespository;
+    private OrderRepository OrderRepository;
 
     @Autowired
     private CustomerRepository CustomerRepository;
@@ -54,7 +52,7 @@ public class OrderService {
         // Filter op basis van de order die er is
         // Alle timestamp dat is later dan current time filter out
         List<Orders> OrdersNotHandled = new ArrayList<>();
-        List<Orders> allOrders = OrderRespository.findAll();
+        List<Orders> allOrders = OrderRepository.findAll();
 
         LocalDateTime now = LocalDateTime.now();
         Timestamp timestamp = Timestamp.valueOf(now);
@@ -100,7 +98,7 @@ public class OrderService {
     }
 
     protected  boolean saveOrder(Orders order) {
-        OrderRespository.save(order);
+        OrderRepository.save(order);
         return true;
     }
 }
