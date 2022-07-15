@@ -19,6 +19,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -47,14 +48,19 @@ public class OrderController {
         return "/complete";
     }
 
-    @RequestMapping(value = "/makeOrder", method = RequestMethod.POST)
-    public ModelAndView MakeOrder(@ModelAttribute List<CategoryDto> categories) throws IOException {
+    @RequestMapping(value = "/makeorder", params = "btnOrder",method = RequestMethod.POST)
+    public ModelAndView MakeOrder(@RequestBody List<CategoryDto> categories) throws IOException {
         // get all categories back
+
         Orders order = new Orders();
         order = ChosenProductsForOrder(categories, order);
-
-        double totalPrice = orderService.CalculateTotalPrice(order);
-        order.setTotalPrice(totalPrice);
+        System.out.println(categories.size());
+        System.out.println("Making order");
+        System.out.println(order.getId());
+        //double totalPrice = orderService.CalculateTotalPrice(order);
+        //System.out.println(totalPrice);
+        System.out.println(order.getId());
+        //order.setTotalPrice(totalPrice);
         ModelAndView mv = new ModelAndView("redirect:/showorder");
         mv.addObject(order);
 
