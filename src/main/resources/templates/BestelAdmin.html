@@ -16,18 +16,17 @@
 <header>
     <h1><i class="fa-solid fa-drumstick-bite"></i>'T Half Kieke</h1>
 </header>
-<div class="Adminoverzicht">
-    <h2 th:each="orders: ${orders}">Bestellingen</h2>
+<div class="Adminoverzicht" th:each="orders: ${orders}">
+    <h2 th:each="Customer:${orders.Customer}" >Bestellingen</h2>
         <div class="Bestellingcard">
            <h3></h3>
             <i class="fa-solid fa-circle-x"></i>
-            <h4  th:text="${orders.Customer.firstname}+' '+${orders.Customer.lastname}"></h4>
-            <h4 th:text="${orders.Customer.phone}"></h4>
+            <h4  th:text="${Customer.firstname}+' '+${Customer.lastname}"></h4>
+            <h4 th:text="${Customer.phone}"></h4>
             <ul th:each="products: ${orders.Product}">
                 <li>2 Kleine friet</li>
             </ul>
         </div>
-
 </div>
 </body>
 </html>

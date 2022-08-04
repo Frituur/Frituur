@@ -53,7 +53,7 @@ public class HomeController {
     private ProductRepository productRepository;
 
     @RequestMapping("/")
-    public String GetCategoriesAndProductsForHomePage(Model model, @Param("keyword") String keyword) {
+    public String GetCategoriesAndProductsForHomePage(Model model) {
         List<Category> categories=categoryRepository.findAll();
         List<CategoryDto> categoryDtos = new ArrayList<>();
         TypeToken<List<CategoryDto>> typeToken = new TypeToken<>() {
