@@ -3,12 +3,13 @@ package be.thomasmore.graduaten.hellospring.controllers;
 import be.thomasmore.graduaten.hellospring.dto.CategoryDto;
 import be.thomasmore.graduaten.hellospring.dto.OrderDto;
 import be.thomasmore.graduaten.hellospring.dto.ProductDto;
-import be.thomasmore.graduaten.hellospring.entities.Category;
 import be.thomasmore.graduaten.hellospring.entities.Orders;
 import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.mapper.ModelMap;
 import be.thomasmore.graduaten.hellospring.repositories.OrderRepository;
+import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import be.thomasmore.graduaten.hellospring.services.OrderService;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-@Controller
+@RestController
 public class OrderController {
 
     @Autowired
@@ -30,6 +33,8 @@ public class OrderController {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
     @GetMapping("/showorder")
     public ModelAndView ShowOrder(@RequestParam("Order") Orders order){
         ModelAndView mv = new ModelAndView("BestelKlant");
@@ -47,25 +52,23 @@ public class OrderController {
         return "/complete";
     }
 
-    @RequestMapping(value = "/makeorder", params = "btnOrder",method = RequestMethod.POST)
-    public ModelAndView MakeOrder(@RequestBody List<CategoryDto> categories) throws IOException {
-        // get all categories back
+    @RequestMapping(value = "/makeorder",method = RequestMethod.POST)
+    public List<Product> MakeOrder(@RequestBody ProductRequest request) throws IOException {
 
-        Orders order = new Orders();
-        order = ChosenProductsForOrder(categories, order);
-        System.out.println(categories.size());
-        System.out.println("Making order");
-        System.out.println(order.getId());
-        //double totalPrice = orderService.CalculateTotalPrice(order);
-        //System.out.println(totalPrice);
-        System.out.println(order.getId());
-        //order.setTotalPrice(totalPrice);
-        ModelAndView mv = new ModelAndView("redirect:/showorder");
-        mv.addObject(order);
-
-        return mv;
+        List<Product> products=new ArrayList<>();
+        for(int i=0;i<request.getProducts().stream().count();i++){
+            products.add(request.getProducts().get(i));
+        }
+        System.out.println(products);
+        return products;
     }
+    public static final class ProductRequest {
+        List<Product> products;
 
+        public List<Product> getProducts() {
+            return products;
+        }
+    }
     //Orders ophalen van de customers in database
     @GetMapping("/getorders")
     public String GetOrdersFromCustomers() {
@@ -93,6 +96,11 @@ public class OrderController {
     @RequestMapping("/BestelAdmin")
     public String BestelPage(Model model) {
         List<Orders> orders=orderRepository.findAll();
-        model.addAttribute("orders",orders);
+        List<OrderDto> orderDtos = new ArrayList<>();
+        TypeToken<List<OrderDto>> typeToken = new TypeToken<>() {
+        };
+        orderDtos = modelMap.modelMapper().map(orders,typeToken.getType());
+        System.out.println(orderDtos.isEmpty());
+        model.addAttribute("orders",orderDtos);
         return "BestelAdmin";}
 }
