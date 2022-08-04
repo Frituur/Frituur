@@ -30,8 +30,6 @@ public class Customer {
 
 
     private String address;
-    private String phone;
-    private String email;
 
     @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn

@@ -24,7 +24,7 @@
     <input type="text" placeholder="Search.." name="search">
     <button type="submit"><i class="fa fa-search"></i></button>
 </div>
-<form action="makeorder" method='POST'  th:object="${categories}">
+<form  method='POST'  th:action="@{/makeorder}" >
 
     <div class="container" th:each="categories: ${categories}">
         <div class="row">
@@ -43,7 +43,8 @@
                     <input
                             type="checkbox"
                             name="myBooleanVariable"
-                            th:checked="${products.chosenProduct}"/>
+                            th:value="${products.id}"
+                    />
                 </div>
             </div>
         </div>
@@ -51,7 +52,7 @@
 
     </div>
     <div class="order">
-        <input type="submit" name="btnOrder" >
+        <input type="submit"  name="submit" value="value" >
     </div>
 </form>
 
