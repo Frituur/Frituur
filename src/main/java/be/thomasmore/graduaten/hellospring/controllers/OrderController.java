@@ -10,6 +10,7 @@ import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import be.thomasmore.graduaten.hellospring.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -66,13 +67,15 @@ public class OrderController {
                     int nummer = parseInt(lijst2[1].substring(0, 1));
                     order.setNumberOfProducts(nummer);
                     o.add(order);
-                    return o.toString();
                 }
             }
-        } else return "redirect:/";
-
-
-            return o.toString();
+            ra.addFlashAttribute("Lijst",o);
+            return "redirect:/bestelklant";
+        }
+        else
+        {
+            return "redirect:/";
+        }
         }
 
 
