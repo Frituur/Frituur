@@ -55,6 +55,10 @@ public class OrderController {
     public String MakeOrder(@RequestBody String Json, RedirectAttributes ra) throws IOException {
         String[] lijst = Json.split("r");
         List<Orders> o = new ArrayList<>();
+        String[] naamsplit=Json.split("CustomerNaam"+"=");
+        String naam="eeee";
+        String[] adressplit=Json.split("CustomerAdres"+"=");
+        String adres=adressplit[1].substring(0, adressplit[1].indexOf("&"));
         if (Json.contains("on")) {
             for (int i = 0; i < lijst.length; i++) {
                 if (lijst[i].contains("on")) {
@@ -69,12 +73,12 @@ public class OrderController {
                     o.add(order);
                 }
             }
-            ra.addFlashAttribute("Lijst",o);
-            return "redirect:/bestelklant";
+
+            return Json;
         }
         else
         {
-            return "redirect:/";
+            return Json;
         }
         }
 
