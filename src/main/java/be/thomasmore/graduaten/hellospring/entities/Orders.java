@@ -23,10 +23,6 @@ public class Orders {
     @Column(name = "numberofproducts")
     private int numberOfProducts;
 
-    @Column(name="totalprice")
-    private double totalPrice;
-
-
 
     @ManyToOne
     @JoinTable(name = "Customers",

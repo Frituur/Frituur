@@ -55,27 +55,21 @@ public class OrderController {
         return "/complete";
     }
 
-    @PostMapping (value ="/makeorder", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public String MakeOrder(@RequestBody IDRequest request) throws IOException{
-        // get all categories back
-        System.out.println(request.getIds());
-        ObjectMapper mapper = new ObjectMapper();
-        //int id = mapper.readValue(json, Integer.class);
-        //ObjectReader objectReader = mapper.reader().forType(new TypeReference<List<Integer>>(){});
+    @RequestMapping(value = "/makeorder",method = RequestMethod.POST)
+    public List<Product> MakeOrder(@RequestBody ProductRequest request) throws IOException {
 
-        //List<Integer> result = objectReader.readValue(json);
-
-        Orders order = new Orders();
-        //order = ChosenProductsForOrder(categories, order);
-        //System.out.println(categories.length);
-        System.out.println("Making order");
-        System.out.println(order.getId());
-        //double totalPrice = orderService.CalculateTotalPrice(order);
-        //System.out.println(totalPrice);
-        System.out.println(order.getId());
-        //order.setTotalPrice(totalPrice);
-        return "Thanks For Posting!!!";
+        List<Product> products=new ArrayList<>();
+        for(int i=0;i<request.getProducts().stream().count();i++){
+            products.add(request.getProducts().get(i));
+        }
+        System.out.println(products);
+        return products;
+    }
+    public static final class ProductRequest {
+        List<Product> products;
+        public List<Product> getProducts() {
+            return products;
+        }
     }
 
     //Orders ophalen van de customers in database

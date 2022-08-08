@@ -41,6 +41,4 @@ public class ProductDto {
     private List<Category> category;
 
 
-
-    private Orders orderid;
 }
