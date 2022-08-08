@@ -10,10 +10,12 @@ import be.thomasmore.graduaten.hellospring.mapper.ModelMap;
 import be.thomasmore.graduaten.hellospring.repositories.CategoryRepository;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import be.thomasmore.graduaten.hellospring.security.UserDetailsService;
+import be.thomasmore.graduaten.hellospring.services.ProductService;
 import be.thomasmore.graduaten.hellospring.shared.Converter;
 import org.aspectj.weaver.ast.Or;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,7 +41,8 @@ public class HomeController {
 
     @Autowired
     private Converter converter;
-
+    @Autowired
+    private ProductService service;
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -69,11 +72,7 @@ public class HomeController {
     @RequestMapping("/Login")
     public String LoginPage() {return "Login"; }
 
-    @RequestMapping("/BestelKlant")
-    public String TijdsslotsPage() {return "BestelKlant";}
 
-    @RequestMapping("/BestelAdmin")
-    public String BestelPage() {return "BestelAdmin";}
 
 
 

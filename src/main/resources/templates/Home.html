@@ -17,6 +17,7 @@
 </header>
 <nav>
     <tr th:each="categories: ${categories}">
+
         <td><a th:href="'#'+${categories.name}" th:text="${categories.name}"></a> </td><br>
     </tr>
 </nav>
@@ -45,6 +46,7 @@
                                 name="myBooleanVariable"
                                 th:value="${products.id}"
                         />
+
                     </div>
                 </div>
 
@@ -54,7 +56,9 @@
 
     </div>
     <div class="order">
+
         <input type="submit"  name="submit" value="value" >
+
     </div>
 </form>
 

@@ -30,3 +30,6 @@ jQuery('.quantity').each(function() {
     });
 
 });
+function clearSearch() {
+    window.location = "[[@{/}]]";
+};
