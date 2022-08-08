@@ -17,38 +17,48 @@
 </header>
 <nav>
     <tr th:each="categories: ${categories}">
-        <td><a th:href="'#'+${categories.name}" th:text="${categories.name}" ></a></td><br>
+
+        <td><a th:href="'#'+${categories.name}" th:text="${categories.name}"></a> </td><br>
     </tr>
 </nav>
-<form action="makeOrder" method="post">
+<div class="search">
+    <input type="text" placeholder="Search.." name="search">
+    <button type="submit"><i class="fa fa-search"></i></button>
+</div>
+<form  method='POST'  th:action="@{/makeorder}" >
+
     <div class="container" th:each="categories: ${categories}">
-        <div class="row">
-            <h2 th:id="${categories.name}" th:text="${categories.name}"></h2>
+        <div class="row" th:id="${categories.name}">
+            <h2 th:text="${categories.name}"></h2>
         </div>
         <div class="row">
             <div  th:each="products:${categories.product}">
-                <div class="card border-dark mb-3" style="width: 18rem;">
+                <div class="card" style="width: 18rem;">
                     <img th:src="${products.image}" width="100" height="100"/>
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${products.name}"></h5>
-                        <p class="card-text"  th:text="'€'+${products.price}"></p>
+                        <p th:text="${products.name}"></p><br>
                         <div class="quantity">
                             <input th:type="${products.quantity}"  min="1" max="9" step="1" value="1">
                         </div>
-
+                        <p th:text="'€'+${products.price}"></p>
                         <input
                                 type="checkbox"
                                 name="myBooleanVariable"
-                                th:checked="${products.chosenProduct}"/>
+                                th:value="${products.id}"
+                        />
+
                     </div>
                 </div>
+
             </div>
         </div>
 
 
     </div>
     <div class="order">
-        <input th:type="submit" th:value="Submit">
+
+        <input type="submit"  name="submit" value="value" >
+
     </div>
 </form>
 

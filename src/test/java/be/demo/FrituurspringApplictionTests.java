@@ -8,6 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(classes = FrituurspringApplication.class)
 class FrituurspringApplictionTests {
 
-	
+
 
 }

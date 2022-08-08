@@ -43,7 +43,7 @@ public class OrController {
     @PostMapping("/neworder")
     @ResponseBody
     public ResponseEntity<String> MakeOrderWithProducts(Orders orders,
-                                                        List<Integer> productsids,
+                                                        Product product,
                                                         Customer customer, Timeslot tijdslot){
 
         // Haal de tijdslot uit de database en check of deze beschikbaar is en bestaat
@@ -52,10 +52,9 @@ public class OrController {
         try{
 
             customerService.AddCustomer(customer);
-            productsForOrder = orderService.GetAllProductsForOrder(productsids);
             orders.setTimeslot(tijdslot);
             orders.setCustomer(customer);
-            orders.setProduct(productsForOrder);
+            orders.setProduct(product);
             return new ResponseEntity<>("De order is toegevoegd", HttpStatus.ACCEPTED);
         }catch (Exception ex) {
             consoleLogger.PrintMessage(ex.getMessage());

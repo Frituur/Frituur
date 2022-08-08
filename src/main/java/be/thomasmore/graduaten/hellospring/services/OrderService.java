@@ -37,13 +37,9 @@ public class OrderService {
     public double CalculateTotalPrice(Orders Order){
         // Go through the list of  products
         Double totalPrice = 0.0;
-        List<Product> productCustomer = Order.getProduct();
+        Product product = Order.getProduct();
         int quantityOfProducts = Order.getNumberOfProducts();
-        // Laad the Order
-        for (Product product : productCustomer) {
             totalPrice += product.getPrice() * quantityOfProducts;
-
-        }
         return totalPrice;
     }
 
@@ -70,14 +66,12 @@ public class OrderService {
 
     }
 
-    public List<Product> DeleteProductFromOrder(Orders orderCustomer, Long id) {
+    public Product DeleteProductFromOrder(Orders orderCustomer, Long id) {
         // TODO: THE USER CAN DELETE PRODUCT FROM ORDER BY
         var productsCustomer = orderCustomer.getProduct();
-        for(Product product : productsCustomer){
-            if(product.getId() == id ){
-                productsCustomer.remove(product);
-            }
-        }
+
+
+
         return productsCustomer;
     }
 
