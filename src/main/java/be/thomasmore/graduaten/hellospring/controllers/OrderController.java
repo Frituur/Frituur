@@ -56,7 +56,7 @@ public class OrderController {
         String[] lijst = Json.split("r");
         List<Orders> o = new ArrayList<>();
         String[] naamsplit=Json.split("CustomerNaam"+"=");
-        String naam="eeee";
+        String naam=naamsplit[1].substring(0, naamsplit[1].indexOf("&"));
         String[] adressplit=Json.split("CustomerAdres"+"=");
         String adres=adressplit[1].substring(0, adressplit[1].indexOf("&"));
         if (Json.contains("on")) {
@@ -74,7 +74,7 @@ public class OrderController {
                 }
             }
 
-            return Json;
+            return adres;
         }
         else
         {
