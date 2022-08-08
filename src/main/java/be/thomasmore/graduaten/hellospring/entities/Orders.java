@@ -24,19 +24,17 @@ public class Orders {
     private int numberOfProducts;
 
 
-    @ManyToOne
-    @JoinTable(name = "Customers",
-            joinColumns = {@JoinColumn(name="orderid")},
-            inverseJoinColumns = @JoinColumn(name = "customerid"))
-    private Customer Customer;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="customerid")
+    private Customer customer;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     private Timeslot timeslot;
 
-    @OneToMany(mappedBy= "orderid")
-    @JsonManagedReference
-    private List<Product> Product;
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Product Product;
 
 
 }

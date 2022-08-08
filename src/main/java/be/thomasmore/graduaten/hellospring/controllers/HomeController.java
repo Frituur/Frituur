@@ -52,14 +52,12 @@ public class HomeController {
     @RequestMapping("/")
     public String GetCategoriesAndProductsForHomePage(Model model) {
         List<Category> categories=categoryRepository.findAll();
-        System.out.println("hello world");
         List<CategoryDto> categoryDtos = new ArrayList<>();
         TypeToken<List<CategoryDto>> typeToken = new TypeToken<>() {
         };
         categoryDtos = modelMap.modelMapper().map(categories,typeToken.getType());
-        System.out.println(categoryDtos.isEmpty());
         categoryDtos = ConvertPhotoBase64(categoryDtos);
-        model.addAttribute("categories",categories);
+        model.addAttribute("categories",categoryDtos);
         return "Home";
     }
 

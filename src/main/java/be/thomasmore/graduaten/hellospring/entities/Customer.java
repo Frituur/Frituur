@@ -31,9 +31,8 @@ public class Customer {
 
     private String address;
 
-    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
-    private List<Orders> Order;
+    @OneToMany(mappedBy = "customer")
+    private List<Orders> orders;
 
 
 }

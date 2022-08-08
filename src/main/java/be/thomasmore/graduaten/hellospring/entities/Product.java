@@ -37,8 +37,7 @@ public class Product {
     @Column(name = "photo")
     private byte[] photo;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL
-    )
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "product_category",
             joinColumns = @JoinColumn(name = "productid"),
@@ -48,12 +47,8 @@ public class Product {
     private List<Category> category;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "Orders",
-            joinColumns = {@JoinColumn(name="orderid")},
-            inverseJoinColumns = @JoinColumn(name = "productid"))
-    @JsonBackReference
-    private Orders orderid;
+    @OneToOne(mappedBy = "Product")
+    private Orders Order;
 
 
 

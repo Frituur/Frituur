@@ -85,7 +85,7 @@ public class OrderController {
             for (ProductDto productDto : categoryDto.getProduct()) {
                 if(productDto.isChosenProduct() == true){
                     Product product = modelMap.modelMapper().map(productDto, Product.class);
-                    order.getProduct().add(product);
+
                 }
 
             }
