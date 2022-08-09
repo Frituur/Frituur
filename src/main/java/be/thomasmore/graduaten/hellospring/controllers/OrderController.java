@@ -53,34 +53,42 @@ public class OrderController {
 
     @RequestMapping(value = "/makeorder", method = RequestMethod.POST)
     public String MakeOrder(@RequestBody String Json, RedirectAttributes ra) throws IOException {
-        String[] lijst = Json.split("r");
         List<Orders> o = new ArrayList<>();
-        String[] naamsplit=Json.split("CustomerNaam"+"=");
-        String naam=naamsplit[1].substring(0, naamsplit[1].indexOf("&"));
-        String[] adressplit=Json.split("CustomerAdres"+"=");
-        String adres=adressplit[1].substring(0, adressplit[1].indexOf("&"));
-        if (Json.contains("on")) {
-            for (int i = 0; i < lijst.length; i++) {
-                if (lijst[i].contains("on")) {
-                    Optional<Product> optionalEntity = productRepository.findById(Long.valueOf(i));
-                    Product product = optionalEntity.get();
-                    Orders order = new Orders();
-                    order.setProduct(product);
-                    String q = i + "=";
-                    String[] lijst2 = lijst[i].split(q);
-                    int nummer = parseInt(lijst2[1].substring(0, 1));
-                    order.setNumberOfProducts(nummer);
-                    o.add(order);
+        String[] lijst = Json.split("r");
+        String[] naamsplit = Json.split("CustomerNaam" + "=");
+        String naam = naamsplit[1].substring(0, naamsplit[1].indexOf("&"));
+        naam = naam.replace("+", " ");
+        String[] adressplit = Json.split("CustomerAdres" + "=");
+        String adres = adressplit[1].substring(0, adressplit[1].indexOf("&"));
+        adres = adres.replace("+", " ");
+        if (naam != "" && adres != "") {
+            if (Json.contains("=on")) {
+                for (int i = 0; i < lijst.length; i++) {
+                    if (lijst[i].contains("=on")) {
+                        Optional<Product> optionalEntity = productRepository.findById(Long.valueOf(i));
+                        Product product = optionalEntity.get();
+                        Orders order = new Orders();
+                        order.setProduct(product);
+                        String q = i + "=";
+                        String[] lijst2 = lijst[i].split(q);
+                        int nummer = parseInt(lijst2[1].substring(0, 1));
+                        order.setNumberOfProducts(nummer);
+                        o.add(order);
+                    }
                 }
-            }
 
-            return adres;
+                return adres;
+            }
+            else
+            {
+                return "redirect:/";
+            }
         }
         else
         {
-            return Json;
+            return "redirect:/";
         }
-        }
+    }
 
 
         //Orders ophalen van de customers in database
