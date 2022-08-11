@@ -24,16 +24,16 @@
             <form>
                 <div class="products">
                     <h3 class="title">Bestelling</h3>
-                    <div class="item" th:each="products:${order.Product}">
+                    <div class="item" >
                         <div class="row">
-                            <span class="price" th:text="${products.price}"></span>
-                            <p class="item-name" th:text="${products.name}"></p>
+                            <span class="price"></span>
+                            <p class="item-name" ></p>
                         </div>
                     </div>
-                    <div class="total">Total<span class="price" th:text="${order.totalPrice}">$320</span></div>
+                    <div class="total">Total<span class="price">$320</span></div>
                 </div>
                 <div class="row">
-                    <input class="item-name" th:text="">
+                    <input class="item-name">
                 </div>
             </form>
         </div>
