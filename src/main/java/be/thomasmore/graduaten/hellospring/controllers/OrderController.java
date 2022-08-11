@@ -1,19 +1,34 @@
 package be.thomasmore.graduaten.hellospring.controllers;
 
-import be.thomasmore.graduaten.hellospring.dto.CategoryDto;
-import be.thomasmore.graduaten.hellospring.dto.OrderDto;
-import be.thomasmore.graduaten.hellospring.dto.ProductDto;
+import be.thomasmore.graduaten.hellospring.dto.*;
 import be.thomasmore.graduaten.hellospring.entities.Orders;
 import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.mapper.ModelMap;
-import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
+
+
+import be.thomasmore.graduaten.hellospring.repositories.OrderRespository;
+import be.thomasmore.graduaten.hellospring.requests.RequestIds;
 import be.thomasmore.graduaten.hellospring.services.OrderService;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
+import org.modelmapper.ModelMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -88,6 +103,18 @@ public class OrderController {
         {
             return "redirect:/";
         }
+
+        System.out.println(products);
+        return products;
+
+    }
+    public static final class ProductRequest {
+        List<Product> products;
+        public List<Product> getProducts() {
+            return products;
+        }
+
+
     }
 
 
@@ -98,14 +125,16 @@ public class OrderController {
             return "getorders";
         }
 
-        private Orders ChosenProductsForOrder (List < CategoryDto > categoryDtos, Orders order)
-        {
-            for (CategoryDto categoryDto : categoryDtos) {
-                for (ProductDto productDto : categoryDto.getProduct()) {
-                    if (productDto.isChosenProduct() == true) {
-                        Product product = modelMap.modelMapper().map(productDto, Product.class);
 
-                    }
+    private Orders ChosenProductsForOrder(List<CategoryDto> categoryDtos, Orders order)
+    {
+        for (CategoryDto categoryDto : categoryDtos) {
+            for (ProductDto productDto : categoryDto.getProduct()) {
+                if(productDto.isChosenProduct() == true){
+                    Product product = modelMap.modelMapper().map(productDto, Product.class);
+
+                }
+
 
                 }
             }
@@ -125,3 +154,33 @@ public class OrderController {
             }
         }
     }
+
+
+
+    public static final class IDRequest {
+        List<Integer> ids;
+
+        public void setIds(List<Integer> ids) {
+            this.ids = ids;
+        }
+
+        public List<Integer> getIds() {
+            return ids;
+        }
+    }
+
+    @RequestMapping("/BestelKlant")
+    public String TijdsslotsPage() {return "BestelKlant";}
+
+    @RequestMapping("/BestelAdmin")
+    public String BestelPage(Model model) {
+        List<Orders> orders=orderRepository.findAll();
+        List<OrderDto> orderDtos = new ArrayList<>();
+        TypeToken<List<OrderDto>> typeToken = new TypeToken<>() {
+        };
+        orderDtos = modelMap.modelMapper().map(orders,typeToken.getType());
+        System.out.println(orderDtos.isEmpty());
+        model.addAttribute("orders",orderDtos);
+        return "BestelAdmin";}
+
+
