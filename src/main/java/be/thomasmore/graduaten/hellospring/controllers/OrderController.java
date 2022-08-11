@@ -6,7 +6,8 @@ import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.mapper.ModelMap;
 
 
-import be.thomasmore.graduaten.hellospring.repositories.OrderRespository;
+import be.thomasmore.graduaten.hellospring.repositories.OrderRepository;
+import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import be.thomasmore.graduaten.hellospring.requests.RequestIds;
 import be.thomasmore.graduaten.hellospring.services.OrderService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -15,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import org.modelmapper.ModelMapper;
 
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -48,6 +50,8 @@ public class OrderController {
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
     @GetMapping("/showorder")
     public ModelAndView ShowOrder(@RequestParam("Order") Orders order) {
@@ -104,8 +108,7 @@ public class OrderController {
             return "redirect:/";
         }
 
-        System.out.println(products);
-        return products;
+
 
     }
     public static final class ProductRequest {
@@ -153,21 +156,11 @@ public class OrderController {
                 return ids;
             }
         }
-    }
 
 
 
-    public static final class IDRequest {
-        List<Integer> ids;
 
-        public void setIds(List<Integer> ids) {
-            this.ids = ids;
-        }
 
-        public List<Integer> getIds() {
-            return ids;
-        }
-    }
 
     @RequestMapping("/BestelKlant")
     public String TijdsslotsPage() {return "BestelKlant";}
@@ -181,6 +174,8 @@ public class OrderController {
         orderDtos = modelMap.modelMapper().map(orders,typeToken.getType());
         System.out.println(orderDtos.isEmpty());
         model.addAttribute("orders",orderDtos);
-        return "BestelAdmin";}
+        return "BestelAdmin";
+    }
+}
 
 
