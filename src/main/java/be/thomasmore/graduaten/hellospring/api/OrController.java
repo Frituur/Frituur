@@ -6,9 +6,6 @@ import be.thomasmore.graduaten.hellospring.entities.Orders;
 import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.entities.Timeslot;
 import be.thomasmore.graduaten.hellospring.logging.ConsoleLogger;
-import be.thomasmore.graduaten.hellospring.repositories.CustomerRepository;
-import be.thomasmore.graduaten.hellospring.repositories.OrderRespository;
-import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import be.thomasmore.graduaten.hellospring.services.CustomerService;
 import be.thomasmore.graduaten.hellospring.services.OrderService;
 import be.thomasmore.graduaten.hellospring.services.TimeslotService;
@@ -21,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.criteria.Order;
 import java.util.ArrayList;
 import java.util.List;
 

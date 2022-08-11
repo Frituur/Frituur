@@ -24,7 +24,12 @@ public class ProductService {
     @Autowired
     private Converter converter;
 
-
+    public List<Product> listAll(String keyword) {
+        if (keyword != null) {
+            return productRepository.search(keyword);
+        }
+        return productRepository.findAll();
+    }
     public Product GetProductById(int id) {
         return null;
     }
