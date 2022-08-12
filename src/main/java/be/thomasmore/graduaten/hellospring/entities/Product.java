@@ -46,8 +46,9 @@ public class Product {
     private List<Category> category;
 
 
-    @OneToOne(mappedBy = "Product")
+    @OneToOne(mappedBy = "product")
     private Orders Order;
+
 
 
 

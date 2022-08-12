@@ -21,12 +21,8 @@ public class Customer {
     @Column(name = "customerid")
     private Long id;
 
-    @Column(name = "firstname")
-    private String firstname ;
-
-
-    @Column(name = "lastname")
-    private String lastname ;
+    @Column(name = "naam")
+    private String naam ;
 
 
     private String address;
