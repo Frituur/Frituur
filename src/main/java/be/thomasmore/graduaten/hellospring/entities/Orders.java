@@ -32,9 +32,9 @@ public class Orders {
     @PrimaryKeyJoinColumn
     private Timeslot timeslot;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Product Product;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="productid")
+    private Product product;
 
 
 }

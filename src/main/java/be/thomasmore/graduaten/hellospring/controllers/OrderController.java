@@ -1,11 +1,13 @@
 package be.thomasmore.graduaten.hellospring.controllers;
 
 import be.thomasmore.graduaten.hellospring.dto.*;
+import be.thomasmore.graduaten.hellospring.entities.Customer;
 import be.thomasmore.graduaten.hellospring.entities.Orders;
 import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.mapper.ModelMap;
 
 
+import be.thomasmore.graduaten.hellospring.repositories.CustomerRepository;
 import be.thomasmore.graduaten.hellospring.repositories.OrderRepository;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import be.thomasmore.graduaten.hellospring.requests.RequestIds;
@@ -52,6 +54,8 @@ public class OrderController {
     private ProductRepository productRepository;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @GetMapping("/showorder")
     public ModelAndView ShowOrder(@RequestParam("Order") Orders order) {
@@ -72,7 +76,7 @@ public class OrderController {
 
     @RequestMapping(value = "/makeorder", method = RequestMethod.POST)
     public String MakeOrder(@RequestBody String Json, RedirectAttributes ra) throws IOException {
-        List<Orders> o = new ArrayList<>();
+        Customer customer=new Customer();
         String[] lijst = Json.split("r");
         String[] naamsplit = Json.split("CustomerNaam" + "=");
         String naam = naamsplit[1].substring(0, naamsplit[1].indexOf("&"));
@@ -82,21 +86,27 @@ public class OrderController {
         adres = adres.replace("+", " ");
         if (naam != "" && adres != "") {
             if (Json.contains("=on")) {
+                customer.setNaam(naam);
+                customer.setAddress(adres);
+                Customer customersaved=customerRepository.save(customer);
                 for (int i = 0; i < lijst.length; i++) {
                     if (lijst[i].contains("=on")) {
-                        Optional<Product> optionalEntity = productRepository.findById(Long.valueOf(i));
+                        String[] getidstring=lijst[i].split("boolean");
+                        int getidnum=parseInt(getidstring[1].substring(0,getidstring[1].indexOf("=")));
+                        Optional<Product> optionalEntity = productRepository.findById((long) getidnum);
                         Product product = optionalEntity.get();
                         Orders order = new Orders();
-                        order.setProduct(product);
-                        String q = i + "=";
-                        String[] lijst2 = lijst[i].split(q);
+                        String splitter=getidnum+"=";
+                        String[] lijst2 = lijst[i].split(splitter);
                         int nummer = parseInt(lijst2[1].substring(0, 1));
                         order.setNumberOfProducts(nummer);
-                        o.add(order);
+                        order.setProduct(product);
+                        order.setCustomer(customersaved);
+                        orderRepository.save(order);
+                        System.out.println(Json);
                     }
                 }
-
-                return adres;
+                return "redirect:/Tijdslots";
             }
             else
             {
