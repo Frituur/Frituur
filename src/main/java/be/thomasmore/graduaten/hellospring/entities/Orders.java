@@ -32,7 +32,7 @@ public class Orders {
     @PrimaryKeyJoinColumn
     private Timeslot timeslot;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="productid")
     private Product product;
 
