@@ -50,6 +50,14 @@ nav a {
     grid-row: 2;
 }
 
+#input-quantity {
+    max-width: 40px;
+}
+
+#first-button {
+
+}
+
 input[type="text"] {
     padding: 5px;
     margin-top: 30px;
@@ -163,6 +171,16 @@ input[type=number]
     }
 }
 .card{
-    display: inline-block;
-    margin:0.5rem;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #cccccc;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    box-sizing: border-box;
+    width: 200px;
+    height: 300px;
+
 }

@@ -29,27 +29,37 @@
             <hr class="solid"/><br>
         </div>
         <div class="row">
-            <div  th:each="products:${categories.product}">
+            <div class="col-4" th:each="products:${categories.product}">
 
 
-                <div class="card" style="width: 18rem;">
+                <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 18rem;">
                     <img th:src="${products.image}" style="display: block; margin-left: auto; margin-right: auto; margin-top: 5px; height: 100px">
 
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${products.name}"></h5>
-                        <span class="badge text-bg-success" th:text="'€'+${products.price}"></span>
-                        <br><br>
-                            <div class="input-group">
-                                <button class="btn btn-outline-secondary" type="button">-</button>
-                                <input class="form-control" th:type="number" th:name="'r'+'quantity'+${products.id}" min="1" max="9" step="1" th:value="1"/>
-                                <button class="btn btn-outline-secondary" type="button">+</button>
-                            </div>
-                                <input type="checkbox" th:name="'boolean'+${products.id}" />
 
+                                <h5 class="card-title" th:text="${products.name}"></h5>
+                        <div class="row">
+                            <div class="col">
+                                <h5><span class="badge bg-success"</h5>
+                            <div class="col">
+
+                                <div class="input-group">
+                                    <button class="btn btn-outline-secondary btn-sm" type="button">-</button>
+                                    <input id="input-quantity" class="form-control" th:type="number" th:name="'r'+'quantity'+${products.id}" min="1" max="9" step="1" th:value="1"/>
+                                    <button class="btn btn-outline-secondary-sm" type="button">+</button>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="input-group">
+                                <input type="checkbox" th:name="'boolean'+${products.id}">
+                                <span>Toevoegen</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
             </div>
+            <br><br>
         </div>
 
 
