@@ -32,7 +32,7 @@
             <div class="col-4" th:each="products:${categories.product}">
 
 
-                <div class="card    ">
+                <div class="card">
                     <img th:src="${products.image}" style="display: block; margin-left: auto; margin-right: auto; margin-top: 5px; height: 100px">
 
                     <div class="card-body">
@@ -52,7 +52,7 @@
                                     </div>
 
                             </div>
-
+                        </div>
                         <div class="col">
                                 <div class="input-group">
                                     <input type="checkbox" th:name="'boolean'+${products.id}">
