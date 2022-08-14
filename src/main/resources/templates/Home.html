@@ -32,12 +32,21 @@
         <div class="row">
             <div  th:each="products:${categories.product}">
                 <div class="card" style="width: 18rem;">
-                    <img th:src="${products.image}" width="100" height="100"/>
+                    <img th:src="${products.image}" class="card-img-top" height="100" width="100"/>
                     <div class="card-body">
-                        <p th:text="${products.name}"></p><br>
-                            <input th:type="number" th:name="'r'+'quantity'+${products.id}" min="1" max="9" step="1" th:value="1">
+                        <h5 th:text="${products.name}"></h5><br>
+
+
+                        <div class="input-group mb-3">
+                            <button class="btn btn-outline-primary" type="button">+</button>
+                            <input class="form-control" th:type="number" th:name="'r'+'quantity'+${products.id}" min="1" max="9" step="1" th:value="1">
+                            <button class="btn btn-outline-primary" type="button">-</button>
+                        </div>
+<!--                        <input th:type="number" th:name="'r'+'quantity'+${products.id}" min="1" max="9" step="1" th:value="1">    -->
                         <p th:text="'€'+${products.price}"></p>
                         <input type="checkbox" th:name="'boolean'+${products.id}" />
+
+
 
                     </div>
                 </div>
