@@ -54,7 +54,16 @@ nav a {
     max-width: 40px;
 }
 
-#first-button {
+#customer-login {
+    position: fixed;
+    bottom: 100px;
+    max-width: 250px;
+
+}
+
+.customer-login{
+    margin-bottom: 10px;
+    width: 100%;
 
 }
 
@@ -180,6 +189,7 @@ input[type=number]
     display: inline-block;
     height: 300px;
     width: 350px;
+
 
 }
 
