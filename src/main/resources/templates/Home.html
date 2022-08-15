@@ -12,35 +12,35 @@
 <header>
     <h1><i class="fa-solid fa-drumstick-bite fa-xl"></i>'T Half Kieke</h1>
 </header>
-<nav>
-    <tr th:each="categories: ${categories}">
-
-        <td><a id="nav-link" th:href="'#'+${categories.name}" th:text="${categories.name}"></a> </td>
-        <br>
-    </tr>
-    <div id="customer-login" class="container">
-        <div class="card">
-       <form>
-           <div class="card-body">
-
-               <h5 class="card-title">Vul in en bestel</h5>
 
 
+<form  method='POST'  th:action="@{/makeorder}">
 
-               <input type="text" class="form-control customer-login" name="CustomerNaam" placeholder="Naam">
-               <input type="text" class="form-control customer-login" name="CustomerAdres" placeholder="Adres">
-               <button type="submit" class="btn btn-success">Bestel</button>
+            <nav>
+                <ul class="nav flex-column">
+                    <li class="nav-item" th:each="categories: ${categories}">
+                        <h5><a class="nav-link" th:href="'#'+${categories.name}" th:text="${categories.name}"></a></h5>
+                        <hr class="solid">
+                    </li>
+                </ul>
+            </nav>
 
+        <div id="customer-login" class="container">
+            <div class="card">
+                <form>
+                    <div class="card-body">
 
-       </form>
+                        <h5 class="card-title">Vul in en bestel!</h5>
+
+                        <input type="text" class="form-control customer-login" name="CustomerNaam" placeholder="Naam">
+                        <input type="text" class="form-control customer-login" name="CustomerAdres" placeholder="Adres">
+                        <button type="submit" class="btn btn-success">Bestel</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-</nav>
 
-<form  method='POST'  th:action="@{/makeorder}"  >
-
-
-    <div class="container" th:each="categories: ${categories}">
+    <div id="main-content" class="container" th:each="categories: ${categories}">
         <div class="row" th:id="${categories.name}">
             <br>
             <h2 th:text="${categories.name}"></h2>
@@ -48,41 +48,28 @@
         </div>
         <div class="row">
             <div class="col-4" th:each="products:${categories.product}">
-
-
                 <div class="card shadow p-3 mb-5 bg-white rounded">
                     <img th:src="${products.image}" style="display: block; margin-left: auto; margin-right: auto; margin-top: 5px; height: 100px">
 
                     <div class="card-body">
                         <h5 class="card-title" th:text="${products.name}"></h5>
                         <h4><span class="badge bg-success" th:text="'€'+${products.price}"/></h4>
-                        <br>
-                        <div class="row">
-                            <div class="col">
-                                    <div class="input-group">
-                                        <button th:id="sub+${products.id}" onclick=changeValue() class="btn btn-outline-secondary" type="button">-</button>
-                                        <input th:id="${products.id}" class="form-control" th:type="number" th:name="'r'+'quantity'+${products.id}" th:value="1"/>
-                                        <button th:id="pls+${products.id}" onclick=changeValue() class="btn btn-outline-secondary">+</button>
-                                    </div>
-
+                    </div>
+                    <div class="card-footer">
+                        <div class="input-group">
+                            <input th:id="${products.id}" class="form-control" th:type="number" th:name="'r'+'quantity'+${products.id}" th:value="1" style="max-width: 65px;" min="1" max="9"/>
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" th:name="'boolean'+${products.id}">
                             </div>
-                        </div>
-                        <div class="col">
-                                <div class="input-group">
-                                    <input class="form-control" type="checkbox" th:name="'boolean'+${products.id}">
-                                    <span class="input-group-text">Voeg toe</span>
-                                </div>
-                        </div>
 
+                            <span class="input-group-text">Voeg toe</span>
+                        </div>
                     </div>
                 </div>
-
-            </div>
             <br><br>
         </div>
     </div>
-
-
+    </div>
 </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <script type="text/javascript" th:src="@{/js/script.js}"></script>
