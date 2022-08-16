@@ -68,7 +68,7 @@ public class HomeController {
     public String IndexPage() {return "Index"; }
 
     @RequestMapping("/BestelAdmin")
-    public String BestelAdminPage() {return "BestelAdmin"; }
+    public String BestelAdminPage() {return "BestelAdmin";}
 
     @RequestMapping("/Detail")
     public String DetailPage() {return "Detail"; }
