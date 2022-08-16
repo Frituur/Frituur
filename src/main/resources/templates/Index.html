@@ -1,18 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="nl">
 <head>
-    <meta charset="ISO-8859-1">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous">
-    <script type="text/javascript" th:src="@{../static/js/script.js}"></script>
-    <title>Thymeleaf tutorial</title>
+    <title>Frituur 'T Half Kieke</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <script type="text/javascript" th:href="@{/js/script.js}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous"/>
+
 </head>
-<body>
-<h1 align="center">Welcome to Thymeleaf</h1>
-<p align="center">Learn How to add CSS/JS in thymeleaf</p>
-<center><button type="button" onclick="myFunction()" >Click Here</button></center>
+<body id="body-landing">
+
+<div class="container py-4" id="div-landing">
+
+    <div class="container-fluid rounded-3" id="div-landing-content">
+        <div class="card text-center shadow-lg p-3 mb-5" id="card-landing">
+
+            <h2 class="card-title" style="margin-top: 15px;">Welkom bij frituur 't Half Kieke</h2>
+            <br>
+            <img th:src="@{../images/varia/janine.jpg}" class="rounded-circle shadow-lg p-3 mb-5 mx-auto" height="200px" width="200px"/>
+            <hr class="solid">
+            <div class="card-body">
+                <button type="submit" class="btn btn-secondary btn-lg">Bestel nu online!</button>
+                <br><br>
+                <h6>Alle dagen open, soms gesloten!</h6>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/187b41207f.js" crossorigin="anonymous"></script>
 </body>
 </html>
