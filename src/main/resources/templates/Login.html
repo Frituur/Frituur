@@ -31,21 +31,25 @@
 </nav>
 
 <form>
-
+<div class="container" id="container-login">
+    <h2>Administrator login</h2>
     <div class="form-outline mb-4">
-        <input type="text" id="formLogin" class="form-control" />
         <label class="form-label" for="formLogin">Login</label>
+        <input type="text" id="formLogin" class="form-control" />
+
     </div>
 
 
     <div class="form-outline mb-4">
-        <input type="password" id="formPaswoord" class="form-control" />
         <label class="form-label" for="formPaswoord">Paswoord</label>
+        <input type="password" id="formPaswoord" class="form-control" />
+    </div>
+    <div class="form-outline mb-4 d-grid" id="div-login-button">
+        <button type="button" class="btn btn-secondary text-center">Aanmelden</button>
     </div>
 
-    <button type="button" class="btn btn-primary btn-block mb-4">Aanmelden</button>
 
-
+</div>
 </form>
 </body>
 </html>
