@@ -1,45 +1,44 @@
-* {
-    background-color: #FCF5D1;
-}
+
 
 body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    background-color: #FCF5D1;
     min-height: 100%;
+
 }
 
-header {
 
-    width: 100%;
-}
 
-header h1 {
+nav h1 {
     background-color: #EB5757;
     padding: 2rem;
     margin-top: 0;
+    font-weight: bold;
+    font-size: large;
 }
 
-header i {
+nav i {
     background-color: #EB5757;
-    padding-right: 1rem;
-    padding-left: 30px;
+    margin-left: 50px;
 }
 
-nav {
-    position: fixed;
-    width: 20%;
-    top: 8rem;
-    left: 0;
 
+ul li h5  {
+    margin-left: 50px;
+    margin-top: 25px;
+    margin-bottom: 15px;
 }
 
-nav a {
-    display: block;
+nav ul li {
+
     padding: 20px 10px 10px 40px;
     text-decoration: none;
     color: black;
+    font-weight: bold;
+    font-size: large;
+    display: inline-block;
+
 }
 
 .search {
@@ -47,105 +46,22 @@ nav a {
     grid-row: 2;
 }
 
-input[type="text"] {
-    padding: 5px;
-    margin-top: 30px;
-}
 
-button {
-    padding: 5px;
-}
-
-.producten {
-    grid-column: 2;
-    grid-row: 3;
-}
-
-.productgrid {
+.product-card{
+    /*border-radius: 8px;*/
+    margin-top: 10px;
+    border: 1px solid #cccccc;
+    align-items: center;
+    display: inline-block;
+    height: 300px;
+    width: 350px;
+    horiz-align: center;
+    vertical-align: center;
+    justify-content: center;
 
 }
 
-.item {
 
-}
-
-.item image {
-
-}
-
-.item p {
-
-}
-
-.quantity {
-    position: relative;
-}
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button
-{
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type=number]
-{
-    -moz-appearance: textfield;
-}
-
-.quantity input {
-    width: 45px;
-    height: 42px;
-    line-height: 1.65;
-    float: left;
-    display: block;
-    padding: 0;
-    margin: 0;
-    padding-left: 20px;
-    border: 1px solid #eee;
-}
-
-.quantity input:focus {
-    outline: 0;
-}
-
-.quantity-nav {
-    float: left;
-    position: relative;
-    height: 42px;
-}
-
-.quantity-button {
-    position: relative;
-    cursor: pointer;
-    border-left: 1px solid #eee;
-    width: 20px;
-    text-align: center;
-    color: #333;
-    font-size: 13px;
-    font-family: "Trebuchet MS", Helvetica, sans-serif !important;
-    line-height: 1.7;
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%);
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-}
-
-.quantity-button.quantity-up {
-    position: absolute;
-    height: 50%;
-    top: 0;
-    border-bottom: 1px solid #eee;
-}
-
-.quantity-button.quantity-down {
-    position: absolute;
-    bottom: -1px;
-    height: 50%;
-}
 
 @media screen and (max-height: 450px) {
     nav a {
@@ -159,6 +75,157 @@ input[type=number]
         white-space: nowrap;
     }
 }
-.card{
-    margin:0.5rem;
+
+#categorie-nav {
+    position: fixed;
+    max-width: 300px;
+    top: 8rem;
+    left: 0;
+    margin-right: 10px;
 }
+#bot-row {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.customer-login {
+
+    margin-bottom: 5px;
+
+}
+
+#main-content {
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+
+}
+
+#top-nav {
+    background-color: #EB5757;
+
+}
+
+#link-nav {
+    font-size: larger;
+    font-weight: bold;
+
+}
+
+#navbarNavUl {
+    margin-right: 50px;
+}
+
+#body-landing {
+    background-image: url("https://burgerbites.be/wp-content/uploads/2020/03/verse-frieten-scaled.jpg");
+}
+
+#order-container {
+
+    margin-left: 15%;
+}
+
+#customerLogin {
+    margin-top: 15px;
+    position: fixed;
+}
+
+/*input[type="text"] {*/
+/*    padding: 5px;*/
+/*    margin-top: 30px;*/
+/*}*/
+
+/*button {*/
+/*    padding: 5px;*/
+/*}*/
+
+/*.producten {*/
+/*    grid-column: 2;*/
+/*    grid-row: 3;*/
+/*}*/
+
+/*.productgrid {*/
+
+/*}*/
+
+/*.item {*/
+
+/*}*/
+
+/*.item image {*/
+
+/*}*/
+
+/*.item p {*/
+
+/*}*/
+
+/*.quantity {*/
+/*    position: relative;*/
+/*}*/
+
+/*input[type=number]::-webkit-inner-spin-button,*/
+/*input[type=number]::-webkit-outer-spin-button*/
+/*{*/
+/*    -webkit-appearance: none;*/
+/*    margin: 0;*/
+/*}*/
+
+/*input[type=number]*/
+/*{*/
+/*    -moz-appearance: textfield;*/
+/*}*/
+
+/*.quantity input {*/
+/*    width: 45px;*/
+/*    height: 42px;*/
+/*    line-height: 1.65;*/
+/*    float: left;*/
+/*    display: block;*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*    padding-left: 20px;*/
+/*    border: 1px solid #eee;*/
+/*}*/
+
+/*.quantity input:focus {*/
+/*    outline: 0;*/
+/*}*/
+
+/*.quantity-nav {*/
+/*    float: left;*/
+/*    position: relative;*/
+/*    height: 42px;*/
+/*}*/
+
+/*.quantity-button {*/
+/*    position: relative;*/
+/*    cursor: pointer;*/
+/*    border-left: 1px solid #eee;*/
+/*    width: 20px;*/
+/*    text-align: center;*/
+/*    color: #333;*/
+/*    font-size: 13px;*/
+/*    font-family: "Trebuchet MS", Helvetica, sans-serif !important;*/
+/*    line-height: 1.7;*/
+/*    -webkit-transform: translateX(-100%);*/
+/*    transform: translateX(-100%);*/
+/*    -webkit-user-select: none;*/
+/*    -moz-user-select: none;*/
+/*    -ms-user-select: none;*/
+/*    -o-user-select: none;*/
+/*    user-select: none;*/
+/*}*/
+
+/*.quantity-button.quantity-up {*/
+/*    position: absolute;*/
+/*    height: 50%;*/
+/*    top: 0;*/
+/*    border-bottom: 1px solid #eee;*/
+/*}*/
+
+/*.quantity-button.quantity-down {*/
+/*    position: absolute;*/
+/*    bottom: -1px;*/
+/*    height: 50%;*/
+/*}*/
