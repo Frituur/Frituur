@@ -5,47 +5,40 @@ body {
     padding: 0;
     font-family: 'Roboto', sans-serif;
     min-height: 100%;
+
 }
 
-header {
 
-    width: 100%;
-}
 
-header h1 {
+nav h1 {
     background-color: #EB5757;
     padding: 2rem;
     margin-top: 0;
-}
-
-header i {
-    background-color: #EB5757;
-    padding-right: 1rem;
-    padding-left: 30px;
-}
-
-nav {
-    position: fixed;
-    max-width: 300px;
-    top: 8rem;
-    left: 0;
-    margin-right: 10px;
-
-}
-
-
-#link-nav {
-    font-size: larger;
     font-weight: bold;
+    font-size: large;
 }
+
+nav i {
+    background-color: #EB5757;
+    margin-left: 50px;
+}
+
+
+ul li h5  {
+    margin-left: 50px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
 nav ul li {
-    display: block;
+
     padding: 20px 10px 10px 40px;
     text-decoration: none;
     color: black;
     font-weight: bold;
     font-size: large;
-    color: black;
+    display: inline-block;
+
 }
 
 .search {
@@ -54,29 +47,97 @@ nav ul li {
 }
 
 
-#customer-login {
+.product-card{
+    /*border-radius: 8px;*/
+    margin-top: 10px;
+    border: 1px solid #cccccc;
+    align-items: center;
+    display: inline-block;
+    height: 300px;
+    width: 350px;
+    horiz-align: center;
+    vertical-align: center;
+    justify-content: center;
+
+}
+
+
+
+@media screen and (max-height: 450px) {
+    nav a {
+        display: inline-block;
+        text-align: center;
+        padding: 14px;
+        text-decoration: none;
+    }
+    nav {
+        overflow: auto;
+        white-space: nowrap;
+    }
+}
+
+#categorie-nav {
     position: fixed;
-    bottom: 100px;
     max-width: 300px;
-    width: 100%;
+    top: 8rem;
+    left: 0;
+    margin-right: 10px;
+}
+#bot-row {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.customer-login {
+
+    margin-bottom: 5px;
+
 }
 
 #main-content {
-    display: block;
+    align-content: center;
+    justify-content: center;
     width: 100%;
-    left: 400px;
+
 }
 
+#top-nav {
+    background-color: #EB5757;
 
-
-input[type="text"] {
-    padding: 5px;
-    margin-top: 30px;
 }
 
-button {
-    padding: 5px;
+#link-nav {
+    font-size: larger;
+    font-weight: bold;
+
 }
+
+#navbarNavUl {
+    margin-right: 50px;
+}
+
+#body-landing {
+    background-image: url("https://burgerbites.be/wp-content/uploads/2020/03/verse-frieten-scaled.jpg");
+}
+
+#order-container {
+
+    margin-left: 15%;
+}
+
+#customerLogin {
+    margin-top: 15px;
+    position: fixed;
+}
+
+/*input[type="text"] {*/
+/*    padding: 5px;*/
+/*    margin-top: 30px;*/
+/*}*/
+
+/*button {*/
+/*    padding: 5px;*/
+/*}*/
 
 /*.producten {*/
 /*    grid-column: 2;*/
@@ -156,46 +217,15 @@ button {
 /*    user-select: none;*/
 /*}*/
 
-.quantity-button.quantity-up {
-    position: absolute;
-    height: 50%;
-    top: 0;
-    border-bottom: 1px solid #eee;
-}
+/*.quantity-button.quantity-up {*/
+/*    position: absolute;*/
+/*    height: 50%;*/
+/*    top: 0;*/
+/*    border-bottom: 1px solid #eee;*/
+/*}*/
 
-.quantity-button.quantity-down {
-    position: absolute;
-    bottom: -1px;
-    height: 50%;
-}
-
-@media screen and (max-height: 450px) {
-    nav a {
-        display: inline-block;
-        text-align: center;
-        padding: 14px;
-        text-decoration: none;
-    }
-    nav {
-        overflow: auto;
-        white-space: nowrap;
-    }
-}
-.card{
-    /*border-radius: 8px;*/
-    margin-top: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #cccccc;
-    justify-content: center;
-    align-items: center;
-    display: inline-block;
-    height: 300px;
-    width: 350px;
-
-
-}
-
-.card-body {
-    width: 300px;
-    margin-left: 25px;
-}
+/*.quantity-button.quantity-down {*/
+/*    position: absolute;*/
+/*    bottom: -1px;*/
+/*    height: 50%;*/
+/*}*/
