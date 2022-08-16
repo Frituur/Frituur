@@ -52,7 +52,7 @@ public class HomeController {
     @Autowired
     private ProductRepository productRepository;
 
-    @RequestMapping("/")
+    @RequestMapping("/Home")
     public String GetCategoriesAndProductsForHomePage(Model model) {
         List<Category> categories=categoryRepository.findAll();
         List<CategoryDto> categoryDtos = new ArrayList<>();
@@ -64,7 +64,8 @@ public class HomeController {
         return "Home";
     }
 
-
+    @RequestMapping("/")
+    public String IndexPage() {return "Index"; }
 
     @RequestMapping("/Detail")
     public String DetailPage() {return "Detail"; }
