@@ -16,7 +16,55 @@
 <header>
     <h1><i class="fa-solid fa-drumstick-bite"></i>'T Half Kieke</h1>
 </header>
-<div class="Adminoverzicht" th:each="orders: ${orders}">
+
+
+
+<div class="container" id="container-admin">
+    <div class="row">
+        <div class="col-sm">
+            <h5>Bestellingen</h5>
+            <hr class="solid">
+
+        </div>
+        <div class="col-sm">
+            <h5>Tijdslots</h5>
+            <hr class="solid">
+
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm">
+            <h5>Productbeheer</h5>
+            <hr class="solid">
+
+            <ul class="list-group list-group-horizontal" id="ul-products-admin" th:each="products:${products}">
+                <li class="list-group-item" th:text="${products.id}"></li>
+                <li class="list-group-item" th:text="${products.name}"></li>
+                <li class="list-group-item" th:text="${products.price}"></li>
+            </ul>
+
+        </div>
+        <div class="col-sm">
+            <h5>Categoriebeheer</h5>
+            <hr class="solid">
+            <br>
+            <ul class="list-group list-group-horizontal" id="ul-categorie-admin">
+                <li class="list-group-item" th:each="categories: ${categories}">
+                    <h5><a class="nav-link" th:href="'#'+${categories.name}" th:text="${categories.name}"></a></h5>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</body>
+
+
+<!--<div class="Adminoverzicht" th:each="orders: ${orders}">
     <h2 th:each="Customer:${orders.Customer}" >Bestellingen</h2>
         <div class="Bestellingcard">
            <h3></h3>
@@ -27,8 +75,8 @@
                 <li>2 Kleine friet</li>
             </ul>
         </div>
-</div>
-</body>
+</div>-->
+
 </html>
 
 
