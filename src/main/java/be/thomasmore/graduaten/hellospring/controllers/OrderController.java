@@ -82,7 +82,7 @@ public class OrderController {
         String naam = naamsplit[1].substring(0, naamsplit[1].indexOf("&"));
         naam = naam.replace("+", " ");
         String[] adressplit = Json.split("CustomerAdres" + "=");
-        String adres = adressplit[1].substring(0, adressplit[1].indexOf("&"));
+        String adres = adressplit[1];
         adres = adres.replace("+", " ");
         if (naam != "" && adres != "") {
             if (Json.contains("=on")) {
