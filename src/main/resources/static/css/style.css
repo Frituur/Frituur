@@ -74,7 +74,10 @@ nav ul li {
     justify-content: center;
 
 }
-
+#landing-image{
+    max-width: 100%;
+    height: auto;
+}
 #top-nav {
     background-color: #EB5757;
     width: 100%;
