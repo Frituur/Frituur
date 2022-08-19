@@ -96,7 +96,7 @@
 
                     <ul class="nav flex-column hidden-xs" id="categorie-nav">
                         <li class="nav-item">
-                            <h5><a class="nav-link" href="#Bestellingen" >Bestellingen</a></h5>
+                            <h5><a class="nav-link" href="#Bestellingen">Bestellingen</a></h5>
                         </li>
                         <li class="nav-item">
                             <h5><a class="nav-link" href="#Tijdslots">Tijdslots</a></h5>
@@ -458,16 +458,16 @@
                         </tr>
                         </thead>
                         <tbody >
-                        <tr>
+                        <tr th:each="categoriesAdmin: ${categoriesAdmin}">
 
-                            <th scope="row">1</th>
-                            <td>Frieten</td>
+                            <th scope="row" th:href="'#'+${categoriesAdmin.id}" th:text="${categoriesAdmin.id}"></th>
+                            <td th:href="'#'+${categoriesAdmin.name}" th:text="${categoriesAdmin.name}"></td>
 
                             <td>
-                                <button class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
+                                <button th:id="btnEdit+${categoriesAdmin.id}" class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
                             </td>
                             <td>
-                                <button class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
+                                <button th:id="btnDel+${categoriesAdmin.id}" class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
                             </td>
 
                         <tr>
