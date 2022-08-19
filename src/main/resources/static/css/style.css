@@ -118,6 +118,53 @@ nav ul li {
     margin-top: 50px;
 }
 
+.td-totprijs {
+
+    text-align: right;
+}
+
+.table-subcat {
+    text-align: left;
+}
+
+.tr-order-customer {
+    font-weight: bold;
+}
+
+.btn-nieuw-toevoegen{
+    margin-bottom: 10px;
+    width: 100%;
+}
+.div-beheer{
+    max-height: 35%;
+}
+.div-categorie{
+    margin: 10px;
+}
+
+.td-product-button{
+    text-align: right;
+    width: 15%;
+}
+
+.btn-table-product{
+    max-width: 100%;
+}
+
+#container-admin{
+    max-width: 100%;
+}
+
+#table-orders {
+    max-width: 95%;
+}
+
+#container-admin-orders{
+    align-self: center;
+}
+
+
+
 /*input[type="text"] {*/
 /*    padding: 5px;*/
 /*    margin-top: 30px;*/
