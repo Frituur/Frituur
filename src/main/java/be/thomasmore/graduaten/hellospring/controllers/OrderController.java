@@ -11,7 +11,7 @@ import be.thomasmore.graduaten.hellospring.repositories.CustomerRepository;
 import be.thomasmore.graduaten.hellospring.repositories.OrderRepository;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import be.thomasmore.graduaten.hellospring.requests.RequestIds;
-import be.thomasmore.graduaten.hellospring.services.OrderService;
+import be.thomasmore.graduaten.hellospring.shared.FileCreater;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,10 +45,11 @@ import static java.lang.Integer.parseInt;
 public class OrderController {
 
     @Autowired
-    private ModelMap modelMap;
+    private FileCreater fileCreater;
 
     @Autowired
-    private OrderService orderService;
+    private ModelMap modelMap;
+
 
     @Autowired
     private ProductRepository productRepository;
@@ -67,11 +68,18 @@ public class OrderController {
     }
 
 
-    public String FinalOrder() {
-        // Eenmaal als tijdslot gekozen is, lijst van producten in orders, naam van klant en telefoon nummer
-        // Dan kan hij de final bestelling uitvoeren
-
-        return "/complete";
+    @RequestMapping(value = "/finalorder")
+    public String FinalOrder(RedirectAttributes ra) throws IOException {
+        // Pak een liist van alle orders gelinkt aan de customer
+        var id = fileCreater.ReadFromTempFile();
+        long customerid = Long.parseLong(id.toString());
+        Customer customer = customerRepository.getById(customerid);
+        // Bekijk alle products van de customer
+        List<Orders> allOrders = orderRepository.findAll();
+        List<Orders> ordersFromCustomer =  GetAllOrdersFromCustomer(customerid, allOrders);
+        Double TotalPrice = CalculateTotalPrice(ordersFromCustomer);
+        System.out.println(TotalPrice);
+        return "/orderready";
     }
 
     @RequestMapping(value = "/makeorder", method = RequestMethod.POST)
@@ -89,6 +97,7 @@ public class OrderController {
                 customer.setNaam(naam);
                 customer.setAddress(adres);
                 Customer customersaved=customerRepository.save(customer);
+                fileCreater.WriteToTempFile(customersaved.getId().toString());
                 for (int i = 0; i < lijst.length; i++) {
                     if (lijst[i].contains("=on")) {
                         String[] getidstring=lijst[i].split("boolean");
@@ -186,6 +195,35 @@ public class OrderController {
         model.addAttribute("orders",orderDtos);
         return "BestelAdmin";
     }
+
+    public double CalculatePriceProduct(Orders Order){
+        // Go through the list of  products
+        Double totalPrice = 0.0;
+        Product product = Order.getProduct();
+        int quantityOfProducts = Order.getNumberOfProducts();
+        totalPrice += product.getPrice() * quantityOfProducts;
+        return totalPrice;
+    }
+
+    public List<Orders> GetAllOrdersFromCustomer(Long customerid, List<Orders> orders){
+        List<Orders> ordersFromCustomer = new ArrayList<>();
+        for (var order : orders) {
+            if(customerid == order.getCustomer().getId()){
+                ordersFromCustomer.add(order);
+            }
+        }
+
+        return ordersFromCustomer;
+    }
+
+    public Double CalculateTotalPrice(List<Orders> orders){
+        Double TotalPriceCustomer = 0.0;
+        for (var order : orders) {
+            TotalPriceCustomer += CalculatePriceProduct(order);
+        }
+        return TotalPriceCustomer;
+    }
 }
+
 
 
