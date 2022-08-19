@@ -63,14 +63,12 @@ public class OrderController {
         OrderDto orderDto = modelMap.modelMapper().map(order, OrderDto.class);
         mv.addObject(order);
         return mv;
-
     }
 
 
     public String FinalOrder() {
         // Eenmaal als tijdslot gekozen is, lijst van producten in orders, naam van klant en telefoon nummer
         // Dan kan hij de final bestelling uitvoeren
-
         return "/complete";
     }
 
