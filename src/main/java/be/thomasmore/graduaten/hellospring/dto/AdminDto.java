@@ -18,6 +18,4 @@ public class AdminDto {
 
     private String name;
 
-
-    private List<ProductDto> product;
 }

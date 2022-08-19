@@ -61,11 +61,11 @@ public class AdminController {
 
     @RequestMapping("/BestelAdmin")
     public String GetProductsForAdmin(Model model) {
-        List<Product> ordersProduct=productRepository.findAll();
+        List<Product> productAdmin=productRepository.findAll();
         List<AdminDto> adminDtos;
         TypeToken<List<AdminDto>> typeToken = new TypeToken<>() {
         };
-        adminDtos = modelMap.modelMapper().map(ordersProduct,typeToken.getType());
+        adminDtos = modelMap.modelMapper().map(productAdmin,typeToken.getType());
 
         model.addAttribute("productAdmin",adminDtos);
         return "BestelAdmin";
