@@ -5,7 +5,6 @@ body {
     padding: 0;
     font-family: 'Roboto', sans-serif;
     min-height: 100%;
-
 }
 
 
@@ -15,7 +14,7 @@ nav h1 {
     padding: 2rem;
     margin-top: 0;
     font-weight: bold;
-    font-size: large;
+    font-size: x-large;
 }
 
 nav i {
@@ -25,9 +24,9 @@ nav i {
 
 
 ul li h5  {
-    margin-left: 50px;
-    margin-top: 25px;
-    margin-bottom: 15px;
+
+    margin-top: 15px;
+    margin-bottom: 20px;
 }
 
 nav ul li {
@@ -38,7 +37,6 @@ nav ul li {
     font-weight: bold;
     font-size: large;
     display: inline-block;
-
 }
 
 .search {
@@ -61,55 +59,34 @@ nav ul li {
 
 }
 
-
-
-@media screen and (max-height: 450px) {
-    nav a {
-        display: inline-block;
-        text-align: center;
-        padding: 14px;
-        text-decoration: none;
-    }
-    nav {
-        overflow: auto;
-        white-space: nowrap;
-    }
-}
-
-#categorie-nav {
-    position: fixed;
-    max-width: 300px;
-    top: 8rem;
-    left: 0;
-    margin-right: 10px;
-}
-#bot-row {
-    margin-top: 20px;
-    margin-bottom: 50px;
+.body-container{
+    margin-top: 10px;
 }
 
 .customer-login {
-
-    margin-bottom: 5px;
-
+    margin-left: 15px;
+    position: fixed;
+    display: inline-block;
 }
 
 #main-content {
     align-content: center;
     justify-content: center;
-    width: 100%;
 
 }
-
+#landing-image{
+    max-width: 100%;
+    height: auto;
+}
 #top-nav {
     background-color: #EB5757;
-
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 #link-nav {
     font-size: larger;
     font-weight: bold;
-
 }
 
 #navbarNavUl {
@@ -121,13 +98,11 @@ nav ul li {
 }
 
 #order-container {
-
     margin-left: 15%;
 }
 
 #customerLogin {
-    margin-top: 15px;
-    position: fixed;
+
 }
 
 #div-landing-content {
@@ -141,8 +116,54 @@ nav ul li {
 
 #container-login {
     margin-top: 50px;
-    max-width: 400px;
 }
+
+.td-totprijs {
+
+    text-align: right;
+}
+
+.table-subcat {
+    text-align: left;
+}
+
+.tr-order-customer {
+    font-weight: bold;
+}
+
+.btn-nieuw-toevoegen{
+    margin-bottom: 10px;
+    width: 100%;
+}
+.div-beheer{
+    max-height: 35%;
+}
+.div-categorie{
+    margin: 10px;
+}
+
+.td-product-button{
+    text-align: right;
+    width: 15%;
+}
+
+.btn-table-product{
+    max-width: 100%;
+}
+
+#container-admin{
+    max-width: 100%;
+}
+
+#table-orders {
+    max-width: 95%;
+}
+
+#container-admin-orders{
+    align-self: center;
+}
+
+
 
 /*input[type="text"] {*/
 /*    padding: 5px;*/
