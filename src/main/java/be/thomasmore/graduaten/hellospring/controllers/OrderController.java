@@ -111,12 +111,12 @@ public class OrderController {
             }
             else
             {
-                return "redirect:/";
+                return "redirect:/Home";
             }
         }
         else
         {
-            return "redirect:/";
+            return "redirect:/Home";
         }
 
 
