@@ -27,11 +27,5 @@ public class Timeslot {
     @OneToOne(mappedBy = "timeslot")
     private Orders Order;
 
-    @Column(name = "begintime")
-    private Timestamp beginTime;
-
-    @Column(name = "endtime")
-    private Timestamp endtime;
-
 
 }

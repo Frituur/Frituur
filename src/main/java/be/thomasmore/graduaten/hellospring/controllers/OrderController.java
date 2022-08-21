@@ -4,12 +4,14 @@ import be.thomasmore.graduaten.hellospring.dto.*;
 import be.thomasmore.graduaten.hellospring.entities.Customer;
 import be.thomasmore.graduaten.hellospring.entities.Orders;
 import be.thomasmore.graduaten.hellospring.entities.Product;
+import be.thomasmore.graduaten.hellospring.entities.Timeslot;
 import be.thomasmore.graduaten.hellospring.mapper.ModelMap;
 
 
 import be.thomasmore.graduaten.hellospring.repositories.CustomerRepository;
 import be.thomasmore.graduaten.hellospring.repositories.OrderRepository;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
+import be.thomasmore.graduaten.hellospring.repositories.TimeslotRepository;
 import be.thomasmore.graduaten.hellospring.requests.RequestIds;
 import be.thomasmore.graduaten.hellospring.shared.FileCreater;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -35,7 +37,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +55,8 @@ public class OrderController {
     @Autowired
     private ModelMap modelMap;
 
+    @Autowired
+    private TimeslotRepository timeslotRepository;
 
     @Autowired
     private ProductRepository productRepository;
@@ -69,16 +76,29 @@ public class OrderController {
 
 
     @RequestMapping(value = "/finalorder")
-    public String FinalOrder(RedirectAttributes ra) throws IOException {
-        // Pak een liist van alle orders gelinkt aan de customer
+    public String FinalOrder(Model model) throws IOException {
+
+        EndOrderDto endOrderDto = new EndOrderDto();
+        List<Timeslot> tijdslots= GetAllAvailableTimeslots();
         var id = fileCreater.ReadFromTempFile();
-        long customerid = Long.parseLong(id.toString());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        long customerid = Long.parseLong(id);
+        System.out.println(customerid);
         Customer customer = customerRepository.getById(customerid);
         // Bekijk alle products van de customer
         List<Orders> allOrders = orderRepository.findAll();
         List<Orders> ordersFromCustomer =  GetAllOrdersFromCustomer(customerid, allOrders);
         Double TotalPrice = CalculateTotalPrice(ordersFromCustomer);
-        System.out.println(TotalPrice);
+        customer.setTotalprice(TotalPrice);
+        customerRepository.save(customer);
+        endOrderDto.setTimeslots(tijdslots);
+        endOrderDto.setCustomerAddress(customer.getNaam());
+        endOrderDto.setTotalPrice(TotalPrice);
+        endOrderDto.setCustomerAddress(customer.getAddress());
+        endOrderDto.setToday(now.toLocalDate());
+
+        model.addAttribute("order", endOrderDto);
         return "/orderready";
     }
 
@@ -90,8 +110,11 @@ public class OrderController {
         String naam = naamsplit[1].substring(0, naamsplit[1].indexOf("&"));
         naam = naam.replace("+", " ");
         String[] adressplit = Json.split("CustomerAdres" + "=");
-        String adres = adressplit[1];
+        System.out.println(adressplit);
+        String adres = adressplit[1].substring(1, adressplit[1].indexOf("&"));
+        System.out.println(adres);
         adres = adres.replace("+", " ");
+        System.out.println(adres);
         if (naam != "" && adres != "") {
             if (Json.contains("=on")) {
                 customer.setNaam(naam);
@@ -115,7 +138,7 @@ public class OrderController {
                         System.out.println(Json);
                     }
                 }
-                return "redirect:/Tijdslots";
+                return "redirect:/finalorder";
             }
             else
             {
@@ -222,6 +245,39 @@ public class OrderController {
             TotalPriceCustomer += CalculatePriceProduct(order);
         }
         return TotalPriceCustomer;
+    }
+
+
+    protected List<Timeslot> GetAllAvailableTimeslots() {
+        List<Timeslot> timeslots = timeslotRepository.findAll();
+        List<Timeslot> allAvailableTimeslot = new ArrayList<>();
+
+        for (Timeslot timeslot : timeslots) {
+            if(timeslot.getIsAvailable() == true){
+                allAvailableTimeslot.add(timeslot);
+            }
+        }
+
+        return allAvailableTimeslot;
+    }
+
+    protected boolean CheckIfTimeSlotIsAvailable(Timeslot givenTimeslot) {
+        List<Timeslot> timeslots = timeslotRepository.findAll();
+        //Check if the timeslot exists and is available
+        for(Timeslot timeslot : timeslots) {
+            if(timeslot.getIsAvailable() == true
+                    && timeslot.getTimeArrival() == givenTimeslot.getTimeArrival()){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private Long GetIdFromJson(String json ){
+        String[] jsonSplit = json.split("=");
+        var id = Long.parseLong(jsonSplit[0]);
+        return id;
     }
 }
 
