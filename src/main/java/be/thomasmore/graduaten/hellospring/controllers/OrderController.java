@@ -84,13 +84,15 @@ public class OrderController {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         long customerid = Long.parseLong(id);
-        System.out.println(customerid);
+        System.out.println("The customer id is " + customerid);
         Customer customer = customerRepository.getById(customerid);
         // Bekijk alle products van de customer
         List<Orders> allOrders = orderRepository.findAll();
         List<Orders> ordersFromCustomer =  GetAllOrdersFromCustomer(customerid, allOrders);
+        System.out.println("How many orders in " + ordersFromCustomer.stream().count());
         Double TotalPrice = CalculateTotalPrice(ordersFromCustomer);
         customer.setTotalprice(TotalPrice);
+        System.out.println("The total price is " + TotalPrice);
         customerRepository.save(customer);
         endOrderDto.setTimeslots(tijdslots);
         endOrderDto.setCustomerAddress(customer.getNaam());

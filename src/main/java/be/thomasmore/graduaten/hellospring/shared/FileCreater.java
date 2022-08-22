@@ -5,21 +5,38 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletContext;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Component
 public class FileCreater {
 
-
-
-    private String filename = "C:\\Users\\ArnoS\\Downloads\\Frituur-master\\Frituur-master\\src\\main\\java\\be\\thomasmore\\graduaten\\hellospring\\temp\\temp1.txt"; 
-    private String folder = "C:\\Users\\ArnoS\\Downloads\\Frituur-master\\Frituur-master\\src\\main\\java\\be\\thomasmore\\graduaten\\hellospring\\temp";
     private static String tempFilePath  = "";
-    private static String MainProjectPath = "src/main/java/be/thomasmore/graduaten/hellospring";
-    
-    
-    public void WriteToTempFile(String json) throws IOException {
+    private static String MainProjectPath = "src/main/java/be/thomasmore/graduaten/hellospring/temp/";
 
-        File fout = new File(filename);
+    public void CreateTempFile(String filename) throws IOException {
+        String absoluteTestPath = new File(MainProjectPath).getAbsolutePath();
+        System.out.println(absoluteTestPath);
+        var newfile = MainProjectPath + filename;
+        Path textFilePath = Paths.get(newfile);
+        tempFilePath = newfile.toString();
+        System.out.println(tempFilePath);
+        Files.createFile(textFilePath);
+    }
+
+    public void AssignTempFile(String filename) {
+        String absoluteTestPath = new File(MainProjectPath).getAbsolutePath();
+        tempFilePath = absoluteTestPath + filename;
+    }
+
+    public void ClearTempFile(String File){
+
+
+    }
+
+    public void WriteToTempFile(String json) throws IOException {
+        File fout = new File(tempFilePath);
         FileOutputStream fos = new FileOutputStream(fout);
 
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
@@ -34,14 +51,14 @@ public class FileCreater {
     }
 
     public String ReadFromTempFile() throws IOException {
-        BufferedReader reader = new BufferedReader(new BufferedReader(new FileReader(filename)));
+        BufferedReader reader = new BufferedReader(new BufferedReader(new FileReader(tempFilePath)));
         return reader.readLine();
     }
 
     public String SearchTempFile() {
 
         String tempfile = "";
-        File directory = new File(folder);
+        File directory = new File(MainProjectPath);
         File[] contents = directory.listFiles();
         for ( File f : contents) {
             tempfile = f.getAbsolutePath();

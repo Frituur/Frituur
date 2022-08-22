@@ -36,7 +36,8 @@ public class FrituurspringApplication extends SpringBootServletInitializer {
 
 
 	public static void main(String[] args) throws SQLException, IOException {
-
+		FileCreater fileCreater = new FileCreater();
+		fileCreater.AssignTempFile("temp2.txt");
 
 		logger.info("The application is starting now");
 		DatabaseInitializer databaseInitializer = new DatabaseInitializer(logger);
