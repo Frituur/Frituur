@@ -30,7 +30,11 @@ public class FileCreater {
         tempFilePath = absoluteTestPath + filename;
     }
 
-    public void ClearTempFile(String File){
+    public void ClearTempFile(String File) throws FileNotFoundException {
+        PrintWriter writer = new PrintWriter(tempFilePath);
+        writer.print("");
+// other operations
+        writer.close();
 
 
     }

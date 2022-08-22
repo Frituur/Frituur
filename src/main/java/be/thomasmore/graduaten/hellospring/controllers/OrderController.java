@@ -13,6 +13,7 @@ import be.thomasmore.graduaten.hellospring.repositories.OrderRepository;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import be.thomasmore.graduaten.hellospring.repositories.TimeslotRepository;
 import be.thomasmore.graduaten.hellospring.requests.RequestIds;
+import be.thomasmore.graduaten.hellospring.shared.Converter;
 import be.thomasmore.graduaten.hellospring.shared.FileCreater;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -48,6 +49,9 @@ import static java.lang.Integer.parseInt;
 
 @Controller
 public class OrderController {
+
+    @Autowired
+    private Converter converter;
 
     @Autowired
     private FileCreater fileCreater;
@@ -86,20 +90,19 @@ public class OrderController {
         long customerid = Long.parseLong(id);
         System.out.println("The customer id is " + customerid);
         Customer customer = customerRepository.getById(customerid);
-        // Bekijk alle products van de customer
         List<Orders> allOrders = orderRepository.findAll();
         List<Orders> ordersFromCustomer =  GetAllOrdersFromCustomer(customerid, allOrders);
-        System.out.println("How many orders in " + ordersFromCustomer.stream().count());
+        List<ProductDto> productDtos = SetProductDtosForOrderCustomer(ordersFromCustomer);
         Double TotalPrice = CalculateTotalPrice(ordersFromCustomer);
         customer.setTotalprice(TotalPrice);
-        System.out.println("The total price is " + TotalPrice);
+        System.out.println("The total price is " + tijdslots.stream().count());
         customerRepository.save(customer);
         endOrderDto.setTimeslots(tijdslots);
-        endOrderDto.setCustomerAddress(customer.getNaam());
+        endOrderDto.setCustomerName(customer.getNaam());
         endOrderDto.setTotalPrice(TotalPrice);
         endOrderDto.setCustomerAddress(customer.getAddress());
         endOrderDto.setToday(now.toLocalDate());
-
+        endOrderDto.setProductDtos(productDtos);
         model.addAttribute("order", endOrderDto);
         return "/orderready";
     }
@@ -113,7 +116,7 @@ public class OrderController {
         naam = naam.replace("+", " ");
         String[] adressplit = Json.split("CustomerAdres" + "=");
         System.out.println(adressplit);
-        String adres = adressplit[1].substring(1, adressplit[1].indexOf("&"));
+        String adres = adressplit[1].substring(0, adressplit[1].indexOf("&"));
         System.out.println(adres);
         adres = adres.replace("+", " ");
         System.out.println(adres);
@@ -164,6 +167,19 @@ public class OrderController {
 
     }
 
+
+    @PostMapping("/posttimeslot")
+    public String PostTijdSlotKlant(@PathVariable(value = "id") Long tijdslotId) throws IOException {
+        var tijdslot = timeslotRepository.getById(tijdslotId);
+        var id = fileCreater.ReadFromTempFile();
+        long customerid = Long.parseLong(id);
+        System.out.println(tijdslotId);
+        var customer = customerRepository.getById(customerid);
+        customer.setTimeslot(tijdslot);
+        fileCreater.ClearTempFile("temp2.txt");
+        return "OrderComplete";
+        //Je een tijdslot terug
+    }
 
         //Orders ophalen van de customers in database
         @GetMapping("/getorders")
@@ -263,23 +279,39 @@ public class OrderController {
         return allAvailableTimeslot;
     }
 
-    protected boolean CheckIfTimeSlotIsAvailable(Timeslot givenTimeslot) {
-        List<Timeslot> timeslots = timeslotRepository.findAll();
-        //Check if the timeslot exists and is available
-        for(Timeslot timeslot : timeslots) {
-            if(timeslot.getIsAvailable() == true
-                    && timeslot.getTimeArrival() == givenTimeslot.getTimeArrival()){
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     private Long GetIdFromJson(String json ){
         String[] jsonSplit = json.split("=");
         var id = Long.parseLong(jsonSplit[0]);
         return id;
+    }
+
+
+    private List<ProductDto> SetProductDtosForOrderCustomer(List<Orders> Orders){
+        List<ProductDto> productDtos = new ArrayList<>();
+        for (var order : Orders) {
+            ProductDto productDto = new ProductDto();
+            productDto.setName(order.getProduct().getName());
+            productDto.setPrice(order.getProduct().getPrice());
+            productDto.setQuantity(order.getNumberOfProducts());
+            productDtos.add(productDto);
+        }
+        productDtos = ConvertPhotoBase64(productDtos);
+        return productDtos;
+    }
+
+    private List<ProductDto> ConvertPhotoBase64(List<ProductDto> products)
+    {
+        String base64IntroString = "data:image/png;base64, ";
+            for (ProductDto productDto : products) {
+                var photo = productDto.getPhoto();
+                if (photo != null  && photo.length > 0) {
+                    var fullImageString = base64IntroString +  converter.ConvertByteArrayToBase64(photo);
+                    productDto.setImage(fullImageString);
+                }
+            }
+
+        return products;
     }
 }
 
