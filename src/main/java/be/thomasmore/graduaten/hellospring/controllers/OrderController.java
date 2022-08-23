@@ -114,12 +114,11 @@ public class OrderController {
         String[] naamsplit = Json.split("CustomerNaam" + "=");
         String naam = naamsplit[1].substring(0, naamsplit[1].indexOf("&"));
         naam = naam.replace("+", " ");
-        String[] adressplit = Json.split("CustomerAdres" + "=");
+        int numberOfOrderedItems = 0;
+       String[] adressplit = Json.split("CustomerAdres" + "=");
         System.out.println(adressplit);
         String adres = adressplit[1].substring(0, adressplit[1].indexOf("&"));
-        System.out.println(adres);
         adres = adres.replace("+", " ");
-        System.out.println(adres);
         if (naam != "" && adres != "") {
             if (Json.contains("=on")) {
                 customer.setNaam(naam);
@@ -136,14 +135,18 @@ public class OrderController {
                         String splitter=getidnum+"=";
                         String[] lijst2 = lijst[i].split(splitter);
                         int nummer = parseInt(lijst2[1].substring(0, 1));
+                        numberOfOrderedItems += nummer;
                         order.setNumberOfProducts(nummer);
                         order.setProduct(product);
                         order.setCustomer(customersaved);
                         orderRepository.save(order);
-                        System.out.println(Json);
+                        numberOfOrderedItems++;
                     }
                 }
-                return "redirect:/finalorder";
+                if(numberOfOrderedItems < 20) {
+                    return "redirect:/finalorder";
+                }
+                return "/";
             }
             else
             {
@@ -168,12 +171,17 @@ public class OrderController {
     }
 
 
-    @PostMapping("/posttimeslot")
-    public String PostTijdSlotKlant(@PathVariable(value = "id") Long tijdslotId) throws IOException {
-        var tijdslot = timeslotRepository.getById(tijdslotId);
+    @RequestMapping(value = "/tijdslotpost", method = RequestMethod.POST)
+    public String PostTijdSlotKlant(String json) throws IOException {
+        System.out.println("hello world" + json);
+        if(json == null){
+            return "/";
+        }
+        Long idhal = Long.valueOf(5);
+        var tijdslot = timeslotRepository.getById(idhal);
         var id = fileCreater.ReadFromTempFile();
         long customerid = Long.parseLong(id);
-        System.out.println(tijdslotId);
+        System.out.println(json);
         var customer = customerRepository.getById(customerid);
         customer.setTimeslot(tijdslot);
         fileCreater.ClearTempFile("temp2.txt");

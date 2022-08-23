@@ -109,7 +109,7 @@
                     </div>
                 </div>
             </div>
-            <form  method='POST'  th:action="@{/posttimeslot}">
+            <form  method='POST'  th:action="@{/tijdslotpost}">
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="card mb-4">
@@ -118,7 +118,7 @@
                                 <h3 class="h6">Kies hier je moment om jouw bestelling af te halen </h3>
                                 <div class="input-group">
                                     <div class="input-group-btn" >
-                                        <select class="form-select form-select-lg mb-3" ria-label=".form-select-lg example" id="dropDownList">
+                                        <select class="form-select form-select-lg mb-3" ria-label=".form-select-lg example" id="dropDownList" th:field="*{order.timeslots}">
                                             <option value="">Wanneer? </option>
                                             <option th:each="timeslots: ${order.timeslots}" th:value="${timeslots.id}" th:text="${timeslots.begintime}"></option>
                                         </select>
@@ -133,7 +133,7 @@
                             <!-- Send -->
                             <div class="card-body">
                                 <div class="text-center text-md-left">
-                                    <a class="btn btn-primary" >Verzenden</a>
+                                    <button type="submit" class="btn btn-primary">Verzenden</button>
                                 </div>
 
                             </div>
