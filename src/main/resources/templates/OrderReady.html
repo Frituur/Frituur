@@ -118,7 +118,7 @@
                                 <h3 class="h6">Kies hier je moment om jouw bestelling af te halen </h3>
                                 <div class="input-group">
                                     <div class="input-group-btn" >
-                                        <select class="form-select form-select-lg mb-3" ria-label=".form-select-lg example" id="dropDownList" th:field="*{order.timeslots}">
+                                        <select class="form-select form-select-lg mb-3" ria-label=".form-select-lg example" id="dropDownList" >
                                             <option value="">Wanneer? </option>
                                             <option th:each="timeslots: ${order.timeslots}" th:value="${timeslots.id}" th:text="${timeslots.begintime}"></option>
                                         </select>

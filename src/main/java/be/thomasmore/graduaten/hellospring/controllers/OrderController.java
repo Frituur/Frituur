@@ -185,7 +185,7 @@ public class OrderController {
         var customer = customerRepository.getById(customerid);
         customer.setTimeslot(tijdslot);
         fileCreater.ClearTempFile("temp2.txt");
-        return "OrderComplete";
+        return "ThankYou";
         //Je een tijdslot terug
     }
 
