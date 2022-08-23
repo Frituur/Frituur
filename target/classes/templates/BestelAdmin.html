@@ -135,13 +135,13 @@
                                 </thead>
                                 <tbody>
 
-                                <tr class="table-danger tr-order-customer" >
+                                <tr class="table-danger tr-order-customer" th:each="orders: ${orders}" >
 
-                                    <th scope="row">1</th>
-                                    <td>Joske Vermeulen</td>
-                                    <td>01/09/2022</td>
-                                    <td>20:15</td>
-                                    <td class="td-totprijs">20,50€</td>
+                                    <th scope="row" th:text="${orders.id}"></th>
+                                    <td th:text="${orders.customerid}"></td>
+                                    <td th:text="${orders.numberofproducts}"></td>
+                                    <td th:text="${orders.id}"></td>
+                                    <td class="td-totprijs" th:text="${orders.id}"></td>
 
                                 </tr>
                                     <td colspan="4">
@@ -178,126 +178,7 @@
                                     </td>
 
 
-                                <tr class="table-danger tr-order-customer">
-                                    <th scope="row">1</th>
-                                    <td>Joske Vermeulen</td>
-                                    <td>01/09/2022</td>
-                                    <td>20:15</td>
-                                    <td class="td-totprijs table-sm">20,50€</td>
-                                </tr>
-                                <td>&nbsp;</td>
-                                <td colspan="4">
 
-                                    <table class="table mb-0 table-hover table-subcat">
-                                        <tbody>
-                                        <tr>
-                                            <td>Kleine Friet</td>
-                                            <td class="td-totprijs">3,10€</td>
-                                            <td class="td-totprijs">x2</td>
-                                            <td class="td-totprijs">6,20€</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Grote Friet</td>
-                                            <td class="td-totprijs">4,00€</td>
-                                            <td class="td-totprijs">x1</td>
-                                            <td class="td-totprijs">4,00€</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Frikandel</td>
-                                            <td class="td-totprijs">3,40€</td>
-                                            <td class="td-totprijs">x2</td>
-                                            <td class="td-totprijs">6,80€</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Potje Stookvleessaus</td>
-                                            <td class="td-totprijs">3,50€</td>
-                                            <td class="td-totprijs">x1</td>
-                                            <td class="td-totprijs">3,00€</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <br>
-                                </td>
-                                <tr class="table-danger tr-order-customer">
-                                    <th scope="row">1</th>
-                                    <td>Joske Vermeulen</td>
-                                    <td>01/09/2022</td>
-                                    <td>20:15</td>
-                                    <td class="td-totprijs table-sm">20,50€</td>
-                                </tr>
-                                <td>&nbsp;</td>
-                                <td colspan="4" class="hiddenRow">
-
-                                    <table class="table mb-0 table-hover table-subcat">
-                                        <tbody>
-                                        <tr>
-                                            <td>Kleine Friet</td>
-                                            <td class="td-totprijs">3,10€</td>
-                                            <td class="td-totprijs">x2</td>
-                                            <td class="td-totprijs">6,20€</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Grote Friet</td>
-                                            <td class="td-totprijs">4,00€</td>
-                                            <td class="td-totprijs">x1</td>
-                                            <td class="td-totprijs">4,00€</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Frikandel</td>
-                                            <td class="td-totprijs">3,40€</td>
-                                            <td class="td-totprijs">x2</td>
-                                            <td class="td-totprijs">6,80€</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Potje Stookvleessaus</td>
-                                            <td class="td-totprijs">3,50€</td>
-                                            <td class="td-totprijs">x1</td>
-                                            <td class="td-totprijs">3,00€</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <br>
-                                </td>
-                                <tr class="table-danger tr-order-customer">
-                                    <th scope="row">1</th>
-                                    <td>Joske Vermeulen</td>
-                                    <td>01/09/2022</td>
-                                    <td>20:15</td>
-                                    <td class="td-totprijs table-sm">20,50€</td>
-                                </tr>
-                                <td>&nbsp;</td>
-                                <td colspan="4" class="hiddenRow">
-
-                                    <table class="table mb-0 table-hover table-subcat">
-                                        <tbody>
-                                        <tr>
-                                            <td>Kleine Friet</td>
-                                            <td class="td-totprijs">3,10€</td>
-                                            <td class="td-totprijs">x2</td>
-                                            <td class="td-totprijs">6,20€</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Grote Friet</td>
-                                            <td class="td-totprijs">4,00€</td>
-                                            <td class="td-totprijs">x1</td>
-                                            <td class="td-totprijs">4,00€</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Frikandel</td>
-                                            <td class="td-totprijs">3,40€</td>
-                                            <td class="td-totprijs">x2</td>
-                                            <td class="td-totprijs">6,80€</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Potje Stookvleessaus</td>
-                                            <td class="td-totprijs">3,50€</td>
-                                            <td class="td-totprijs">x1</td>
-                                            <td class="td-totprijs">3,00€</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <br>
-                                </td>
                                 </tbody>
                             </table>
 
