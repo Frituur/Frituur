@@ -2,6 +2,7 @@ package be.thomasmore.graduaten.hellospring.controllers;
 
 
 import be.thomasmore.graduaten.hellospring.dto.AdminDto;
+import be.thomasmore.graduaten.hellospring.dto.CategoryDto;
 import be.thomasmore.graduaten.hellospring.entities.Category;
 import be.thomasmore.graduaten.hellospring.entities.Customer;
 import be.thomasmore.graduaten.hellospring.entities.Orders;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,40 +37,18 @@ public class AdminController {
 
     @Autowired
     private ProductRepository productRepository;
-    @RequestMapping("/BestelAdmin")
-    public String GetCategoriesAndProductsForAdminPage(Model model) {
-        List<Category> categoriesAdmin=categoryRepository.findAll();
-        List<AdminDto> adminDtos;
-        TypeToken<List<AdminDto>> typeToken = new TypeToken<>() {
-        };
-        adminDtos = modelMap.modelMapper().map(categoriesAdmin,typeToken.getType());
 
-        model.addAttribute("categoriesAdmin",adminDtos);
-        return "BestelAdmin";
-    }
 
     @RequestMapping("/BestelAdmin")
-    public String GetOrdersForAdminPage(Model model) {
-        List<Orders> ordersAdmin=orderRepository.findAll();
-        List<AdminDto> adminDtos;
-        TypeToken<List<AdminDto>> typeToken = new TypeToken<>() {
+    public String GetCategoriesAndProductsForHomePage(Model model) {
+        List<Category> categories=categoryRepository.findAll();
+        List<CategoryDto> categoryDtos = new ArrayList<>();
+        TypeToken<List<CategoryDto>> typeToken = new TypeToken<>() {
         };
-        adminDtos = modelMap.modelMapper().map(ordersAdmin,typeToken.getType());
+        categoryDtos = modelMap.modelMapper().map(categories,typeToken.getType());
 
-        model.addAttribute("ordersAdmin",adminDtos);
-        return "BestelAdmin";
-    }
-
-    @RequestMapping("/BestelAdmin")
-    public String GetProductsForAdmin(Model model) {
-        List<Product> productAdmin=productRepository.findAll();
-        List<AdminDto> adminDtos;
-        TypeToken<List<AdminDto>> typeToken = new TypeToken<>() {
-        };
-        adminDtos = modelMap.modelMapper().map(productAdmin,typeToken.getType());
-
-        model.addAttribute("productAdmin",adminDtos);
-        return "BestelAdmin";
+        model.addAttribute("categories",categoryDtos);
+        return "Home";
     }
 
 
