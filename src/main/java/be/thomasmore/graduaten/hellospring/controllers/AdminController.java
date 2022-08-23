@@ -3,6 +3,7 @@ package be.thomasmore.graduaten.hellospring.controllers;
 
 import be.thomasmore.graduaten.hellospring.dto.AdminDto;
 import be.thomasmore.graduaten.hellospring.dto.CategoryDto;
+import be.thomasmore.graduaten.hellospring.dto.ProductDto;
 import be.thomasmore.graduaten.hellospring.entities.Category;
 import be.thomasmore.graduaten.hellospring.entities.Customer;
 import be.thomasmore.graduaten.hellospring.entities.Orders;
@@ -11,6 +12,8 @@ import be.thomasmore.graduaten.hellospring.mapper.ModelMap;
 import be.thomasmore.graduaten.hellospring.repositories.CategoryRepository;
 import be.thomasmore.graduaten.hellospring.repositories.OrderRepository;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
+import be.thomasmore.graduaten.hellospring.security.UserDetailsService;
+import be.thomasmore.graduaten.hellospring.services.ProductService;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +35,10 @@ public class AdminController {
     private ModelMap modelMap;
 
     @Autowired
+    private ProductService service;
+    @Autowired
+    private UserDetailsService userDetailsService;
+    @Autowired
     private CategoryRepository categoryRepository;
 
     @Autowired
@@ -43,12 +51,18 @@ public class AdminController {
     @RequestMapping("/BestelAdmin")
     public String GetCategoriesAndProductsForAdminPage(Model model) {
         List<Category> categories=categoryRepository.findAll();
-        List<CategoryDto> categoryDtos = new ArrayList<>();
-        TypeToken<List<CategoryDto>> typeToken = new TypeToken<>() {
+        List<CategoryDto> categoryDtos;
+        List<Product> products=productRepository.findAll();
+        List<ProductDto> productDtos;
+        TypeToken<List<CategoryDto>> typeTokenCategory = new TypeToken<>() {
         };
-        categoryDtos = modelMap.modelMapper().map(categories,typeToken.getType());
+        categoryDtos = modelMap.modelMapper().map(categories,typeTokenCategory.getType());
+        TypeToken<List<ProductDto>> typeTokenProduct = new TypeToken<>(){};
+        productDtos = modelMap.modelMapper().map(products,typeTokenProduct.getType());
+
 
         model.addAttribute("categories",categoryDtos);
+        model.addAttribute("products", productDtos);
         return "BestelAdmin";
     }
 
