@@ -26,6 +26,7 @@ import java.util.List;
 @Controller
 public class AdminController {
 
+
     @Autowired
     private ModelMap modelMap;
 
@@ -40,7 +41,7 @@ public class AdminController {
 
 
     @RequestMapping("/BestelAdmin")
-    public String GetCategoriesAndProductsForHomePage(Model model) {
+    public String GetCategoriesAndProductsForAdminPage(Model model) {
         List<Category> categories=categoryRepository.findAll();
         List<CategoryDto> categoryDtos = new ArrayList<>();
         TypeToken<List<CategoryDto>> typeToken = new TypeToken<>() {
@@ -48,7 +49,7 @@ public class AdminController {
         categoryDtos = modelMap.modelMapper().map(categories,typeToken.getType());
 
         model.addAttribute("categories",categoryDtos);
-        return "Home";
+        return "BestelAdmin";
     }
 
 
