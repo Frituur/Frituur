@@ -3,6 +3,7 @@ package be.thomasmore.graduaten.hellospring;
 import be.thomasmore.graduaten.hellospring.entities.User;
 import be.thomasmore.graduaten.hellospring.security.PasswordConfig;
 import be.thomasmore.graduaten.hellospring.shared.DatabaseInitializer;
+import be.thomasmore.graduaten.hellospring.shared.FileCreater;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +14,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -33,9 +35,9 @@ public class FrituurspringApplication extends SpringBootServletInitializer {
 	private static final Logger logger = LoggerFactory.getLogger(FrituurspringApplication.class);
 
 
-	public static void main(String[] args) throws SQLException, FileNotFoundException {
-
-
+	public static void main(String[] args) throws SQLException, IOException {
+		FileCreater fileCreater = new FileCreater();
+		fileCreater.AssignTempFile("temp2.txt");
 		logger.info("The application is starting now");
 		DatabaseInitializer databaseInitializer = new DatabaseInitializer(logger);
 		Connection conn = databaseInitializer.GetConnection();

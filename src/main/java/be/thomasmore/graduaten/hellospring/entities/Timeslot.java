@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 @Entity
@@ -18,20 +19,14 @@ public class Timeslot {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "timearrival")
-    private Timestamp timeArrival;
+    @Column(name = "begintime")
+    private Time begintime;
 
     @Column(name = "isavailable")
     private Boolean isAvailable = true;
 
     @OneToOne(mappedBy = "timeslot")
     private Orders Order;
-
-    @Column(name = "begintime")
-    private Timestamp beginTime;
-
-    @Column(name = "endtime")
-    private Timestamp endtime;
 
 
 }

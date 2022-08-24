@@ -1,7 +1,6 @@
 package be.thomasmore.graduaten.hellospring.controllers;
 
 import be.thomasmore.graduaten.hellospring.entities.Product;
-import be.thomasmore.graduaten.hellospring.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,8 +21,7 @@ public class ProductController {
     // TODO: Convert the Image to base64string to display on the screen
     //TODO: Tonen van een bepaald product detail pagina door id
 
-    @Autowired
-    ProductService service;
+
 
     @RequestMapping(value = "/product", method= RequestMethod.GET)
     public String showProductPage(@RequestParam String name, ModelMap map){
@@ -37,11 +35,7 @@ public class ProductController {
         return "Detail";
     }
 
-    @RequestMapping(value = "/searchproducts", method = RequestMethod.GET)
-    public List<Product> GetProductsFromCategoryName(@RequestParam String category){
-        var products = service.GetProductsByCatorgory(category);
-        return products;
-    }
+
 
 
 

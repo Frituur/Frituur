@@ -4,14 +4,17 @@ import be.thomasmore.graduaten.hellospring.dto.*;
 import be.thomasmore.graduaten.hellospring.entities.Customer;
 import be.thomasmore.graduaten.hellospring.entities.Orders;
 import be.thomasmore.graduaten.hellospring.entities.Product;
+import be.thomasmore.graduaten.hellospring.entities.Timeslot;
 import be.thomasmore.graduaten.hellospring.mapper.ModelMap;
 
 
 import be.thomasmore.graduaten.hellospring.repositories.CustomerRepository;
 import be.thomasmore.graduaten.hellospring.repositories.OrderRepository;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
+import be.thomasmore.graduaten.hellospring.repositories.TimeslotRepository;
 import be.thomasmore.graduaten.hellospring.requests.RequestIds;
-import be.thomasmore.graduaten.hellospring.services.OrderService;
+import be.thomasmore.graduaten.hellospring.shared.Converter;
+import be.thomasmore.graduaten.hellospring.shared.FileCreater;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,7 +38,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,10 +51,16 @@ import static java.lang.Integer.parseInt;
 public class OrderController {
 
     @Autowired
+    private Converter converter;
+
+    @Autowired
+    private FileCreater fileCreater;
+
+    @Autowired
     private ModelMap modelMap;
 
     @Autowired
-    private OrderService orderService;
+    private TimeslotRepository timeslotRepository;
 
     @Autowired
     private ProductRepository productRepository;
@@ -67,11 +79,32 @@ public class OrderController {
     }
 
 
-    public String FinalOrder() {
-        // Eenmaal als tijdslot gekozen is, lijst van producten in orders, naam van klant en telefoon nummer
-        // Dan kan hij de final bestelling uitvoeren
+    @RequestMapping(value = "/finalorder")
+    public String FinalOrder(Model model) throws IOException {
 
-        return "/complete";
+        EndOrderDto endOrderDto = new EndOrderDto();
+        List<Timeslot> tijdslots= GetAllAvailableTimeslots();
+        var id = fileCreater.ReadFromTempFile();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        long customerid = Long.parseLong(id);
+        System.out.println("The customer id is " + customerid);
+        Customer customer = customerRepository.getById(customerid);
+        List<Orders> allOrders = orderRepository.findAll();
+        List<Orders> ordersFromCustomer =  GetAllOrdersFromCustomer(customerid, allOrders);
+        List<ProductDto> productDtos = SetProductDtosForOrderCustomer(ordersFromCustomer);
+        Double TotalPrice = CalculateTotalPrice(ordersFromCustomer);
+        customer.setTotalprice(TotalPrice);
+        System.out.println("The total price is " + tijdslots.stream().count());
+        customerRepository.save(customer);
+        endOrderDto.setTimeslots(tijdslots);
+        endOrderDto.setCustomerName(customer.getNaam());
+        endOrderDto.setTotalPrice(TotalPrice);
+        endOrderDto.setCustomerAddress(customer.getAddress());
+        endOrderDto.setToday(now.toLocalDate());
+        endOrderDto.setProductDtos(productDtos);
+        model.addAttribute("order", endOrderDto);
+        return "/orderready";
     }
 
     @RequestMapping(value = "/makeorder", method = RequestMethod.POST)
@@ -81,15 +114,17 @@ public class OrderController {
         String[] naamsplit = Json.split("CustomerNaam" + "=");
         String naam = naamsplit[1].substring(0, naamsplit[1].indexOf("&"));
         naam = naam.replace("+", " ");
-        String[] adressplit = Json.split("CustomerAdres" + "=");
-        String adres = adressplit[1].substring(1,adressplit[1].indexOf("&"));
+        int numberOfOrderedItems = 0;
+       String[] adressplit = Json.split("CustomerAdres" + "=");
+        System.out.println(adressplit);
+        String adres = adressplit[1].substring(0, adressplit[1].indexOf("&"));
         adres = adres.replace("+", " ");
-        System.out.println(adres);
         if (naam != "" && adres != "") {
             if (Json.contains("=on")) {
                 customer.setNaam(naam);
                 customer.setAddress(adres);
                 Customer customersaved=customerRepository.save(customer);
+                fileCreater.WriteToTempFile(customersaved.getId().toString());
                 for (int i = 0; i < lijst.length; i++) {
                     if (lijst[i].contains("=on")) {
                         String[] getidstring=lijst[i].split("boolean");
@@ -100,23 +135,27 @@ public class OrderController {
                         String splitter=getidnum+"=";
                         String[] lijst2 = lijst[i].split(splitter);
                         int nummer = parseInt(lijst2[1].substring(0, 1));
+                        numberOfOrderedItems += nummer;
                         order.setNumberOfProducts(nummer);
                         order.setProduct(product);
                         order.setCustomer(customersaved);
                         orderRepository.save(order);
-                        System.out.println(Json);
+                        numberOfOrderedItems++;
                     }
                 }
-                return "redirect:/Tijdslots";
+                if(numberOfOrderedItems < 20) {
+                    return "redirect:/finalorder";
+                }
+                return "/";
             }
             else
             {
-                return "redirect:/Home";
+                return "redirect:/";
             }
         }
         else
         {
-            return "redirect:/Home";
+            return "redirect:/";
         }
 
 
@@ -131,6 +170,24 @@ public class OrderController {
 
     }
 
+
+    @RequestMapping(value = "/tijdslotpost", method = RequestMethod.POST)
+    public String PostTijdSlotKlant(String json) throws IOException {
+        System.out.println("hello world" + json);
+        if(json == null){
+            return "/";
+        }
+        Long idhal = Long.valueOf(5);
+        var tijdslot = timeslotRepository.getById(idhal);
+        var id = fileCreater.ReadFromTempFile();
+        long customerid = Long.parseLong(id);
+        System.out.println(json);
+        var customer = customerRepository.getById(customerid);
+        customer.setTimeslot(tijdslot);
+        fileCreater.ClearTempFile("temp2.txt");
+        return "ThankYou";
+        //Je een tijdslot terug
+    }
 
         //Orders ophalen van de customers in database
         @GetMapping("/getorders")
@@ -176,8 +233,7 @@ public class OrderController {
     @RequestMapping("/BestelKlant")
     public String TijdsslotsPage() {return "BestelKlant";}
 
-    /* Conflict met AdminController RequestMapping("/BestelAdmin") */
-/*    @RequestMapping("/BestelAdmin")
+    @RequestMapping("/BestelAdmin")
     public String BestelPage(Model model) {
         List<Orders> orders=orderRepository.findAll();
         List<OrderDto> orderDtos = new ArrayList<>();
@@ -187,7 +243,85 @@ public class OrderController {
         System.out.println(orderDtos.isEmpty());
         model.addAttribute("orders",orderDtos);
         return "BestelAdmin";
-    }*/
+    }
+
+    public double CalculatePriceProduct(Orders Order){
+        // Go through the list of  products
+        Double totalPrice = 0.0;
+        Product product = Order.getProduct();
+        int quantityOfProducts = Order.getNumberOfProducts();
+        totalPrice += product.getPrice() * quantityOfProducts;
+        return totalPrice;
+    }
+
+    public List<Orders> GetAllOrdersFromCustomer(Long customerid, List<Orders> orders){
+        List<Orders> ordersFromCustomer = new ArrayList<>();
+        for (var order : orders) {
+            if(customerid == order.getCustomer().getId()){
+                ordersFromCustomer.add(order);
+            }
+        }
+
+        return ordersFromCustomer;
+    }
+
+    public Double CalculateTotalPrice(List<Orders> orders){
+        Double TotalPriceCustomer = 0.0;
+        for (var order : orders) {
+            TotalPriceCustomer += CalculatePriceProduct(order);
+        }
+        return TotalPriceCustomer;
+    }
+
+
+    protected List<Timeslot> GetAllAvailableTimeslots() {
+        List<Timeslot> timeslots = timeslotRepository.findAll();
+        List<Timeslot> allAvailableTimeslot = new ArrayList<>();
+
+        for (Timeslot timeslot : timeslots) {
+            if(timeslot.getIsAvailable() == true){
+                allAvailableTimeslot.add(timeslot);
+            }
+        }
+
+        return allAvailableTimeslot;
+    }
+
+
+    private Long GetIdFromJson(String json ){
+        String[] jsonSplit = json.split("=");
+        var id = Long.parseLong(jsonSplit[0]);
+        return id;
+    }
+
+
+    private List<ProductDto> SetProductDtosForOrderCustomer(List<Orders> Orders){
+        List<ProductDto> productDtos = new ArrayList<>();
+        for (var order : Orders) {
+            ProductDto productDto = new ProductDto();
+            productDto.setName(order.getProduct().getName());
+            productDto.setPrice(order.getProduct().getPrice());
+            productDto.setQuantity(order.getNumberOfProducts());
+            productDtos.add(productDto);
+        }
+        productDtos = ConvertPhotoBase64(productDtos);
+        return productDtos;
+    }
+
+    private List<ProductDto> ConvertPhotoBase64(List<ProductDto> products)
+    {
+        String base64IntroString = "data:image/png;base64, ";
+            for (ProductDto productDto : products) {
+                var photo = productDto.getPhoto();
+                if (photo != null  && photo.length > 0) {
+                    var fullImageString = base64IntroString +  converter.ConvertByteArrayToBase64(photo);
+                    productDto.setImage(fullImageString);
+                }
+            }
+
+        return products;
+    }
 }
+
 
 
