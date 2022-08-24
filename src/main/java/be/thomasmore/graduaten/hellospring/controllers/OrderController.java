@@ -43,10 +43,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static java.lang.Integer.parseInt;
 
@@ -98,7 +95,7 @@ public class OrderController {
         List<ProductDto> productDtos = SetProductDtosForOrderCustomer(ordersFromCustomer);
         Double TotalPrice = CalculateTotalPrice(ordersFromCustomer);
         customer.setTotalprice(TotalPrice);
-        System.out.println("The total price is " + tijdslots.stream().count());
+        System.out.println("The total price is " + TotalPrice);
         customerRepository.save(customer);
         endOrderDto.setTimeslots(tijdslots);
         endOrderDto.setCustomerName(customer.getNaam());
@@ -175,18 +172,20 @@ public class OrderController {
 
 
     @RequestMapping(value = "/tijdslotpost", method = RequestMethod.POST)
-    public String PostTijdSlotKlant(String json) throws IOException {
-        System.out.println("hello world" + json);
-        if(json == null){
-            return "/";
+    public String PostTijdSlotKlant(@ModelAttribute("TijdslotId") Timeslot tijdlsotSelected) throws IOException {
+
+        if(tijdlsotSelected == null){
+            return "redirect:/";
         }
-        Long idhal = Long.valueOf(5);
-        var tijdslot = timeslotRepository.getById(idhal);
+        var tijdslot = timeslotRepository.getById(tijdlsotSelected.getId());
         var id = fileCreater.ReadFromTempFile();
         long customerid = Long.parseLong(id);
-        System.out.println(json);
+        System.out.println(tijdlsotSelected.getId());
         var customer = customerRepository.getById(customerid);
+        tijdslot.setIsAvailable(false);
+        timeslotRepository.save(tijdslot);
         customer.setTimeslot(tijdslot);
+        customerRepository.save(customer);
         fileCreater.ClearTempFile("temp2.txt");
         return "ThankYou";
         //Je een tijdslot terug
@@ -231,12 +230,8 @@ public class OrderController {
 
 
 
-
-
-    @RequestMapping("/BestelKlant")
-    public String TijdsslotsPage() {return "BestelKlant";}
-
     /*@RequestMapping("/BestelAdmin")
+
     public String BestelPage(Model model) {
         List<Orders> orders=orderRepository.findAll();
         List<OrderDto> orderDtos = new ArrayList<>();
@@ -260,11 +255,11 @@ public class OrderController {
     public List<Orders> GetAllOrdersFromCustomer(Long customerid, List<Orders> orders){
         List<Orders> ordersFromCustomer = new ArrayList<>();
         for (var order : orders) {
-            if(customerid == order.getCustomer().getId()){
+            if(Objects.equals(customerid, order.getCustomer().getId())){
                 ordersFromCustomer.add(order);
             }
         }
-
+        System.out.println("The size of orders" + ordersFromCustomer.size());
         return ordersFromCustomer;
     }
 
@@ -285,8 +280,10 @@ public class OrderController {
 
 
         for (Timeslot timeslot : timeslots) {
+            System.out.println("De tijdslot id is " + timeslot.getBegintime() + timeslot.getId());
             LocalTime timeslotDb = timeslot.getBegintime().toLocalTime();
             if(timeslot.getIsAvailable() == true && timeslotDb.isAfter(LocalTime.parse(target))){
+
                 allAvailableTimeslot.add(timeslot);
             }
         }
