@@ -134,8 +134,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <div th:each="customers: ${customers}">
-                                <tr class="table-danger tr-order-customer" th:each="orders: ${customers.orders}" >
+
+                                <tr class="table-danger tr-order-customer" th:each="customers: ${customers}" >
 
                                     <th scope="row" th:text="${customers.id}"></th>
                                     <td th:text="${customers.naam}"></td>
@@ -177,7 +177,7 @@
                                         <br>
                                     </td>
 
-                                </div>
+
 
                                 </tbody>
                             </table>
