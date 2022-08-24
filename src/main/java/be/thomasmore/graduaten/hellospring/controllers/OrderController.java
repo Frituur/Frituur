@@ -82,8 +82,9 @@ public class OrderController {
         String naam = naamsplit[1].substring(0, naamsplit[1].indexOf("&"));
         naam = naam.replace("+", " ");
         String[] adressplit = Json.split("CustomerAdres" + "=");
-        String adres = adressplit[1];
+        String adres = adressplit[1].substring(1,adressplit[1].indexOf("&"));
         adres = adres.replace("+", " ");
+        System.out.println(adres);
         if (naam != "" && adres != "") {
             if (Json.contains("=on")) {
                 customer.setNaam(naam);
@@ -110,12 +111,12 @@ public class OrderController {
             }
             else
             {
-                return "redirect:/";
+                return "redirect:/Home";
             }
         }
         else
         {
-            return "redirect:/";
+            return "redirect:/Home";
         }
 
 
