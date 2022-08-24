@@ -146,6 +146,12 @@
                                     <td th:text="${customers.address}"></td>
                                     <td></td>
                                     <td class="td-totprijs" th:text="${customers.totalPrice}"></td>
+                                    <td>
+                                        <form th:action="@{/deleteCustomer/{id}(id=${customers.id})}" th:object="${customers}" method="post">
+                                            <input type="hidden" th:field="${customers}">Delete</input>
+                                            <button type="submit" onClick="return confirm('Weet je het zeker?')"/>
+                                        </form>
+                                    </td>
 
                                 </tr>
 

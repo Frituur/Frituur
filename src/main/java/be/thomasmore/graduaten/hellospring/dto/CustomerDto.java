@@ -20,6 +20,8 @@ import java.util.List;
 @Builder
 public class CustomerDto {
 
+    private long id;
+
     private String naam;
 
     private String address;
