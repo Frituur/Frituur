@@ -67,6 +67,11 @@ public class AdminController {
 //        model.addAttribute("orders", orderDtos);
         return "BestelAdmin";
     }
+    @PostMapping("/deleteCustomer/{id}")
+    public String deleteCustomer(@PathVariable Long id){
+        customerRepository.deleteById(id);
+        return "redirect:/BestelAdmin";
+    }
 
 
 }
