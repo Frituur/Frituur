@@ -91,247 +91,247 @@
     <div class="row">
         <div class="col-2">
             <div class="customer-login d-none d-xl-block">
-            <div class="col shadow p-3 mb-5 bg-body rounded div-categorie">
-                <div class="sidenav">
+                <div class="col shadow p-3 mb-5 bg-body rounded div-categorie">
+                    <div class="sidenav">
 
-                    <ul class="nav flex-column hidden-xs" id="categorie-nav">
-                        <li class="nav-item">
-                            <h5><a class="nav-link" href="#Bestellingen">Bestellingen</a></h5>
-                        </li>
-                        <li class="nav-item">
-                            <h5><a class="nav-link" href="#Tijdslots">Tijdslots</a></h5>
-                        </li>
-                        <li class="nav-item">
-                            <h5><a class="nav-link" href="#Productbeheer">Producten</a></h5>
-                        </li>
-                        <li class="nav-item">
-                            <h5><a class="nav-link" href="#Categoriebeheer">Categoriën</a></h5>
-                        </li>
-                    </ul>
+                        <ul class="nav flex-column hidden-xs" id="categorie-nav">
+                            <li class="nav-item">
+                                <h5><a class="nav-link" href="#Bestellingen">Bestellingen</a></h5>
+                            </li>
+                            <li class="nav-item">
+                                <h5><a class="nav-link" href="#Tijdslots">Tijdslots</a></h5>
+                            </li>
+                            <li class="nav-item">
+                                <h5><a class="nav-link" href="#Productbeheer">Producten</a></h5>
+                            </li>
+                            <li class="nav-item">
+                                <h5><a class="nav-link" href="#Categoriebeheer">Categoriën</a></h5>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
 
-        </div>
+            </div>
         </div>
         <div class="col">
             <div class="container-fluid">
-                    <br>
-                    <div class="row">
-                        <div class="col shadow p-3 mb-5 bg-body rounded div-categorie">
-                            <br>
-                            <h5 id="Bestellingen">Bestellingen</h5>
-                            <hr class="solid">
+                <br>
+                <div class="row">
+                    <div class="col shadow p-3 mb-5 bg-body rounded div-categorie">
+                        <br>
+                        <h5 id="Bestellingen">Bestellingen</h5>
+                        <hr class="solid">
 
 
-                            <table class="table" id="table-orders">
-                                <thead>
-                                <tr >
-                                    <th scope="col">id</th>
-                                    <th scope="col">Klant</th>
-                                    <th scope="col">Besteldatum</th>
-                                    <th scope="col">Tijdslot</th>
-                                    <th scope="col" class="td-totprijs">Totaalprijs</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                        <table class="table" id="table-orders">
+                            <thead>
+                            <tr >
+                                <th scope="col">id</th>
+                                <th scope="col">Klant</th>
+                                <th scope="col">Besteldatum</th>
+                                <th scope="col">Tijdslot</th>
+                                <th scope="col" class="td-totprijs">Totaalprijs</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-                                <tr class="table-danger tr-order-customer" th:each="customers: ${customers}" >
+                            <tr class="table-danger tr-order-customer" th:each="customers: ${customers}" >
 
-                                    <th scope="row" th:text="${customers.id}"></th>
-                                    <td th:text="${customers.naam}"></td>
-                                    <td th:text="${customers.address}"></td>
-                                    <td th:text="${customers.id}"></td>
-                                    <td class="td-totprijs" th:text="${customers.id}"></td>
+                                <th scope="row" th:text="${customers.id}"></th>
+                                <td th:text="${customers.naam}"></td>
+                                <td th:text="${customers.address}"></td>
+                                <td th:text="${customers.id}"></td>
+                                <td class="td-totprijs" th:text="${customers.id}"></td>
 
-                                </tr>
+                            </tr>
 
-                                    <td colspan="4">
+                            <td colspan="4">
 
-                                        <table class="table mb-0 table-hover table-subcat">
-                                            <tbody>
-                                            <tr>
-                                                <td>Kleine Friet</td>
-                                                <td class="td-totprijs">3,10€</td>
-                                                <td class="td-totprijs">x2</td>
-                                                <td class="td-totprijs">6,20€</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Grote Friet</td>
-                                                <td class="td-totprijs">4,00€</td>
-                                                <td class="td-totprijs">x1</td>
-                                                <td class="td-totprijs">4,00€</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Frikandel</td>
-                                                <td class="td-totprijs">3,40€</td>
-                                                <td class="td-totprijs">x2</td>
-                                                <td class="td-totprijs">6,80€</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Potje Stookvleessaus</td>
-                                                <td class="td-totprijs">3,50€</td>
-                                                <td class="td-totprijs">x1</td>
-                                                <td class="td-totprijs">3,00€</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <br>
-                                    </td>
+                                <table class="table mb-0 table-hover table-subcat">
+                                    <tbody>
+                                    <tr>
+                                        <td>Kleine Friet</td>
+                                        <td class="td-totprijs">3,10€</td>
+                                        <td class="td-totprijs">x2</td>
+                                        <td class="td-totprijs">6,20€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grote Friet</td>
+                                        <td class="td-totprijs">4,00€</td>
+                                        <td class="td-totprijs">x1</td>
+                                        <td class="td-totprijs">4,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Frikandel</td>
+                                        <td class="td-totprijs">3,40€</td>
+                                        <td class="td-totprijs">x2</td>
+                                        <td class="td-totprijs">6,80€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Potje Stookvleessaus</td>
+                                        <td class="td-totprijs">3,50€</td>
+                                        <td class="td-totprijs">x1</td>
+                                        <td class="td-totprijs">3,00€</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                            </td>
 
 
 
-                                </tbody>
-                            </table>
+                            </tbody>
+                        </table>
 
-                        </div>
-
-                        <div class="col-4">
-                            <div class="row">
-                                <div class="col-sm-6 shadow p-3 mb-5 bg-body rounded div-categorie">
-                                    <h5 id="Tijdslots">Tijdslots</h5>
-                                    <hr class="solid">
-
-                                    <ul class="list-group list-group-horizontal">
-                                        <li class="list-group-item">11:30</li>
-
-                                        <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox"></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <br>
-
-                            <br>
-                        </div>
                     </div>
+
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-sm-6 shadow p-3 mb-5 bg-body rounded div-categorie">
+                                <h5 id="Tijdslots">Tijdslots</h5>
+                                <hr class="solid">
+
+                                <ul class="list-group list-group-horizontal">
+                                    <li class="list-group-item">11:30</li>
+
+                                    <li class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox"></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <br>
+
+                        <br>
+                    </div>
+                </div>
             </div>
 
             <div class="container-fluid" id="container-admin">
                 <div class="row">
-                <div class="col-sm shadow p-3 mb-5 bg-body rounded div-categorie  col-products overflow-auto">
-                    <br>
-                    <h5 id="Productbeheer">Productbeheer</h5>
-                    <hr class="solid">
-                    <button type="button" class="btn btn-secondary btn-nieuw-toevoegen shadow-sm" data-bs-toggle="modal" data-bs-target="#addProduct">
-                        Nieuw product toevoegen
-                    </button>
+                    <div class="col-sm shadow p-3 mb-5 bg-body rounded div-categorie  col-products overflow-auto">
+                        <br>
+                        <h5 id="Productbeheer">Productbeheer</h5>
+                        <hr class="solid">
+                        <button type="button" class="btn btn-secondary btn-nieuw-toevoegen shadow-sm" data-bs-toggle="modal" data-bs-target="#addProduct">
+                            Nieuw product toevoegen
+                        </button>
 
-                    <table class="table table-striped" id="table-producten">
-                        <thead class="table-danger">
-                        <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">Productnaam</th>
-                            <th scope="col">Prijs</th>
-                            <th scope="col" class="td-product-button"></th>
-                            <th scope="col" class="td-product-button"></th>
-                        </tr>
-                        </thead>
+                        <table class="table table-striped" id="table-producten">
+                            <thead class="table-danger">
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">Productnaam</th>
+                                <th scope="col">Prijs</th>
+                                <th scope="col" class="td-product-button"></th>
+                                <th scope="col" class="td-product-button"></th>
+                            </tr>
+                            </thead>
 
-                        <tbody >
+                            <tbody >
 
-                        <tr th:each="products:${products}">
-                            <th scope="row" th:text="${products.id}">test</th>
-                            <td th:text="${products.name}"></td>
+                            <tr th:each="products:${products}">
+                                <th scope="row" th:text="${products.id}">test</th>
+                                <td th:text="${products.name}"></td>
 
-                            <td th:text="${products.price}"></td>
-                            <td>
-                                <button class="btn btn-outline-secondary btn-sm btn-table-product" th:id="btnEdit+${products.id}" type="button">Edit</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-outline-danger btn-sm btn-table-product" th:id="btnDel+${products.id}" type="button">Verwijder</button>
-                            </td>
-                        </tr>
+                                <td th:text="${products.price}"></td>
+                                <td>
+                                    <button class="btn btn-outline-secondary btn-sm btn-table-product" th:id="btnEdit+${products.id}" type="button">Edit</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-outline-danger btn-sm btn-table-product" th:id="btnDel+${products.id}" type="button">Verwijder</button>
+                                </td>
+                            </tr>
 
 
-                        </tbody>
+                            </tbody>
 
-                    </table>
+                        </table>
 
+
+                    </div>
+
+                    <div class="col-sm shadow p-3 mb-5 bg-body rounded div-categorie  col-products overflow-auto">
+                        <br>
+                        <h5 id="Categoriebeheer">Categoriebeheer</h5>
+                        <hr class="solid">
+
+                        <button type="button" class="btn btn-secondary btn-nieuw-toevoegen shadow-sm" data-bs-toggle="modal" data-bs-target="#addCategorie">
+                            Nieuwe categorie toevoegen
+                        </button>
+                        <table class="table table-striped" id="table-producten2">
+                            <thead class="table-danger">
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">Categorienaam</th>
+
+                                <th scope="col" class="td-product-button"></th>
+                                <th scope="col" class="td-product-button"></th>
+
+                            </tr>
+                            </thead>
+                            <tbody >
+                            <div class="col-products overflow-auto">
+                                <tr th:each="categories: ${categories}">
+
+                                    <th scope="row" th:text="${categories.id}"></th>
+                                    <td th:text="${categories.name}"></td>
+
+                                    <td>
+                                        <button th:id="btnEdit+${categories.id}" class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
+                                    </td>
+                                    <td>
+                                        <button th:id="btnDel+${categories.id}" class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
+                                    </td>
+
+                                    <!--<tr>
+                                        <th scope="row">2</th>
+                                        <td>Snacks/Vegi</td>
+
+                                        <td>
+                                            <button class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Sauzen</td>
+
+                                        <td>
+                                            <button class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Drank</td>
+
+                                        <td>
+                                            <button class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Dessert</td>
+
+                                        <td>
+                                            <button class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
+                                        </td>
+                                    </tr>-->
+                            </div>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
-
-                <div class="col-sm shadow p-3 mb-5 bg-body rounded div-categorie  col-products overflow-auto">
-                    <br>
-                    <h5 id="Categoriebeheer">Categoriebeheer</h5>
-                    <hr class="solid">
-
-                    <button type="button" class="btn btn-secondary btn-nieuw-toevoegen shadow-sm" data-bs-toggle="modal" data-bs-target="#addCategorie">
-                        Nieuwe categorie toevoegen
-                    </button>
-                    <table class="table table-striped" id="table-producten2">
-                        <thead class="table-danger">
-                        <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">Categorienaam</th>
-
-                            <th scope="col" class="td-product-button"></th>
-                            <th scope="col" class="td-product-button"></th>
-
-                        </tr>
-                        </thead>
-                        <tbody >
-                        <div class="col-products overflow-auto">
-                        <tr th:each="categories: ${categories}">
-
-                            <th scope="row" th:text="${categories.id}"></th>
-                            <td th:text="${categories.name}"></td>
-
-                            <td>
-                                <button th:id="btnEdit+${categories.id}" class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
-                            </td>
-                            <td>
-                                <button th:id="btnDel+${categories.id}" class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
-                            </td>
-
-                        <!--<tr>
-                            <th scope="row">2</th>
-                            <td>Snacks/Vegi</td>
-
-                            <td>
-                                <button class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Sauzen</td>
-
-                            <td>
-                                <button class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Drank</td>
-
-                            <td>
-                                <button class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Dessert</td>
-
-                            <td>
-                                <button class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
-                            </td>
-                            <td>
-                                <button class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
-                            </td>
-                        </tr>-->
-                        </div>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
             </div>
         </div>
     </div>
