@@ -1,5 +1,4 @@
 package be.thomasmore.graduaten.hellospring.controllers;
-
 import be.thomasmore.graduaten.hellospring.dto.CategoryDto;
 import be.thomasmore.graduaten.hellospring.dto.ProductDto;
 import be.thomasmore.graduaten.hellospring.entities.Category;
@@ -65,8 +64,6 @@ public class HomeController {
     @RequestMapping("/")
     public String IndexPage() {return "Index"; }
 
-//    @RequestMapping("/BestelAdmin")
-//    public String BestelAdminPage() {return "BestelAdmin";}
 
     @RequestMapping("/ThankYou")
     public String ThankYouPage() {return "ThankYou"; }

@@ -146,7 +146,7 @@ public class OrderController {
                 if(numberOfOrderedItems < 20) {
                     return "redirect:/finalorder";
                 }
-                return "/";
+                return "redirect:/";
             }
             else
             {
@@ -228,7 +228,10 @@ public class OrderController {
         }
 
 
-    @RequestMapping("/BestelAdmin")
+
+
+    /*@RequestMapping("/BestelAdmin")
+
     public String BestelPage(Model model) {
         List<Orders> orders=orderRepository.findAll();
         List<OrderDto> orderDtos = new ArrayList<>();
@@ -238,7 +241,7 @@ public class OrderController {
         System.out.println(orderDtos.isEmpty());
         model.addAttribute("orders",orderDtos);
         return "BestelAdmin";
-    }
+    }*/
 
     public double CalculatePriceProduct(Orders Order){
         // Go through the list of  products

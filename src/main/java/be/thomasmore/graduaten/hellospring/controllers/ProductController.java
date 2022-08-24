@@ -35,6 +35,9 @@ public class ProductController {
         return "Detail";
     }
 
+/*    @RestController
+    @RequestMapping*/
+
 
 
 
