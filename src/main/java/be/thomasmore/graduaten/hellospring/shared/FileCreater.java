@@ -28,6 +28,7 @@ public class FileCreater {
     public void AssignTempFile(String filename) {
         String absoluteTestPath = new File(MainProjectPath).getAbsolutePath();
         tempFilePath = absoluteTestPath + filename;
+        System.out.println(tempFilePath);
     }
 
     public void ClearTempFile(String File) throws FileNotFoundException {
