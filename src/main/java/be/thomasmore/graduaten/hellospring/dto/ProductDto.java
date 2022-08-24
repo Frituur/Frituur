@@ -38,7 +38,5 @@ public class ProductDto {
 
     private byte[] photo;
 
-    private List<Category> category;
-
 
 }

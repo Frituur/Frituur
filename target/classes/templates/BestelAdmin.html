@@ -154,7 +154,7 @@
                                     <table class="table mb-0 table-hover table-subcat">
                                         <tbody >
                                         <tr th:each="orders: ${customers.orders}">
-                                            <td th:text="${orders.product.name}"></td>
+                                            <td th:text="${orders.Product.name}"></td>
                                             <td class="td-totprijs" th:text="${orders.numberOfProducts}"></td>
                                         </tr>
                                         </tbody>

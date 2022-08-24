@@ -30,6 +30,6 @@ public class OrderDto {
 
     private TijdslotDto timeslot;
 
-    private List<ProductDto> Product;
+    private ProductDto Product;
 
 }
