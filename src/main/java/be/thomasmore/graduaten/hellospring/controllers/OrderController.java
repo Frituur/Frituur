@@ -146,7 +146,7 @@ public class OrderController {
                 if(numberOfOrderedItems < 20) {
                     return "redirect:/finalorder";
                 }
-                return "/";
+                return "redirect:/";
             }
             else
             {
