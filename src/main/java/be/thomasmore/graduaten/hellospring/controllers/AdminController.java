@@ -11,8 +11,7 @@ import be.thomasmore.graduaten.hellospring.repositories.CategoryRepository;
 import be.thomasmore.graduaten.hellospring.repositories.CustomerRepository;
 import be.thomasmore.graduaten.hellospring.repositories.OrderRepository;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
-import be.thomasmore.graduaten.hellospring.security.UserDetailsService;
-import be.thomasmore.graduaten.hellospring.services.ProductService;
+
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 
