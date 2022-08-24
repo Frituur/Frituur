@@ -134,14 +134,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <div th:each="customers: ${customers}">
+                                <tr class="table-danger tr-order-customer" th:each="orders: ${customers.orders}" >
 
-                                <tr class="table-danger tr-order-customer" th:each="orders: ${orders}" >
-
-                                    <th scope="row" th:text="${orders.id}"></th>
-                                    <td th:text="${orders.customerid}"></td>
-                                    <td th:text="${orders.numberofproducts}"></td>
-                                    <td th:text="${orders.id}"></td>
-                                    <td class="td-totprijs" th:text="${orders.id}"></td>
+                                    <th scope="row" th:text="${customers.id}"></th>
+                                    <td th:text="${customers.naam}"></td>
+                                    <td th:text="${customers.address}"></td>
+                                    <td th:text="${customers.id}"></td>
+                                    <td class="td-totprijs" th:text="${customers.id}"></td>
 
                                 </tr>
                                     <td colspan="4">
@@ -177,7 +177,7 @@
                                         <br>
                                     </td>
 
-
+                                </div>
 
                                 </tbody>
                             </table>

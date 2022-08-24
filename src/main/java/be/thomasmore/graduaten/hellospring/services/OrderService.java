@@ -58,8 +58,6 @@ public class OrderService {
                 OrdersNotHandled.add(order);
 
             }
-
-
         }
 
         return OrdersNotHandled;
