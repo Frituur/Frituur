@@ -146,7 +146,6 @@
                                     <td th:text="${customers.address}"></td>
                                     <td></td>
                                     <td class="td-totprijs" th:text="${customers.totalPrice}"></td>
-
                                 </tr>
 
                                 <td colspan="4">
@@ -155,7 +154,7 @@
                                         <tbody >
                                         <tr th:each="orders: ${customers.orders}">
                                             <td th:text="${orders.product.name}"></td>
-                                            <td class="td-totprijs" th:text="${orders.numberOfProducts}"></td>
+                                            <td class="td-totprijs" th:text="${orders.name}"></td>
                                         </tr>
                                         </tbody>
                                     </table>
