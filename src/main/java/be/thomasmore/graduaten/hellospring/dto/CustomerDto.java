@@ -20,15 +20,11 @@ import java.util.List;
 @Builder
 public class CustomerDto {
 
-    private String firstname ;
-
-    private String lastname ;
-
-    private String fullname = firstname + lastname;
+    private String naam;
 
     private String address;
-    private String phone;
-    private String email;
 
+    private double totalPrice;
 
+    private List<OrderDto> orders;
 }

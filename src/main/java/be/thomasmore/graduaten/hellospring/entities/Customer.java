@@ -24,11 +24,17 @@ public class Customer {
     @Column(name = "naam")
     private String naam ;
 
-
+    @Column(name="address")
     private String address;
+
+    @Column(name= "totalprice")
+    private Double totalprice;
 
     @OneToMany(mappedBy = "customer")
     private List<Orders> orders;
 
+    @OneToOne
+    @JoinColumn(name="tijdslotid")
+    private Timeslot timeslot;
 
 }
