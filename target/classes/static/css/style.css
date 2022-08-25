@@ -32,7 +32,7 @@ nav i {
 }
 
 .gmap_canvas{
-    height: 250px;
+    height: 350px;
 }
 
 ul li h5  {
@@ -144,8 +144,8 @@ nav ul li {
 }
 
 .btn-nieuw-toevoegen{
-    margin-bottom: 10px;
-    width: 100%;
+    padding-bottom: 10px;
+
 }
 .div-beheer{
     max-height: 35%;
@@ -160,11 +160,11 @@ nav ul li {
 
 .td-product-button{
     text-align: right;
-    width: 15%;
+    width: 75px;
 }
 
 .btn-table-product{
-    max-width: 100%;
+    margin: 5px;
 }
 
 #container-admin{

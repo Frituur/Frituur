@@ -13,6 +13,7 @@ import be.thomasmore.graduaten.hellospring.repositories.OrderRepository;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 
 import org.modelmapper.TypeToken;
+import org.simpleframework.xml.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -70,6 +71,18 @@ public class AdminController {
     @PostMapping("/deleteCustomer/{id}")
     public String deleteCustomer(@PathVariable Long id){
         customerRepository.deleteById(id);
+        return "redirect:/BestelAdmin";
+    }
+
+    @PostMapping("/deleteCategorie/{id}")
+    public String deleteCategory(@PathVariable Long id) {
+        categoryRepository.deleteById(id);
+        return "redirect:/BestelAdmin";
+    }
+
+    @PostMapping("/deleteProduct/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        productRepository.deleteById(id);
         return "redirect:/BestelAdmin";
     }
 
