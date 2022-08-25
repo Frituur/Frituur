@@ -38,7 +38,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.chrono.ChronoLocalDateTime;
@@ -276,13 +275,12 @@ public class OrderController {
         List<Timeslot> timeslots = timeslotRepository.findAll();
         List<Timeslot> allAvailableTimeslot = new ArrayList<>();
         LocalTime now = LocalTime.now();
-        String target = now.toString();
 
 
         for (Timeslot timeslot : timeslots) {
             System.out.println("De tijdslot id is " + timeslot.getBegintime() + timeslot.getId());
-            LocalTime timeslotDb = timeslot.getBegintime().toLocalTime();
-            if(timeslot.getIsAvailable() == true && timeslotDb.isAfter(LocalTime.parse(target))){
+            String timeslotDb = timeslot.getBegintime();
+            if(timeslot.getIsAvailable() == true && now.isAfter(LocalTime.parse(timeslotDb))){
 
                 allAvailableTimeslot.add(timeslot);
             }
