@@ -20,7 +20,7 @@ public class Timeslot {
     private Long id;
 
     @Column(name = "begintime")
-    private Time begintime;
+    private String begintime;
 
     @Column(name = "isavailable")
     private Boolean isAvailable = true;
