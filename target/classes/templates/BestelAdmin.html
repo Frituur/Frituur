@@ -244,7 +244,7 @@
                                               th:object="${products}" method="post">
                                             <input type="hidden" th:field="${products}">
                                             <button class="btn btn-outline-danger btn-sm btn-table-product rounded-0"
-                                                    th:id="btnDel+${products.id}" type="button"
+                                                    th:id="btnDel+${products.id}" type="submit"
                                                     onClick="return confirm('Weet je het zeker?')"><i
                                                     class="fa fa-trash"></i>
                                             </button>
@@ -276,10 +276,7 @@
                             <tr>
                                 <th scope="col">id</th>
                                 <th scope="col">Categorienaam</th>
-
-                                <th scope="col" class="td-product-button"></th>
-                                <th scope="col" class="td-product-button"></th>
-
+                                <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
