@@ -64,6 +64,8 @@ public class HomeController {
     @RequestMapping("/")
     public String IndexPage() {return "Index"; }
 
+    @RequestMapping("/Contact")
+    public String ContactPage() {return "Contact"; }
 
     @RequestMapping("/ThankYou")
     public String ThankYouPage() {return "ThankYou"; }

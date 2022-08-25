@@ -7,14 +7,23 @@ body {
     min-height: 100%;
 }
 
-
+li a {
+    color: black;
+    text-decoration: none;
+    padding-left: 20px;
+}
+li p {
+    color: black;
+    text-decoration: none;
+    padding-left: 20px;
+}
 
 nav h1 {
     background-color: #EB5757;
-    padding: 2rem;
+
     margin-top: 0;
     font-weight: bold;
-    font-size: x-large;
+    font-size: 50px;
 }
 
 nav i {
@@ -22,6 +31,9 @@ nav i {
     margin-left: 50px;
 }
 
+.gmap_canvas{
+    height: 250px;
+}
 
 ul li h5  {
 
@@ -75,8 +87,8 @@ nav ul li {
 
 }
 #landing-image{
-    max-width: 100%;
-    height: auto;
+    /*max-width: 100%;*/
+    /*height: auto;*/
 }
 #top-nav {
     background-color: #EB5757;
@@ -140,6 +152,10 @@ nav ul li {
 }
 .div-categorie{
     margin: 10px;
+}
+
+.contact-div{
+    margin-right:10px;
 }
 
 .td-product-button{
