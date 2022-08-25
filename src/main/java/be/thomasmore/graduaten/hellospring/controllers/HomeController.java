@@ -9,7 +9,6 @@ import be.thomasmore.graduaten.hellospring.mapper.ModelMap;
 import be.thomasmore.graduaten.hellospring.repositories.CategoryRepository;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
 import be.thomasmore.graduaten.hellospring.security.UserDetailsService;
-import be.thomasmore.graduaten.hellospring.services.ProductService;
 import be.thomasmore.graduaten.hellospring.shared.Converter;
 import org.aspectj.weaver.ast.Or;
 import org.modelmapper.TypeToken;
@@ -40,8 +39,7 @@ public class HomeController {
 
     @Autowired
     private Converter converter;
-    @Autowired
-    private ProductService service;
+
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -66,9 +64,11 @@ public class HomeController {
     @RequestMapping("/")
     public String IndexPage() {return "Index"; }
 
+    @RequestMapping("/Contact")
+    public String ContactPage() {return "Contact"; }
 
-    @RequestMapping("/Detail")
-    public String DetailPage() {return "Detail"; }
+    @RequestMapping("/ThankYou")
+    public String ThankYouPage() {return "ThankYou"; }
 
     @RequestMapping("/Login")
     public String LoginPage() {return "Login"; }

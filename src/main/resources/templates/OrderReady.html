@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Frituur 'T Half Kieke</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/order.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+    <script src="https://kit.fontawesome.com/187b41207f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg shadow-lg p-2 mb-5 sticky-top" id="top-nav">
+    <i class="fa-solid fa-drumstick-bite fa-xl"></i>
+    <h1><a class="navbar-brand" href="Home">'t Half Kieke</a></h1>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse nav justify-content-end" id="navbarNav">
+        <ul class="navbar-nav nav" id="navbarNavUl">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Beheer</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <div class="container">
+        <!-- Title -->
+        <div class="d-flex justify-content-between align-items-center py-3">
+            <h2 class="h5 mb-0" >Bestelling van <br th:text="${order.customerName}"> </h2>
+        </div>
+
+        <!-- Main content -->
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Details -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-3 d-flex justify-content-between">
+                            <div>
+                                <span class="me-3" th:text="${order.Today}"></span>
+                                <span class="badge rounded-pill bg-info">VERZENDEN</span>
+                            </div>
+                            <div class="d-flex">
+                                <button class="btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text"><i class="bi bi-download"></i> <span class="text">Invoice</span></button>
+                                <div class="dropdown">
+                                    <button class="btn btn-link p-0 text-muted" type="button" data-bs-toggle="dropdown">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i> Edit</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="bi bi-printer"></i> Print</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-borderless">
+                            <tbody>
+                            <tr th:each="products: ${order.productDtos}">
+                                <td >
+                                    <div class="d-flex mb-2">
+                                        <div class="flex-shrink-0">
+                                            <img th:src="${products.image}" width="35" class="img-fluid" >
+                                        </div>
+                                        <div class="flex-lg-grow-1 ms-3">
+                                            <h6 class="small mb-0"><a href="#" class="text-reset" th:text="${products.name}"> </a></h6>
+                                            <span class="small" th:text="${products.quantity}">Hoeveelheid</span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td class="text-end"th:text="${products.price}"></td>
+                            </tr>
+
+                            </tbody>
+                            <tfoot>
+
+                            <tr class="fw-bold">
+                                <td colspan="2">TOTAAL</td>
+                                <td class="text-end"th:text="${order.TotalPrice}"></td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-4">
+
+                <div class="card mb-4">
+                    <!-- Shipping information -->
+                    <div class="card-body">
+                        <h3 class="h6">Bestelling Informatie Naam</h3>
+                        <strong th:text="${order.customerName}"></strong>
+                        <hr>
+                        <h3 class="h6">Addres</h3>
+                        <address>
+                            <strong th:text="${order.customerAddress}"></strong><br>
+                        </address>
+                    </div>
+                </div>
+            </div>
+            <form  method='POST'  th:action="@{/tijdslotpost}" th:object="${tijdlsotSelected}">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card mb-4">
+                            <!-- Timeslot -->
+                            <div class="card-body">
+                                <h3 class="h6">Kies hier je moment om jouw bestelling af te halen </h3>
+                                <div class="input-group">
+                                    <div class="input-group-btn" >
+                                        <select class="form-select form-select-lg mb-3" ria-label=".form-select-lg example"  id="id" name="id">
+                                            <option value="">Wanneer? </option>
+                                            <option th:each="timeslots: ${order.timeslots}" th:value="${timeslots.id}" th:text="${timeslots.begintime}" ></option>
+                                        </select>
+                                    </div><!-- /btn-group -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+
+                        <div class="card mb-4">
+                            <!-- Send -->
+                            <div class="card-body">
+                                <div class="text-center text-md-left">
+                                    <button type="submit" class="btn btn-primary">Verzenden</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+    </div>
+    </div>
+</div>
+
+</body>
+</html>

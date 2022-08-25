@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="nl">
+<head>
+    <title>Frituur 'T Half Kieke</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+    <script src="https://kit.fontawesome.com/32c9239c28.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg shadow-lg p-2 mb-5 sticky-top" id="top-nav">
+    <i class="fa-solid fa-drumstick-bite fa-7xs"></i>
+    <h1><a class="navbar-brand" href="Home">'t Half Kieke</a></h1>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse nav justify-content-end" id="navbarNav">
+        <ul class="navbar-nav nav" id="navbarNavUl">
+            <li class="nav-item active">
+                <a class="nav-link" href="Home">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Contact">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="BestelAdmin">Beheer</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container body-container">
+
+    <div class="row">
+        <div class="col">
+            <div class="card shadow shadow-lg">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md">
+
+                            <h3 class="card-title">Contactgegevens</h3>
+
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fa-solid fa-phone"></i></span><a
+                                        href="tel:0400123456">0400 12 34 56</a></li>
+                                <li><span class="fa-li"><i class="fa-solid fa-envelope"></i></span><a
+                                        href="mailto:janineke@thalfkieke.be">janineke@thalfkieke.be</a></li>
+                            </ul>
+                            <br><br>
+                            <h3 class="card-title">Adres</h3>
+
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fa-solid fa-phone"></i></span>
+                                    <p>Kleinhoefstraat 2</p></li>
+                                <li><span class="fa-li"><i class="fa-solid fa-phone"></i></span>
+                                    <p>2440, Geel</p></li>
+
+                            </ul>
+                            <br>
+                            <div class="mapouter shadow shadow-md">
+                                <div class="gmap_canvas">
+                                    <iframe style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;top:0px;left:0px;right:0px;bottom:0px"
+                                            height="100%" width="100%" id="gmap_canvas"
+                                            src="https://maps.google.com/maps?q=Kleinhoefstraat%204,%20Geel&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                    ></iframe>
+                                    <br>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md contact-div d-grid">
+
+                            <h3 class="card-title">Stel een vraag!</h3>
+                            <hr>
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="inputText2">Naam</label>
+                                        <input type="text" class="form-control" id="inputText2"
+                                               placeholder="Jan Janssen">
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="inputText">Adres</label>
+                                        <input type="text" class="form-control" id="inputText"
+                                               placeholder="Straatnaam 123">
+                                    </div>
+                                    <br>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail4">E-mail</label>
+                                    <input type="email" class="form-control" id="inputEmail4"
+                                           placeholder="mail@adres.be">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Stel je vraag</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                              placeholder="Type hier uw vraag zoals: Janine, wat is uw geheim van jouw lekkere frieten?"></textarea>
+                                </div>
+                                <br>
+                            </form>
+                            <button type="submit" class="btn btn-secondary">Verzenden</button>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/187b41207f.js" crossorigin="anonymous"></script>
+</body>
+</html>
