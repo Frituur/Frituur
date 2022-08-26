@@ -5,8 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,8 +24,17 @@ public class Timeslot {
     @Column(name = "isavailable")
     private Boolean isAvailable = true;
 
-    @OneToOne(mappedBy = "timeslot")
-    private Orders Order;
+    @Column(name="numcustomers")
+    private Long numcustomers;
+
+
+    @Column(name="maxcustomers")
+    private Long  maxcustomers;
+
+
+
+    @OneToMany(mappedBy = "timeslot")
+    private List<Customer> customer;
 
 
 }
