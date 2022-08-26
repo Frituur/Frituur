@@ -36,14 +36,9 @@ public class Product {
     @Column(name = "photo")
     private byte[] photo;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "product_category",
-            joinColumns = @JoinColumn(name = "productid"),
-            inverseJoinColumns = @JoinColumn(name = "categoryid"))
-    @JsonManagedReference
-    @JsonIgnore
-    private List<Category> category;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="categoryid")
+    private Category category;
 
 
 
