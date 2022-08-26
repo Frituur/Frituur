@@ -25,11 +25,7 @@ public class Category {
     private String name;
 
 
-    @ManyToMany(mappedBy = "category", cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JsonBackReference
+    @OneToMany(mappedBy = "category")
     private List<Product> product;
 
 }

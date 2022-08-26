@@ -55,23 +55,7 @@ public class ProdController {
         return "Niet gelukt om een product te kunnen toevoegen";
     }
 
-    @PostMapping("/productcategory")
-    @ResponseBody
-    private String addProductWithCategory(Product newProduct, Long categoryid){
-        try{
-            var category = categoryRepository.getById(categoryid);
-            List<Category> CategoryForNewProduct = new ArrayList<>();
-            CategoryForNewProduct.add(category);
-            newProduct.setCategory(CategoryForNewProduct);
-            repository.save(newProduct);
-            return "nieuw product met een categorie is toegevoegd";
-        }
-        catch (Exception ex) {
-            System.out.println("Product kan niet worden toegevoegd");
-            System.out.println(ex.getMessage());
-        }
-        return "Niet gelukt om een product te kunnen toevoegen";
-    }
+
 
 
 }
