@@ -98,25 +98,26 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col">
-            <div class="card shadow-sm p-4 mb-3 bg-white rounded" style="width: 22rem;" th:each="customers:${customers}">
+            <div class="card shadow-sm p-4 mb-3 bg-white rounded" style="width: 22rem;"
+                 th:each="customers:${customers}">
 
                 <div class="card-body">
                     <h5 th:text="'Bestelling #' + ${customers.id}"></h5>
-<!--                    <h3 th:with="begintime=${customers.tijdslot.begintime}" th:text="${begintime}"></h3>-->
+                    <!--                    <h3 th:with="begintime=${customers.tijdslot.begintime}" th:text="${begintime}"></h3>-->
                     <p class="lead" th:text="${customers.naam}"></p>
                     <p class="lead" th:text="${customers.address}"></p>
                 </div>
-                    <table class="table table-hover w-auto table-text-small">
-                        <thead>
+                <table class="table table-hover w-auto table-text-small">
+                    <thead>
                         <tr>
                             <th class="fw-semibold" scope="col">Product</th>
                             <th class="td-prijs fw-semibold" scope="col">€</th>
                             <th class="td-prijs fw-semibold" scope="col">#</th>
                             <th class="td-prijs fw-semibold" scope="col"></th>
                         </tr>
-                        </thead>
-                        <tbody th:each="orders: ${customers.orders}"
-                               th:with="prijs=${orders.Product.price}, aantal=${orders.numberOfProducts}">
+                    </thead>
+                    <tbody th:each="orders: ${customers.orders}"
+                           th:with="prijs=${orders.Product.price}, aantal=${orders.numberOfProducts}">
                         <tr>
                             <td th:text="${orders.Product.name}"></td>
                             <td class="td-prijs"
@@ -126,12 +127,14 @@
                                 th:text="${#numbers.formatDecimal(totaal,1, 2)}+'€'">
                             </td>
                         </tr>
-                        </tbody>
-                    </table>
-                <div class="card-body">
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td class="fw-bold align-right" colspan="3">Totaal</td>
+                        <td class="fw-bold align-middle" th:with="totalprice=${customers.totalPrice}" th:text="${#numbers.formatDecimal(totalprice,1,2)}+'€'"></td>
+                    </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     </div>
