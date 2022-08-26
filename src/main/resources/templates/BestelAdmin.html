@@ -123,11 +123,11 @@
         </div>
         <div class="col">
             <div class="container-fluid">
-                <br>
+
                 <div class="row">
                     <div class="col shadow p-3 mb-5 bg-body div-categorie">
                         <br>
-                        <h5 id="Bestellingen">Bestellingen</h5>
+                        <h4 id="Bestellingen">Bestellingen</h4>
 
 
                         <table class="table rounded-5">
@@ -152,7 +152,7 @@
 
                                     <td class="td-prijs align-middle text-success"
                                         th:with="totalprice=${customers.totalPrice}"
-                                        th:text="${#numbers.formatDecimal(totalprice,1,2)}+' €'"></td>
+                                        th:text="'Totaal: ' + ${#numbers.formatDecimal(totalprice,1,2)}+'€'"></td>
                                     <td class="td-product-button align-middle text-success">
                                         <form th:action="@{/deleteCustomer/{id}(id=${customers.id})}"
                                               th:object="${customers}" method="post">
@@ -174,9 +174,9 @@
                                                 <thead>
                                                 <tr>
                                                     <th class="fw-semibold fs-6" scope="col">Product</th>
-                                                    <th class="td-prijs fw-semibold fs-7" scope="col">Prijs</th>
-                                                    <th class="td-prijs fw-semibold fs-7" scope="col">Aantal</th>
-                                                    <th class="td-prijs fw-semibold fs-7" scope="col">Subtotaal</th>
+                                                    <th class="td-prijs fw-semibold fs-8" scope="col">Prijs</th>
+                                                    <th class="td-prijs fw-semibold fs-8" scope="col">Aantal</th>
+                                                    <th class="td-prijs fw-semibold fs-8" scope="col">Subtotaal</th>
                                                     <th class="td-product-button"></th>
                                                 </tr>
                                                 </thead>
@@ -185,10 +185,10 @@
                                                 <tr>
                                                     <td th:text="${orders.Product.name}"></td>
                                                     <td class="td-prijs"
-                                                        th:text="${#numbers.formatDecimal(prijs,1, 2)}+' €'"></td>
+                                                        th:text="${#numbers.formatDecimal(prijs,1, 2)}+'€'"></td>
                                                     <td class="td-prijs" th:text="${orders.numberOfProducts}"></td>
                                                     <td class="td-prijs" th:with="totaal=${aantal*prijs}"
-                                                        th:text="${#numbers.formatDecimal(totaal,1, 2)}+' €'">
+                                                        th:text="${#numbers.formatDecimal(totaal,1, 2)}+'€'">
                                                     </td>
                                                     <td class="td-product-button"></td>
                                                 </tr>
@@ -264,7 +264,7 @@
                     <div class="col-4">
                         <div class="row">
                             <div class="col-sm-6 shadow p-3 mb-5 bg-body rounded div-categorie">
-                                <h5 id="Tijdslots">Tijdslots</h5>
+                                <h4 id="Tijdslots">Tijdslots</h4>
                                 <hr class="solid">
 
                                 <ul class="list-group list-group-horizontal">
@@ -285,8 +285,8 @@
             <div class="container-fluid" id="container-admin">
                 <div class="row">
                     <div class="col-sm shadow p-3 mb-5 bg-body rounded div-categorie col-products overflow-auto">
-                        <br>
-                        <h5 id="Productbeheer">Productbeheer</h5>
+
+                        <h4 id="Productbeheer">Productbeheer</h4>
                         <hr class="solid">
                         <button type="button" class="btn btn-secondary shadow-sm w-100"
                                 data-bs-toggle="modal" data-bs-target="#addProduct">
@@ -301,21 +301,16 @@
                                 <th scope="col">Productnaam</th>
                                 <th scope="col">Prijs</th>
                                 <th scope="col"></th>
-
                             </tr>
                             </thead>
 
                             <tbody>
-
                             <tr th:each="products:${products}">
-                                <th scope="row" th:text="${products.id}">test</th>
-                                <td th:text="${products.name}"></td>
-                                <td th:text="${products.price}"></td>
-
-
-                                <td class="td-product-button">
+                                <th class="align-middle" scope="row" th:text="${products.id}">test</th>
+                                <td class="align-middle" th:text="${products.name}"></td>
+                                <td class="align-middle" th:with="prodprijs=${products.price}" th:text="${#numbers.formatDecimal(prodprijs, 1,2)}"></td>
+                                <td class="td-product-button align-middle">
                                     <div class="btn-group">
-
                                         <button class="btn btn-outline-secondary btn-sm btn-table-product rounded-0"
                                                 th:id="btnEdit+${products.id}" type="button"><i
                                                 class="fa fa-pen-to-square"></i>
@@ -343,8 +338,8 @@
                     </div>
 
                     <div class="col-sm-4 shadow p-3 mb-5 bg-body rounded div-categorie col-products overflow-auto">
-                        <br>
-                        <h5 id="Categoriebeheer">Categoriebeheer</h5>
+
+                        <h4 id="Categoriebeheer">Categoriebeheer</h4>
                         <hr class="solid">
 
                         <button type="button" class="btn btn-secondary shadow-sm w-100"
@@ -364,14 +359,33 @@
                             <tbody>
                             <div class="col-products">
                                 <tr th:each="categories: ${categories}">
-                                    <th scope="row" th:text="${categories.id}"></th>
-                                    <td th:text="${categories.name}"></td>
-                                    <td>
+                                    <th class="align-middle" scope="row" th:text="${categories.id}"></th>
+                                    <td class="align-middle" th:text="${categories.name}"></td>
+                                    <td class="align-middle">
                                         <div class="btn-group">
                                             <button th:id="btnEdit+${categories.id}"
                                                     class="btn btn-outline-secondary btn-sm btn-table-product rounded-0"
-                                                    type="button"><i class="fa fa-pen-to-square"></i>
+                                                    type="button"><i class="fa fa-pen-to-square" data-bs-toggle="modal" data-bs-target="#editCategorie"></i>
                                             </button>
+
+                                            <div class="modal" tabindex="-1">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Modal title</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Modal body text goes here.</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <form th:action="@{/deleteCategorie/{id}(id=${categories.id})}"
                                                   th:object="${categories}" method="post">
                                                 <input type="hidden" th:field="${products}">
