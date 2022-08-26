@@ -57,6 +57,19 @@ nav ul li {
     grid-row: 2;
 }
 
+.order-card{
+    margin-top: 10px;
+    border: 1px solid #cccccc;
+    display: inline-block;
+}
+
+.table-text-small{
+    font-size: 12px;
+}
+
+.lead{
+    margin-bottom: 2px;
+}
 
 .product-card{
     /*border-radius: 8px;*/
@@ -139,7 +152,10 @@ nav ul li {
     text-align: center;
 }
 
-
+.card-customer{
+    margin-left: 10px;
+    margin-bottom: 0px;
+}
 
 .table-subcat {
     text-align: left;

@@ -97,6 +97,45 @@
 
 <div class="container-fluid">
     <div class="row">
+        <div class="col">
+            <div class="card shadow-sm p-4 mb-3 bg-white rounded" style="width: 22rem;" th:each="customers:${customers}">
+
+                <div class="card-body">
+                    <h5 th:text="'Bestelling #' + ${customers.id}"></h5>
+<!--                    <h3 th:with="begintime=${customers.tijdslot.begintime}" th:text="${begintime}"></h3>-->
+                    <p class="lead" th:text="${customers.naam}"></p>
+                    <p class="lead" th:text="${customers.address}"></p>
+                </div>
+                    <table class="table table-hover w-auto table-text-small">
+                        <thead>
+                        <tr>
+                            <th class="fw-semibold" scope="col">Product</th>
+                            <th class="td-prijs fw-semibold" scope="col">€</th>
+                            <th class="td-prijs fw-semibold" scope="col">#</th>
+                            <th class="td-prijs fw-semibold" scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody th:each="orders: ${customers.orders}"
+                               th:with="prijs=${orders.Product.price}, aantal=${orders.numberOfProducts}">
+                        <tr>
+                            <td th:text="${orders.Product.name}"></td>
+                            <td class="td-prijs"
+                                th:text="${#numbers.formatDecimal(prijs,1, 2)}+'€'"></td>
+                            <td class="td-prijs" th:text="${orders.numberOfProducts}"></td>
+                            <td class="td-prijs" th:with="totaal=${aantal*prijs}"
+                                th:text="${#numbers.formatDecimal(totaal,1, 2)}+'€'">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="row">
 
         <div class="col shadow p-3 mb-5 bg-body rounded-3 div-categorie col-orders-timeslots overflow-auto">
             <h4 id="Bestellingen">Bestellingen</h4>
@@ -106,17 +145,17 @@
 
                 </thead>
                 <tbody th:each="customers:${customers}">
-                <tr class="tr-order-customer table-success">
-                    <th class="align-middle text-success" scope="row"
+                <tr class="">
+                    <th class="" scope="row"
                         th:text="'Bestelling #'+${customers.id}"></th>
-                    <td class="align-middle text-success" th:text="${customers.naam}"></td>
-                    <td colspan="2" class="align-middle text-success"
+                    <td class="" th:text="${customers.naam}"></td>
+                    <td class="" colspan="2"
                         th:text="${customers.address}"></td>
 
-                    <td class="td-prijs align-middle text-success"
+                    <td class=""
                         th:with="totalprice=${customers.totalPrice}"
                         th:text="'Totaal: ' + ${#numbers.formatDecimal(totalprice,1,2)}+'€'"></td>
-                    <td class="td-product-button align-middle text-success">
+                    <td class="td-product-button">
                         <form th:action="@{/deleteCustomer/{id}(id=${customers.id})}"
                               th:object="${customers}" method="post">
 
@@ -133,31 +172,7 @@
                 <tr>
                     <td colspan="6" class="w-80">
                         <div class="container">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th class="fw-semibold fs-6" scope="col">Product</th>
-                                    <th class="td-prijs fw-semibold fs-8" scope="col">Prijs</th>
-                                    <th class="td-prijs fw-semibold fs-8" scope="col">Aantal</th>
-                                    <th class="td-prijs fw-semibold fs-8" scope="col">Subtotaal</th>
-                                    <th class="td-product-button"></th>
-                                </tr>
-                                </thead>
-                                <tbody th:each="orders: ${customers.orders}"
-                                       th:with="prijs=${orders.Product.price}, aantal=${orders.numberOfProducts}">
-                                <tr>
-                                    <td th:text="${orders.Product.name}"></td>
-                                    <td class="td-prijs"
-                                        th:text="${#numbers.formatDecimal(prijs,1, 2)}+'€'"></td>
-                                    <td class="td-prijs" th:text="${orders.numberOfProducts}"></td>
-                                    <td class="td-prijs" th:with="totaal=${aantal*prijs}"
-                                        th:text="${#numbers.formatDecimal(totaal,1, 2)}+'€'">
-                                    </td>
-                                    <td class="td-product-button"></td>
-                                </tr>
-                                </tbody>
 
-                            </table>
                         </div>
                     </td>
                 </tr>
@@ -168,7 +183,11 @@
         <div class="col-sm-2 shadow p-3 mb-5 bg-body rounded-3 div-categorie col-orders-timeslots overflow-auto">
             <h4 id="Tijdslots">Tijdslots</h4>
             <hr class="solid">
-
+            <button type="button" class="btn btn-secondary shadow-sm w-100"
+                    data-bs-toggle="modal" data-bs-target="#saveChanges">
+                Wijzigingen opslaan
+            </button>
+            <br><br>
             <table class="table table-hover">
                 <thead>
                 <tr class="table-success text-center">
@@ -254,7 +273,7 @@
 
         </div>
 
-        <div class="col-md-3 shadow p-3 mb-5 bg-body rounded-3 div-categorie col-orders-timeslots overflow-auto">
+        <div class="col-sm-2 shadow p-3 mb-5 bg-body rounded-3 div-categorie col-orders-timeslots overflow-auto">
             <h4 id="Categoriebeheer">Categoriebeheer</h4>
             <hr class="solid">
 
@@ -277,7 +296,7 @@
                     <tr th:each="categories: ${categories}">
                         <th class="align-middle" scope="row" th:text="${categories.id}"></th>
                         <td class="align-middle" th:text="${categories.name}"></td>
-                        <td class="align-middle">
+                        <td class="td-product-button align-middle">
                             <div class="btn-group">
                                 <button th:id="btnEdit+${categories.id}"
                                         class="btn btn-outline-secondary btn-sm btn-table-product rounded-0"
@@ -321,7 +340,7 @@
                             </div>
                         </td>
 
-                        <!--<tr>
+                        &lt;!&ndash;<tr>
                             <th scope="row">2</th>
                             <td>Snacks/Vegi</td>
 
@@ -364,12 +383,12 @@
                             <td>
                                 <button class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
                             </td>
-                        </tr>-->
+                        </tr>&ndash;&gt;
                 </div>
                 </tbody>
             </table>
         </div>
-    </div>
+    </div>-->
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
