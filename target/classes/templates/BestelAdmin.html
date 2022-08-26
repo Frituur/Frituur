@@ -128,10 +128,9 @@
                     <div class="col shadow p-3 mb-5 bg-body div-categorie">
                         <br>
                         <h5 id="Bestellingen">Bestellingen</h5>
-                        <hr class="solid">
 
 
-                        <table class="table table-secondary rounded-5">
+                        <table class="table rounded-5">
                             <div class="shadow shadow-lg">
                                 <thead>
                                 <tr>
@@ -144,14 +143,14 @@
                                 </tr>
                                 </thead>
                                 <tbody th:each="customers:${customers}">
-                                <tr class="tr-order-customer">
-                                    <th scope="row" th:text="${customers.naam}"></th>
-                                    <td th:text="${customers.naam}"></td>
-                                    <td th:text="${customers.address}"></td>
-                                    <td></td>
-                                    <td class="td-prijs" th:with="totalprice=${customers.totalPrice}"
+                                <tr class="tr-order-customer table-success">
+                                    <th class="align-middle text-success" scope="row" th:text="'Bestelling #'+${customers.id}"></th>
+                                    <td class="align-middle text-success" th:text="${customers.naam}"></td>
+                                    <td colspan="2" class="align-middle text-success" th:text="${customers.address}"></td>
+
+                                    <td class="td-prijs align-middle text-success" th:with="totalprice=${customers.totalPrice}"
                                         th:text="${#numbers.formatDecimal(totalprice,1,2)}+' €'"></td>
-                                    <td class="td-product-button">
+                                    <td class="td-product-button align-middle text-success">
                                         <form th:action="@{/deleteCustomer/{id}(id=${customers.id})}"
                                               th:object="${customers}" method="post">
 
@@ -167,10 +166,10 @@
                                 </tr>
                                 <tr>
                                     <td colspan="6" class="w-80">
+                                        <div class="container">
                                         <table class="table table-hover">
                                             <thead>
                                             <tr>
-
                                                 <th class="fw-semibold fs-6" scope="col">Product</th>
                                                 <th class="td-prijs fw-semibold fs-7" scope="col">Prijs</th>
                                                 <th class="td-prijs fw-semibold fs-7" scope="col">Aantal</th>
@@ -193,6 +192,7 @@
                                             </tbody>
 
                                         </table>
+                                        </div>
                                     </td>
                                 </tr>
 
@@ -289,7 +289,7 @@
                                 data-bs-toggle="modal" data-bs-target="#addProduct">
                             Nieuw product toevoegen
                         </button>
-
+                        <br>
                         <table class="table table-striped" id="table-producten">
                             <thead class="table-danger">
                             <tr>
@@ -347,7 +347,7 @@
                                 data-bs-toggle="modal" data-bs-target="#addCategorie">
                             Nieuwe categorie toevoegen
                         </button>
-
+                        <br>
                         <table class="table table-striped" id="table-producten2">
                             <thead class="table-danger">
                             <tr>
