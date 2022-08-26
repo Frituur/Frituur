@@ -28,7 +28,7 @@ public class OrderDto {
 
     private CustomerDto Customer;
 
-    private TijdslotDto timeslot;
+    private TimeslotDto timeslot;
 
     private ProductDto Product;
 

@@ -131,6 +131,7 @@ nav ul li {
     margin-top: 50px;
 }
 
+
 .td-prijs {
     width: 20%;
     justify-content: center;
@@ -180,6 +181,11 @@ nav ul li {
 #table-orders {
     max-width: 95%;
 
+}
+
+.col-orders-timeslots{
+    max-width: 100%;
+    max-height: 750px;
 }
 
 .col-products {
