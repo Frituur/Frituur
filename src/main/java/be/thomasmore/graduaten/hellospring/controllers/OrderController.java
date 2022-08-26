@@ -6,8 +6,6 @@ import be.thomasmore.graduaten.hellospring.entities.Orders;
 import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.entities.Timeslot;
 import be.thomasmore.graduaten.hellospring.mapper.ModelMap;
-
-
 import be.thomasmore.graduaten.hellospring.repositories.CustomerRepository;
 import be.thomasmore.graduaten.hellospring.repositories.OrderRepository;
 import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
@@ -19,6 +17,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
+import org.bouncycastle.util.Times;
 import org.modelmapper.ModelMapper;
 
 import org.modelmapper.TypeToken;
@@ -38,7 +37,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.chrono.ChronoLocalDateTime;
@@ -62,7 +60,7 @@ public class OrderController {
     @Autowired
     private TimeslotRepository timeslotRepository;
 
-    @Autowired
+     @Autowired
     private ProductRepository productRepository;
     @Autowired
     private OrderRepository orderRepository;
@@ -180,14 +178,18 @@ public class OrderController {
         var tijdslot = timeslotRepository.getById(tijdlsotSelected.getId());
         var id = fileCreater.ReadFromTempFile();
         long customerid = Long.parseLong(id);
-        System.out.println(tijdlsotSelected.getId());
         var customer = customerRepository.getById(customerid);
-        tijdslot.setIsAvailable(false);
+        var customerAllowed = tijdslot.getMaxcustomers();
+        var numberCustomerForTimeslot = tijdslot.getNumcustomers();
+        fileCreater.ClearTempFile("temp2.txt");
+        tijdslot = SetAvailableTimeslot(customerAllowed, numberCustomerForTimeslot, tijdslot);
         timeslotRepository.save(tijdslot);
         customer.setTimeslot(tijdslot);
         customerRepository.save(customer);
-        fileCreater.ClearTempFile("temp2.txt");
         return "ThankYou";
+
+
+
         //Je een tijdslot terug
     }
 
@@ -230,18 +232,7 @@ public class OrderController {
 
 
 
-    /*@RequestMapping("/BestelAdmin")
 
-    public String BestelPage(Model model) {
-        List<Orders> orders=orderRepository.findAll();
-        List<OrderDto> orderDtos = new ArrayList<>();
-        TypeToken<List<OrderDto>> typeToken = new TypeToken<>() {
-        };
-        orderDtos = modelMap.modelMapper().map(orders,typeToken.getType());
-        System.out.println(orderDtos.isEmpty());
-        model.addAttribute("orders",orderDtos);
-        return "BestelAdmin";
-    }*/
 
     public double CalculatePriceProduct(Orders Order){
         // Go through the list of  products
@@ -276,13 +267,12 @@ public class OrderController {
         List<Timeslot> timeslots = timeslotRepository.findAll();
         List<Timeslot> allAvailableTimeslot = new ArrayList<>();
         LocalTime now = LocalTime.now();
-        String target = now.toString();
 
 
         for (Timeslot timeslot : timeslots) {
             System.out.println("De tijdslot id is " + timeslot.getBegintime() + timeslot.getId());
-            LocalTime timeslotDb = timeslot.getBegintime().toLocalTime();
-            if(timeslot.getIsAvailable() == true && timeslotDb.isAfter(LocalTime.parse(target))){
+            String timeslotDb = timeslot.getBegintime();
+            if(timeslot.getIsAvailable() == true && now.isBefore(LocalTime.parse(timeslotDb))){
 
                 allAvailableTimeslot.add(timeslot);
             }
@@ -324,6 +314,17 @@ public class OrderController {
             }
 
         return products;
+    }
+
+    private Timeslot SetAvailableTimeslot(Long customerAllowed, Long numberOfCustomers, Timeslot tijdslot) {
+        if(numberOfCustomers >= customerAllowed){
+            tijdslot.setIsAvailable(false);
+            tijdslot.setNumcustomers(numberOfCustomers);
+            return tijdslot;
+        }
+        numberOfCustomers += 1;
+        tijdslot.setNumcustomers(numberOfCustomers);
+        return tijdslot;
     }
 }
 
