@@ -33,7 +33,7 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Orders> orders;
 
-    @OneToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="tijdslotid")
     private Timeslot timeslot;
 
