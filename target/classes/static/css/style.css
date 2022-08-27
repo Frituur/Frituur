@@ -65,6 +65,11 @@ nav ul li {
     display: inline-block;
 }
 
+.landing-image{
+    height: 200px;
+    width: auto;
+}
+
 .table-text-small{
     font-size: 12px;
 }
@@ -164,7 +169,7 @@ nav ul li {
 
 .card-customer{
     margin-left: 10px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .table-subcat {

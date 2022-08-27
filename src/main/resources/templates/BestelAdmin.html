@@ -167,6 +167,7 @@
                                 th:text="${#numbers.formatDecimal(prodprijs, 1,2)}+'€'"></td>
                             <td class="td-product-button align-middle">
                                 <div class="btn-group">
+
                                     <button class="btn btn-outline-secondary btn-sm btn-table-product rounded-0"
                                             th:id="btnEdit+${products.id}" type="button"><i
                                             class="fa fa-pen-to-square"></i>
@@ -259,11 +260,14 @@
                             <div class="card-header p-2 pb-0 bg-secondary text-white fw-semibold">
                                 <div class="row">
                                     <div class="clearfix">
+                                        <form th:action="@{/deleteCustomer/{id}(id=${customer.id})}"
+                                              th:object="${customer}" method="post">
                                         <button class="btn btn-sm btn-danger shadow-2-strong rounded-0 mb-2 float-end"
                                                 th:id="btnDel+${customer.id}" type="submit"
-                                                onClick="return confirm('Weet je het zeker?')"><i
+                                                th:onclick="return confirm('Bestelling #'+${customer.id})+' verwijderen?'"><i
                                                 class="fa fa-trash"></i>
                                         </button>
+                                        </form>
                                         <h5 class="ps-2 pt-1 align-middle" th:text="'Order #' + ${customer.id}"></h5>
                                     </div>
                                 </div>
