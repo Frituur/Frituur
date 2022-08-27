@@ -2,17 +2,12 @@ package be.thomasmore.graduaten.hellospring.controllers;
 
 
 import be.thomasmore.graduaten.hellospring.dto.*;
-import be.thomasmore.graduaten.hellospring.entities.Category;
-import be.thomasmore.graduaten.hellospring.entities.Customer;
-import be.thomasmore.graduaten.hellospring.entities.Orders;
-import be.thomasmore.graduaten.hellospring.entities.Product;
+import be.thomasmore.graduaten.hellospring.entities.*;
 import be.thomasmore.graduaten.hellospring.mapper.ModelMap;
-import be.thomasmore.graduaten.hellospring.repositories.CategoryRepository;
-import be.thomasmore.graduaten.hellospring.repositories.CustomerRepository;
-import be.thomasmore.graduaten.hellospring.repositories.OrderRepository;
-import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
+import be.thomasmore.graduaten.hellospring.repositories.*;
 
 import org.modelmapper.TypeToken;
+import org.simpleframework.xml.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -35,6 +30,8 @@ public class AdminController {
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
+    private TimeslotRepository timeslotRepository;
+    @Autowired
     private CategoryRepository categoryRepository;
 
     @Autowired
@@ -51,6 +48,12 @@ public class AdminController {
         List<Customer> customers=customerRepository.findAll();
         List<CustomerDto> customerDtos;
 
+        List<Timeslot> timeslots=timeslotRepository.findAll();
+        List<TimeslotDto> timeslotDtos;
+
+        TypeToken<List<TimeslotDto>> typeTokenTimeslot = new TypeToken<>(){};
+        timeslotDtos = modelMap.modelMapper().map(timeslots,typeTokenTimeslot.getType());
+
         TypeToken<List<CustomerDto>> typeTokenCustomer = new TypeToken<>(){};
         customerDtos = modelMap.modelMapper().map(customers,typeTokenCustomer.getType());
 
@@ -64,12 +67,20 @@ public class AdminController {
         model.addAttribute("categories",categoryDtos);
         model.addAttribute("customers",customerDtos);
         model.addAttribute("products", productDtos);
+        model.addAttribute("timeslots", timeslotDtos);
+
 //        model.addAttribute("orders", orderDtos);
         return "BestelAdmin";
     }
     @PostMapping("/deleteCustomer/{id}")
     public String deleteCustomer(@PathVariable Long id){
         customerRepository.deleteById(id);
+        return "redirect:/BestelAdmin";
+    }
+
+    @PostMapping("/deleteProduct/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        productRepository.deleteById(id);
         return "redirect:/BestelAdmin";
     }
 

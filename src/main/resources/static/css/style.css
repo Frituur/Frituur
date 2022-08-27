@@ -35,6 +35,7 @@ nav i {
     height: 350px;
 }
 
+
 ul li h5  {
 
     margin-top: 15px;
@@ -56,6 +57,29 @@ nav ul li {
     grid-row: 2;
 }
 
+
+
+.order-card{
+    margin-top: 10px;
+    border: 1px solid #cccccc;
+    display: inline-block;
+}
+
+.table-text-small{
+    font-size: 12px;
+}
+
+.lead{
+    margin-bottom: 2px;
+}
+.order-card{
+    margin-top: 10px;
+    border: 1px solid #cccccc;
+    align-items: center;
+    display: inline-block;
+    horiz-align: center;
+    vertical-align: center;
+}
 
 .product-card{
     /*border-radius: 8px;*/
@@ -130,9 +154,17 @@ nav ul li {
     margin-top: 50px;
 }
 
-.td-totprijs {
 
-    text-align: right;
+.td-prijs {
+    width: 20%;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+}
+
+.card-customer{
+    margin-left: 10px;
+    margin-bottom: 0px;
 }
 
 .table-subcat {
@@ -144,27 +176,25 @@ nav ul li {
 }
 
 .btn-nieuw-toevoegen{
-    margin-bottom: 10px;
-    width: 100%;
+    padding-bottom: 10px;
+
 }
 .div-beheer{
     max-height: 35%;
 }
-.div-categorie{
-    margin: 10px;
-}
+
 
 .contact-div{
     margin-right:10px;
 }
 
 .td-product-button{
-    text-align: right;
-    width: 15%;
+    justify-items: center;
+    width: 75px;
 }
 
 .btn-table-product{
-    max-width: 100%;
+    margin: 5px;
 }
 
 #container-admin{
@@ -175,6 +205,11 @@ nav ul li {
 #table-orders {
     max-width: 95%;
 
+}
+
+.col-orders-timeslots{
+    max-width: 100%;
+    max-height: 400px;
 }
 
 .col-products {

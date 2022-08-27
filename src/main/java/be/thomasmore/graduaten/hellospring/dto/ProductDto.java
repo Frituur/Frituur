@@ -20,22 +20,12 @@ import java.util.List;
 public class ProductDto {
 
     private Long id;
-
     private String name;
-
-
     private Double price;
-
     private int quantity;
-
-
     private boolean availability;
-
     private boolean chosenProduct;
-
-
     private String image;
-
     private byte[] photo;
 
 
