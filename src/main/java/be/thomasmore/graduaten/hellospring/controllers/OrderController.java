@@ -35,6 +35,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -170,18 +171,23 @@ public class OrderController {
 
 
     @RequestMapping(value = "/tijdslotpost", method = RequestMethod.POST)
-    public String PostTijdSlotKlant(@ModelAttribute("TijdslotId") Timeslot tijdlsotSelected) throws IOException {
+    public String PostTijdSlotKlant(@Valid @ModelAttribute("formData") EndOrderDto formData, BindingResult bindingResult, Model model) throws IOException {
+        if(bindingResult.hasErrors()) {
+            System.out.println("Hass errrors");
+        }
 
-        if(tijdlsotSelected == null){
+        if(formData == null){
             return "redirect:/";
         }
-        var tijdslot = timeslotRepository.getById(tijdlsotSelected.getId());
+        System.out.println("De phone number is " + formData.getPhone());
+        var tijdslotid = formData.getId();
+        var tijdslot = timeslotRepository.getById(tijdslotid);
         var id = fileCreater.ReadFromTempFile();
         long customerid = Long.parseLong(id);
         var customer = customerRepository.getById(customerid);
+        customer.setPhone(formData.getPhone());
         var customerAllowed = tijdslot.getMaxcustomers();
         var numberCustomerForTimeslot = tijdslot.getNumcustomers();
-        fileCreater.ClearTempFile("temp2.txt");
         tijdslot = SetAvailableTimeslot(customerAllowed, numberCustomerForTimeslot, tijdslot);
         timeslotRepository.save(tijdslot);
         customer.setTimeslot(tijdslot);

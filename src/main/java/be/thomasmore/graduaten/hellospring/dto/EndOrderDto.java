@@ -24,4 +24,10 @@ public class EndOrderDto {
 
     public LocalDate Today;
 
+    private Timeslot tijdlsotSelected;
+
+    private Long id;
+
+    private String phone;
+
 }
