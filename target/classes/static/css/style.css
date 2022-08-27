@@ -182,9 +182,7 @@ nav ul li {
 .div-beheer{
     max-height: 35%;
 }
-.div-categorie{
-    margin: 10px;
-}
+
 
 .contact-div{
     margin-right:10px;
@@ -211,7 +209,7 @@ nav ul li {
 
 .col-orders-timeslots{
     max-width: 100%;
-    max-height: 750px;
+    max-height: 400px;
 }
 
 .col-products {

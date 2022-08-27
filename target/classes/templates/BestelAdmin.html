@@ -97,8 +97,154 @@
 <div class="container-fluid">
 
     <div class="row">
+        <div class="col-lg-3">
+            <div class="row">
+                <div class="col container-fluid shadow mx-3 p-3 mb-5 bg-body rounded-3 col-orders-timeslots overflow-auto">
+                    <h4 id="Tijdslots">Tijdslots</h4>
+                    <hr class="solid">
+                    <button type="button" class="btn btn-secondary shadow-sm w-100"
+                            data-bs-toggle="modal" data-bs-target="#saveChanges">
+                        Wijzigingen opslaan
+                    </button>
+                    <br><br>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr class="table-success text-center">
+                            <th scope="col"></th>
+                            <th scope="col">Tijd</th>
+                            <th class="td-prijs align-middle" scope="col">#</th>
+                            <th class="td-prijs align-middle" scope="col">Max</th>
+                            <th class="td-prijs align-middle" scope="col">Show</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="timeslots: ${timeslots}" class="text-center align-middle">
+                            <th class="align-middle" scope="row" th:text="${timeslots.id}"></th>
+                            <td class="align-middle" th:text="${timeslots.begintime}"></td>
+                            <td class="td-prijs align-middle" th:text="${timeslots.numcustomers}"></td>
+                            <div class="mx-auto">
+                                <td class="td-prijs"><input
+                                        class="form-control border-0" th:type="number"
+                                        th:value="${timeslots.maxcustomers}"
+                                        style="max-width: 60px; margin-right: 0"/></td>
+                            </div>
+                            <td class="td-prijs align-middle"><input class="form-check-input"
+                                                                     type="checkbox"
+                                                                     th:checked="${timeslots.isAvailable}">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col container-fluid shadow mx-3 p-3 mb-5 bg-body rounded-3 col-orders-timeslots overflow-auto">
+
+                    <h4 id="Productbeheer">Productbeheer</h4>
+                    <hr class="solid">
+                    <button type="button" class="btn btn-secondary shadow-sm w-100"
+                            data-bs-toggle="modal" data-bs-target="#addProduct">
+                        Nieuw product toevoegen
+                    </button>
+                    <br>
+                    <table class="table table-striped" id="table-producten">
+                        <thead class="table-success">
+                        <br>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Productnaam</th>
+                            <th scope="col">Prijs</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="products:${products}">
+                            <th class="align-middle" scope="row" th:text="${products.id}">test</th>
+                            <td class="align-middle" th:text="${products.name}"></td>
+                            <td class="align-middle" th:with="prodprijs=${products.price}"
+                                th:text="${#numbers.formatDecimal(prodprijs, 1,2)}+'€'"></td>
+                            <td class="td-product-button align-middle">
+                                <div class="btn-group">
+                                    <button class="btn btn-outline-secondary btn-sm btn-table-product rounded-0"
+                                            th:id="btnEdit+${products.id}" type="button"><i
+                                            class="fa fa-pen-to-square"></i>
+                                    </button>
+
+                                    <form th:action="@{/deleteProduct/{id}(id=${products.id})}"
+                                          th:object="${products}" method="post">
+                                        <input type="hidden" th:field="${products}">
+                                        <button class="btn btn-outline-danger btn-sm btn-table-product rounded-0"
+                                                th:id="btnDel+${products.id}" type="submit"
+                                                onClick="return confirm('Weet je het zeker?')"><i
+                                                class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col container-fluid shadow mx-3 p-3 mb-5 bg-body rounded-3 col-orders-timeslots overflow-auto">
+                    <h4 id="Categoriebeheer">Categoriebeheer</h4>
+                    <hr class="solid">
+
+                    <button type="button" class="btn btn-secondary shadow-sm w-100"
+                            data-bs-toggle="modal" data-bs-target="#addCategorie">
+                        Nieuwe categorie toevoegen
+                    </button>
+                    <br>
+                    <table class="table table-striped" id="table-producten2">
+                        <thead class="table-success">
+                        <br>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Categorienaam</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <div class="col-products">
+                            <tr th:each="categories: ${categories}">
+                                <th class="align-middle" scope="row" th:text="${categories.id}"></th>
+                                <td class="align-middle" th:text="${categories.name}"></td>
+                                <td class="td-product-button align-middle">
+                                    <div class="btn-group">
+                                        <button th:id="btnEdit+${categories.id}"
+                                                class="btn btn-outline-secondary btn-sm btn-table-product rounded-0"
+                                                type="button"><i class="fa fa-pen-to-square" data-bs-toggle="modal"
+                                                                 data-bs-target="#editCategorie"></i>
+                                        </button>
+
+                                        <form th:action="@{/deleteCategorie/{id}(id=${categories.id})}"
+                                              th:object="${categories}" method="post">
+                                            <input type="hidden" th:field="${products}">
+                                            <button th:id="btnDel+${categories.id}"
+                                                    class="btn btn-outline-danger btn-sm btn-table-product rounded-0"
+                                                    type="submit" onClick="return confirm('Weet je het zeker?')"><i
+                                                    class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        </div>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
         <div class="col">
-            <div class="container shadow p-3 mb-5 rounded" th:each="timeslots: ${timeslots}"
+            <div class="container-fluid shadow p-3 mb-5 rounded" th:each="timeslots: ${timeslots}"
                  th:if="${not #lists.isEmpty(timeslots.customer)}">
                 <div class="row" th:id="${timeslots.id}">
                     <div class="col">
@@ -109,7 +255,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-3" th:each="customer:${timeslots.customer}">
-                        <div class="card shadow-lg mb-3 bg-white rounded-3">
+                        <div class="card shadow-sm mb-3 bg-white rounded-3">
                             <div class="card-header p-2 pb-0 bg-secondary text-white fw-semibold">
                                 <div class="row">
                                     <div class="clearfix">
@@ -125,8 +271,9 @@
                             <div class="card-body p-2 pt-0">
                                 <div class="clearfix">
                                     <h5 class="shadow-2-strong"><span class="badge bg-success float-sm-end ms-md-3"
-                                              th:with="totprice=${customer.totalPrice}"
-                                              th:text="${#numbers.formatDecimal(totprice,1,2)}+'€'"></span></h5>
+                                                                      th:with="totprice=${customer.totalPrice}"
+                                                                      th:text="${#numbers.formatDecimal(totprice,1,2)}+'€'"></span>
+                                    </h5>
                                     <p class="lead" th:text="${customer.naam}"></p>
                                     <p class="lead" th:text="${customer.address}"></p>
                                 </div>
@@ -159,216 +306,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 shadow p-3 mb-5 bg-body rounded-3 div-categorie col-orders-timeslots overflow-auto">
-            <h4 id="Tijdslots">Tijdslots</h4>
-            <hr class="solid">
-            <button type="button" class="btn btn-secondary shadow-sm w-100"
-                    data-bs-toggle="modal" data-bs-target="#saveChanges">
-                Wijzigingen opslaan
-            </button>
-            <br><br>
-            <table class="table table-hover">
-                <thead>
-                <tr class="table-success text-center">
-                    <th scope="col"></th>
-                    <th scope="col">Tijd</th>
-                    <th class="td-prijs align-middle" scope="col">#</th>
-                    <th class="td-prijs align-middle" scope="col">Max</th>
-                    <th class="td-prijs align-middle" scope="col">Show</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="timeslots: ${timeslots}" class="text-center align-middle">
-                    <th class="align-middle" scope="row" th:text="${timeslots.id}"></th>
-                    <td class="align-middle" th:text="${timeslots.begintime}"></td>
-                    <td class="td-prijs align-middle" th:text="${timeslots.numcustomers}"></td>
-                    <div class="mx-auto">
-                        <td class="td-prijs"><input
-                                class="form-control border-0" th:type="number"
-                                th:value="${timeslots.maxcustomers}"
-                                style="max-width: 60px; margin-right: 0"/></td>
-                    </div>
-                    <td class="td-prijs align-middle"><input class="form-check-input"
-                                                             type="checkbox"
-                                                             th:checked="${timeslots.isAvailable}">
-                    </td>
-                </tr>
-                </tbody>
-            </table>
 
-        </div>
-    </div>
-    <div class="row">
-    <div class="col shadow p-3 mb-5 bg-body rounded-3 div-categorie col-orders-timeslots overflow-auto">
-
-        <h4 id="Productbeheer">Productbeheer</h4>
-        <hr class="solid">
-        <button type="button" class="btn btn-secondary shadow-sm w-100"
-                data-bs-toggle="modal" data-bs-target="#addProduct">
-            Nieuw product toevoegen
-        </button>
-        <br>
-        <table class="table table-striped" id="table-producten">
-            <thead class="table-success">
-            <br>
-            <tr>
-                <th scope="col">id</th>
-                <th scope="col">Productnaam</th>
-                <th scope="col">Prijs</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr th:each="products:${products}">
-                <th class="align-middle" scope="row" th:text="${products.id}">test</th>
-                <td class="align-middle" th:text="${products.name}"></td>
-                <td class="align-middle" th:with="prodprijs=${products.price}"
-                    th:text="${#numbers.formatDecimal(prodprijs, 1,2)}+'€'"></td>
-                <td class="td-product-button align-middle">
-                    <div class="btn-group">
-                        <button class="btn btn-outline-secondary btn-sm btn-table-product rounded-0"
-                                th:id="btnEdit+${products.id}" type="button"><i
-                                class="fa fa-pen-to-square"></i>
-                        </button>
-
-                        <form th:action="@{/deleteProduct/{id}(id=${products.id})}"
-                              th:object="${products}" method="post">
-                            <input type="hidden" th:field="${products}">
-                            <button class="btn btn-outline-danger btn-sm btn-table-product rounded-0"
-                                    th:id="btnDel+${products.id}" type="submit"
-                                    onClick="return confirm('Weet je het zeker?')"><i
-                                    class="fa fa-trash"></i>
-                            </button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-
-
-            </tbody>
-
-        </table>
-
-
-    </div>
-
-    <div class="col-sm-2 shadow p-3 mb-5 bg-body rounded-3 div-categorie col-orders-timeslots overflow-auto">
-        <h4 id="Categoriebeheer">Categoriebeheer</h4>
-        <hr class="solid">
-
-        <button type="button" class="btn btn-secondary shadow-sm w-100"
-                data-bs-toggle="modal" data-bs-target="#addCategorie">
-            Nieuwe categorie toevoegen
-        </button>
-        <br>
-        <table class="table table-striped" id="table-producten2">
-            <thead class="table-success">
-            <br>
-            <tr>
-                <th scope="col">id</th>
-                <th scope="col">Categorienaam</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <div class="col-products">
-                <tr th:each="categories: ${categories}">
-                    <th class="align-middle" scope="row" th:text="${categories.id}"></th>
-                    <td class="align-middle" th:text="${categories.name}"></td>
-                    <td class="td-product-button align-middle">
-                        <div class="btn-group">
-                            <button th:id="btnEdit+${categories.id}"
-                                    class="btn btn-outline-secondary btn-sm btn-table-product rounded-0"
-                                    type="button"><i class="fa fa-pen-to-square" data-bs-toggle="modal"
-                                                     data-bs-target="#editCategorie"></i>
-                            </button>
-
-                            <div class="modal" tabindex="-1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Modal title</h5>
-                                            <button type="button" class="btn-close"
-                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Modal body text goes here.</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close
-                                            </button>
-                                            <button type="button" class="btn btn-primary">Save changes
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <form th:action="@{/deleteCategorie/{id}(id=${categories.id})}"
-                                  th:object="${categories}" method="post">
-                                <input type="hidden" th:field="${products}">
-                                <button th:id="btnDel+${categories.id}"
-                                        class="btn btn-outline-danger btn-sm btn-table-product rounded-0"
-                                        type="submit" onClick="return confirm('Weet je het zeker?')"><i
-                                        class="fa fa-trash"></i>
-
-                                </button>
-                            </form>
-
-                        </div>
-                    </td>
-
-
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Snacks/Vegi</td>
-
-                    <td>
-                        <button class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Sauzen</td>
-
-                    <td>
-                        <button class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Drank</td>
-
-                    <td>
-                        <button class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Dessert</td>
-
-                    <td>
-                        <button class="btn btn-outline-secondary btn-sm btn-table-product" type="button">Edit</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-outline-danger btn-sm btn-table-product" type="button">Verwijder</button>
-                    </td>
-                </tr>
-            </div>
-            </tbody>
-        </table>
-    </div>
     </div>
 </div>
 
