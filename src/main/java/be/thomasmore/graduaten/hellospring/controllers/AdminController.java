@@ -78,12 +78,6 @@ public class AdminController {
         return "redirect:/BestelAdmin";
     }
 
-    @PostMapping("/deleteCategorie/{id}")
-    public String deleteCategory(@PathVariable Long id) {
-        categoryRepository.deleteById(id);
-        return "redirect:/BestelAdmin";
-    }
-
     @PostMapping("/deleteProduct/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productRepository.deleteById(id);

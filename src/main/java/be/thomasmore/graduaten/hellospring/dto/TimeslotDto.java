@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,5 +18,5 @@ public class TimeslotDto {
     private Boolean isAvailable;
     private Long numcustomers;
     private Long  maxcustomers;
-
+    private List<CustomerDto> customer;
 }

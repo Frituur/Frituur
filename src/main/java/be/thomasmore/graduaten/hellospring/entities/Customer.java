@@ -22,7 +22,7 @@ public class Customer {
     private Long id;
 
     @Column(name = "naam")
-    private String naam ;
+    private String naam;
 
     @Column(name="address")
     private String address;

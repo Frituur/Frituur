@@ -57,6 +57,8 @@ nav ul li {
     grid-row: 2;
 }
 
+
+
 .order-card{
     margin-top: 10px;
     border: 1px solid #cccccc;
@@ -69,6 +71,14 @@ nav ul li {
 
 .lead{
     margin-bottom: 2px;
+}
+.order-card{
+    margin-top: 10px;
+    border: 1px solid #cccccc;
+    align-items: center;
+    display: inline-block;
+    horiz-align: center;
+    vertical-align: center;
 }
 
 .product-card{
