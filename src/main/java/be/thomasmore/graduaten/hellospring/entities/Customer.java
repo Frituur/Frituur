@@ -27,6 +27,9 @@ public class Customer {
     @Column(name="address")
     private String address;
 
+    @Column(name="phone")
+    private String phone;
+
     @Column(name= "totalprice")
     private Double totalprice;
 
