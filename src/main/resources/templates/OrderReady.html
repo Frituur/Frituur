@@ -109,7 +109,7 @@
                     </div>
                 </div>
             </div>
-            <form  method='POST'  th:action="@{/tijdslotpost}" th:object="${tijdlsotSelected}">
+            <form  method='POST'  th:action="@{/tijdslotpost}" th:object="${formData}">
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="card mb-4">
@@ -122,6 +122,25 @@
                                             <option value="">Wanneer? </option>
                                             <option th:each="timeslots: ${order.timeslots}" th:value="${timeslots.id}" th:text="${timeslots.begintime}" ></option>
                                         </select>
+                                    </div><!-- /btn-group -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card mb-4">
+                            <!-- Timeslot -->
+                            <div class="card-body">
+                                <h3 class="h6"></h3>
+                                <div class="input-group">
+                                    <label for="phone">Geef je alstublieft jouw gsm nummer in het geval er iets misloopt</label>
+                                    <div class="input-group-btn" >
+                                        <input type="tel" class="form-control" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                               autocomplete="off" name="phone" th:field="${order.phone}"/>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        </div>
+                                        <span class="help-block">Format: 123-456-7890.</span>
                                     </div><!-- /btn-group -->
                                 </div>
                             </div>
