@@ -144,16 +144,16 @@ public class OrderController {
                 if(numberOfOrderedItems < 20) {
                     return "redirect:/finalorder";
                 }
-                return "redirect:/";
+                return "redirect:/Home";
             }
             else
             {
-                return "redirect:/";
+                return "redirect:/Home";
             }
         }
         else
         {
-            return "redirect:/";
+            return "redirect:/Home";
         }
 
 
