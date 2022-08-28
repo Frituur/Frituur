@@ -21,17 +21,15 @@
     <div class="collapse navbar-collapse nav justify-content-end" id="navbarNav">
         <ul class="navbar-nav nav" id="navbarNavUl">
             <li class="nav-item active">
-                <a class="nav-link" href="Home">Home<span class="sr-only">(current)</span></a>
+                <a class="nav-link active" th:href="@{/Home}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Contact">Contact</a>
+                <a class="nav-link" th:href="@{/Contact}">Contact</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Login">Login</a>
+                <a class="nav-link" th:href="@{/login}">Login</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="BestelAdmin">Beheer</a>
-            </li>
+
         </ul>
     </div>
 </nav>
@@ -48,19 +46,19 @@
                             <h3 class="card-title">Contactgegevens</h3>
 
                             <ul class="fa-ul">
-                                <li><span class="fa-li"><i class="fa-solid fa-phone"></i></span><a
+                                <li><span class="fa-li"><i class="fa-solid fa-phone"></i></span><a class="lead"
                                         href="tel:0400123456">0400 12 34 56</a></li>
-                                <li><span class="fa-li"><i class="fa-solid fa-envelope"></i></span><a
+                                <li><span class="fa-li"><i class="fa-solid fa-envelope"></i></span><a class="lead"
                                         href="mailto:janineke@thalfkieke.be">janineke@thalfkieke.be</a></li>
                             </ul>
                             <br><br>
                             <h3 class="card-title">Adres</h3>
 
                             <ul class="fa-ul">
-                                <li><span class="fa-li"><i class="fa-solid fa-phone"></i></span>
-                                    <p>Kleinhoefstraat 2</p></li>
-                                <li><span class="fa-li"><i class="fa-solid fa-phone"></i></span>
-                                    <p>2440, Geel</p></li>
+                                <li><span class="fa-li"><i class="fa-solid fa-location-dot"></i></span>
+                                    <p class="lead">Kleinhoefstraat 2</p></li>
+                                <li><span class="fa-li"><i></i></span>
+                                    <p class="lead">2440, Geel</p></li>
 
                             </ul>
                             <br>

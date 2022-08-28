@@ -87,13 +87,13 @@ public class AdminController {
     @PostMapping("/deleteCustomer/{id}")
     public String deleteCustomer(@PathVariable Long id){
         customerRepository.deleteById(id);
-        return "redirect:/BestelAdmin";
+        return "redirect:/admin/BestelAdmin";
     }
 
     @PostMapping("/deleteProduct/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productRepository.deleteById(id);
-        return "redirect:/BestelAdmin";
+        return "redirect:/admin/BestelAdmin";
     }
 
 
