@@ -40,10 +40,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/admin/**").authenticated()
                 .antMatchers("/")
                 .permitAll()
-                .and().formLogin().loginPage("/login").permitAll()
-                .and().logout().permitAll()
+                .and()
+                    .formLogin()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/process-login")
+                    .defaultSuccessUrl("/admin/BestelAdmin")
+                    .failureUrl("/login?error=true")
+                    .permitAll()
+                .and()
+                    .logout()
+                    .logoutSuccessUrl("/login?logout=true")
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID")
+                    .permitAll()
                 .and() 
                 .httpBasic();
 
@@ -56,6 +68,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
         daoAuthenticationProvider.setUserDetailsService(UserDetailsService);
+
 
 
         return daoAuthenticationProvider;

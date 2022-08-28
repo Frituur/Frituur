@@ -21,6 +21,7 @@ import java.util.List;
 
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
 
@@ -36,6 +37,19 @@ public class AdminController {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private TimeslotRepository timeslotRepository;
+
+
+    @RequestMapping("/EditTimeslots")
+    public String EditTimeslots(Model model) {
+        // Haal alle timeslots op
+        // vull de tijdslots in een time picker voor hoeveel er zijn in de tijdslotsdb
+        var tijdslotsdb =  timeslotRepository.findAll();
+        model.addAttribute("timeslots", tijdslotsdb);
+        return "edittimeslots";
+    }
 
     @RequestMapping("/BestelAdmin")
     public String GetCategoriesAndProductsForAdminPage(Model model) {

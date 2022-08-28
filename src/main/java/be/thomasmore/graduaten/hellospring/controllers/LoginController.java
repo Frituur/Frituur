@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +20,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
+
 @Controller
 public class LoginController {
+
+    @Autowired
+    private DaoAuthenticationProvider daoAuthenticationProvider;
 
     @Qualifier("UserRepository")
     @Autowired
@@ -50,19 +59,23 @@ public class LoginController {
 
     @PostMapping("/trylogin")
     @ResponseBody
-    public RedirectView checkLogin(HttpServletRequest request, @RequestParam("username") String userName,
+    public RedirectView checkLogin(HttpServletRequest request, @RequestParam("Username") String userName,
                                    @RequestParam("password") String password, RedirectAttributes redirectAttributes) {
         if (userDetailsService.checkLogin(userName, password)) {
             if (SecurityContextHolder.getContext().getAuthentication() == null ||
                     SecurityContextHolder.getContext()
                             .getAuthentication().getClass().equals(AnonymousAuthenticationToken.class)) {
+                System.out.println("The user is authenticated");
                 UsernamePasswordAuthenticationToken token =
                         new UsernamePasswordAuthenticationToken(userName, password,new ArrayList<>());
-                SecurityContextHolder.getContext().setAuthentication(token);
+                Authentication auth = daoAuthenticationProvider.authenticate(token);
+                SecurityContext sc = SecurityContextHolder.getContext();
+                sc.setAuthentication(auth);
+                HttpSession session = request.getSession(true);
+                session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
+                redirectAttributes.addFlashAttribute("message", "Login Successful");
+                return new RedirectView("/admin/BestelAdmin");
             }
-            redirectAttributes.addFlashAttribute("message", "Login Successful");
-            return new RedirectView("Home");
-
         }
         redirectAttributes.addFlashAttribute("message", "Invalid Username or Password");
         return new RedirectView("login");
