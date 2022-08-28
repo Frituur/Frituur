@@ -70,11 +70,6 @@ public class HomeController {
     @RequestMapping("/ThankYou")
     public String ThankYouPage() {return "ThankYou"; }
 
-    @RequestMapping("/Login")
-    public String LoginPage() {return "Login"; }
-
-
-
 
 
     private List<CategoryDto> ConvertPhotoBase64(List<CategoryDto> categories)

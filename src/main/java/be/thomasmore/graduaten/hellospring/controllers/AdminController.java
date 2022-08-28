@@ -7,10 +7,7 @@ import be.thomasmore.graduaten.hellospring.entities.Customer;
 import be.thomasmore.graduaten.hellospring.entities.Orders;
 import be.thomasmore.graduaten.hellospring.entities.Product;
 import be.thomasmore.graduaten.hellospring.mapper.ModelMap;
-import be.thomasmore.graduaten.hellospring.repositories.CategoryRepository;
-import be.thomasmore.graduaten.hellospring.repositories.CustomerRepository;
-import be.thomasmore.graduaten.hellospring.repositories.OrderRepository;
-import be.thomasmore.graduaten.hellospring.repositories.ProductRepository;
+import be.thomasmore.graduaten.hellospring.repositories.*;
 
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +23,7 @@ import java.util.List;
 
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
 
@@ -39,6 +37,19 @@ public class AdminController {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private TimeslotRepository timeslotRepository;
+
+
+    @RequestMapping("/EditTimeslots")
+    public String EditTimeslots(Model model) {
+        // Haal alle timeslots op
+        // vull de tijdslots in een time picker voor hoeveel er zijn in de tijdslotsdb
+        var tijdslotsdb =  timeslotRepository.findAll();
+        model.addAttribute("timeslots", tijdslotsdb);
+        return "edittimeslots";
+    }
 
     @RequestMapping("/BestelAdmin")
     public String GetCategoriesAndProductsForAdminPage(Model model) {
