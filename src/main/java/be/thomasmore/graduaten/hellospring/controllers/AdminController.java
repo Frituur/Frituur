@@ -38,8 +38,6 @@ public class AdminController {
     @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    private TimeslotRepository timeslotRepository;
 
 
     @RequestMapping("/EditTimeslots")
